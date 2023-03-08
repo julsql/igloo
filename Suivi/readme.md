@@ -45,11 +45,13 @@ Denis Conan
   la prochaine séance pour pouvoir passer ensuite à la programmation
   sans avoir besoin de spécifier/modéliser (beaucoup).
 
-* [] GEN-01-Indiquer-remarque-prise-en-compte
+* [X] GEN-01-Indiquer-remarque-prise-en-compte
+Les remarques on été prises en compte.
 
 * [] GEN-08-Manque-fichiers-images : les diagrammes
 
-* [] GIT-02-Git-pas-fichier-temporaire : retirez le répertoir `cachedir`
+* [X] GIT-02-Git-pas-fichier-temporaire : retirez le répertoir `cachedir`
+Ok c'est retiré
 
 * je regarde à partir du diagramme de classes : au besoin, posez des
   questions explicitement sur les modifications des éléments
@@ -61,27 +63,28 @@ Denis Conan
       tâche => cohérence avec le vocabulaire dans les préconditions et
       postconditions
 
-* [] DIAGSEQ-21-Pb-cohérence-avec-diag-classes : quid de l'attribut
+* [X] DIAGSEQ-21-Pb-cohérence-avec-diag-classes : quid de l'attribut
   description de la tâche dans « ajouter une tâche »
+C'est ajouté
 
-* [] message « create » : il manque les arguments
+* [X] message « create » : il manque les arguments
 
 * principe diag. de séquence compris
 
-* [] DIAGSEQ-21-Pb-cohérence-avec-diag-classes : dans « mettre à la
+* [X] DIAGSEQ-21-Pb-cohérence-avec-diag-classes : dans « mettre à la
   corbeille une tâche », « nomActivité » ?
   
-* [] DIAGSEQ-02-Compréhension-étude-de-cas : attention ! ce n'est pas
+* [X] DIAGSEQ-02-Compréhension-étude-de-cas : attention ! ce n'est pas
   « supprimer... »
 
-* [] DIAGSEQ-06-Pb-syntaxe-message-affectation-attribut : erreur sur
+* [X] DIAGSEQ-06-Pb-syntaxe-message-affectation-attribut : erreur sur
   message « r5.corbeille = true » + tel qu'écrit, corbeille est un
   attribut => attribut qui n'est pas privé (c'est un problème)
 
-* [] DIAGSEQ-06-Pb-syntaxe-message-affectation-attribut : idem sur
+* [X] DIAGSEQ-06-Pb-syntaxe-message-affectation-attribut : idem sur
   p.corbeille...
 
-* [] mauvais type de fragment pour le plus imbriqué + besoin de faire
+* [X] mauvais type de fragment pour le plus imbriqué + besoin de faire
   un appel sur chaque période de travail
   
 
