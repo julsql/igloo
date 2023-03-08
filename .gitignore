@@ -23,3 +23,5 @@
 **/*.backup
 .DS_Store/
 **/cachedir/
+.DS_Store
+*/.DS_Store
