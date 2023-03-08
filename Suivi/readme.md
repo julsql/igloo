@@ -25,15 +25,15 @@ Complétez les préconditions et adaptez les tables de décision (pour savoir si
 
 * [X] DIAGUC-04-Formulation-non-appropriée : détail, « Mise... » devrait plutôt être « Mettre... » + pb cohérence avec formulation dans les préconditions/postconditions
 
-* [] PREPOSTCOND-05-Précondition-incomplète
+* [X] PREPOSTCOND-05-Précondition-incomplète
     * mettre à la corbeille une tâche : comment trouve-t-on la tâche ? avec un identifiant, non ? et l'identifiant doit être bien formé
     * mettre à la corbeille un développeur
 
-* [] PREPOSTCOND-01-Pré-post-condition-manquante : à faire = « ajouter une tâche » ; ce n'est pas le cas d'utilisation le plus difficile ;-)
+* [X] PREPOSTCOND-01-Pré-post-condition-manquante : à faire = « ajouter une tâche » ; ce n'est pas le cas d'utilisation le plus difficile ;-)
  
-* [] tables de décision à mettre à jour après mise à jour des préconditions et postconditions
+* [X] tables de décision à mettre à jour après mise à jour des préconditions et postconditions
 
-* [] TABLEDECTV-03-Incohérence-pré-post-conditions : il faut essayer de mettre toutes les postconditions dans les tables de décision
+* [X] TABLEDECTV-03-Incohérence-pré-post-conditions : il faut essayer de mettre toutes les postconditions dans les tables de décision
  
 ---
 # Suivi du mar. 07 mars 2023 09:46:03
