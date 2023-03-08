@@ -46,7 +46,7 @@ Denis Conan
   sans avoir besoin de spécifier/modéliser (beaucoup).
 
 * [X] GEN-01-Indiquer-remarque-prise-en-compte
-Les remarques on été prises en compte.
+Les remarques ont été prises en compte.
 
 * [X] GEN-08-Manque-fichiers-images : les diagrammes
 
@@ -86,6 +86,3 @@ C'est ajouté
 
 * [X] mauvais type de fragment pour le plus imbriqué + besoin de faire
   un appel sur chaque période de travail
-  
-
-
