@@ -23,7 +23,7 @@ Denis Conan
 Bon début !
 Complétez les préconditions et adaptez les tables de décision (pour savoir si vous avez complètement compris les tables de décision : vos tables actuelles sont très/trop simples)
 
-* [] DIAGUC-04-Formulation-non-appropriée : détail, « Mise... » devrait plutôt être « Mettre... » + pb cohérence avec formulation dans les préconditions/postconditions
+* [X] DIAGUC-04-Formulation-non-appropriée : détail, « Mise... » devrait plutôt être « Mettre... » + pb cohérence avec formulation dans les préconditions/postconditions
 
 * [] PREPOSTCOND-05-Précondition-incomplète
     * mettre à la corbeille une tâche : comment trouve-t-on la tâche ? avec un identifiant, non ? et l'identifiant doit être bien formé
