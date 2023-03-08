@@ -48,7 +48,7 @@ Denis Conan
 * [X] GEN-01-Indiquer-remarque-prise-en-compte
 Les remarques on été prises en compte.
 
-* [] GEN-08-Manque-fichiers-images : les diagrammes
+* [X] GEN-08-Manque-fichiers-images : les diagrammes
 
 * [X] GIT-02-Git-pas-fichier-temporaire : retirez le répertoir `cachedir`
 Ok c'est retiré
