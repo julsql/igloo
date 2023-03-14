@@ -85,4 +85,33 @@ C'est ajouté
   p.corbeille...
 
 * [X] mauvais type de fragment pour le plus imbriqué + besoin de faire
-  un appel sur chaque période de travail
+  un appel sur chaque période de travail 
+---
+# Suivi du mar. 14 mars 2023 10:06:32
+Denis Conan
+
+Vous avez besoin de travailler entre les séances, par exemple pour
+être prêts pour la programmation.
+
+* [] DIAGCLAS-32-Nom-rôle : activité au pluriel, etc.
+
+* [] DIAGCLA-30-Role-et-nom-association : des associations sans nom
+  d'associations (entre Activité et Tâche, etc.)
+  
+* [] DIAGCLAS-10-Erreur-multiplicité : toujours une période de travail
+  associée à une tâche ?
+
+* diag. de séquence « ajouter une tâche » : ok
+
+* [] pourquoi le message récursif mettreCorbeille(r5) sur r2 ?
+
+* [] « loop [toutes les périodes p ] » suffit : pas besoin d'une
+  recherche de p avant
+
+* [] pourquoi le message récursif mettreCorbeille(p) sur r5 ?
+
+* [] DIAGMACHETATS-01-Diagramme-manquant
+
+* [] INV-01-Invariant-manquant
+
+* [] TABLEDECTU-01-Table-de-décision-manquante
