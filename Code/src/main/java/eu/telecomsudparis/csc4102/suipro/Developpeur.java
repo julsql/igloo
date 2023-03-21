@@ -45,6 +45,7 @@ public class Developpeur {
 		this.alias = alias;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.dansCorbeille = false;
 		assert invariant();
 	}
 
