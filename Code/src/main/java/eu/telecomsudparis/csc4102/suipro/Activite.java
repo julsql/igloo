@@ -2,6 +2,7 @@ package eu.telecomsudparis.csc4102.suipro;
 
 import java.util.Map;
 import java.util.Objects;
+import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 /**
  * Cette classe réalise le concept de développeur. Un développeur est un élément
@@ -76,6 +77,26 @@ public class Activite {
         return taches;
     }
 
+    /**
+    * @param intitule  
+	* @param description    
+    * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+    *                             de décision des tests de validation).
+    */
+    public void ajouterTache(String intitule, String description)throws OperationImpossible{
+        if (this.getTaches().get(intitule) != null) {
+			throw new OperationImpossible("tâche déjà dans le système");
+		}
+
+    this.getTaches().put(intitule, new Tache(intitule, description));
+    }
+
+    public void mettreTacheCorbeille(String intituleTache) throws OperationImpossible
+    {
+    
+    this.getTaches().get(intituleTache).mettreALaCorbeille();
+
+    }
     @Override
     public int hashCode() {
         return Objects.hash(intitule);
