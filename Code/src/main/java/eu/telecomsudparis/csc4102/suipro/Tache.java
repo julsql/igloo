@@ -10,7 +10,7 @@ public class Tache {
 	/**
 	 * l'intitulé de la tache.
 	 */
-	private String intitule;
+	private final String intitule;
 
     private String description;
 
@@ -32,6 +32,7 @@ public class Tache {
 
 		this.intitule = intitule;
         this.description = description;
+		dansCorbeille = false;
 
 		assert invariant();
 	}

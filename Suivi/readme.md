@@ -110,11 +110,11 @@ Vous avez besoin de travailler entre les séances, par exemple pour
 
 * [X] pourquoi le message récursif mettreCorbeille(p) sur r5 ?
 
-* [] DIAGMACHETATS-01-Diagramme-manquant
+* [X] DIAGMACHETATS-01-Diagramme-manquant
 
-* [] INV-01-Invariant-manquant
+* [X] INV-01-Invariant-manquant
 
-* [] TABLEDECTU-01-Table-de-décision-manquante
+* [X] TABLEDECTU-01-Table-de-décision-manquante
  
 ---
 # Suivi du ven. 17 mars 2023 13:50:26
@@ -124,53 +124,50 @@ Bravo ! C'est pas mal du tout ;-)
 Bon démarrage de la programmation. Des éléments seront à ajouter après
 le cours de la séance 6.
 
-* [] DIAGCLAS-17-Nom-classe
+* [x] DIAGCLAS-17-Nom-classe
 
-* [] comme vous laissez les associations bidirectionnelles, les
+* [ ] comme vous laissez les associations bidirectionnelles, les
   attributs dansCorbeille sont des attributs dérivés, non ?
 
-* [] Les agrégations et les compositions ayant une sémantique
+* [ ] Les agrégations et les compositions ayant une sémantique
   « ensemble contient éléments », il n'est pas nécessaire de mettre un
   nom d'association ; le nom d'association est nécessaire lorsque ce
   n'est ni une agrégation ni une composition
     * en trop sur l'agrégation et sur la composition
     * par exemple manque entre Développeur et PériodeDeTravail
 
-* [] DIAGCLAS-10-Erreur-multiplicité : de Période... vers Dév...
+* [ ] DIAGCLAS-10-Erreur-multiplicité : de Période... vers Dév...
 
 * diag. séquence mettre à la corbeille : ok
 
 * diag. machine à états : ok
 
-* [] comme vous laissez les associations bidirectionnelles, les
+* [ ] comme vous laissez les associations bidirectionnelles, les
   attributs dansCorbeille sont des attributs dérivés, non ?
   + RAFDIAGCLAS-05-Traduction-attribut-dérivé-manquante
 
-* [] INV-03-Invariant-à-compléter : manque termes sur les attributs
-  qui correspondent aux associations + les attributs dérivés (montrer
+* [ ] INV-03-Invariant-à-compléter : manque termes sur les attributs qui correspondent aux associations + les attributs dérivés (montrer
   la redondance d'information)
 
 * fiche de la classe tâche : mettre les attributs autres que ceux
   traduisant des associations
 
-* [] TABLEDECTU-03-Incohérence-prototype : pas les mêmes arguments que
-  le create dans le diagramme de séquence « ajouter une tâche »
+* [X] TABLEDECTU-03-Incohérence-prototype : pas les mêmes arguments que le create dans le diagramme de séquence « ajouter une tâche »
 
-* [] pb pagination dernière table de décision
+* [X] pb pagination dernière table de décision
 
-* [] JAVA-13-Avertissement-compilation-code : facile à résoudre, mais y penser
+* [ ] JAVA-13-Avertissement-compilation-code : facile à résoudre, mais y penser
 
-* [] invariant de Developpeur à compléter avec les nouveaux attributs
+* [ ] invariant de Developpeur à compléter avec les nouveaux attributs
 
-* [] invariant de Activite à compléter
+* [ ] invariant de Activite à compléter
 
-* [] idem autres invariants
+* [ ] idem autres invariants
 
-* [] JAVA-06-Pb-traduction-association : classe PeriodeDeTravail
+* [ ] JAVA-06-Pb-traduction-association : classe PeriodeDeTravail
 
-* [] JAVA-04-Cohérence-avec-diagrammes-de-séquence :
+* [ ] JAVA-04-Cohérence-avec-diagrammes-de-séquence :
   SuiPro::ajouterUneTache et
   SuiPro::mettreCorbeilleUneTache... activite.getTaches().get(intituleTache)
   c'est différent du diag. de séquence
     * c'est le diag. de séquence qui est le plus propre
-

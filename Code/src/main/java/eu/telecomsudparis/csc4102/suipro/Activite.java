@@ -22,6 +22,9 @@ public class Activite {
      * les périodes de travail de l'activité.
      */
     private Map<String, Tache> taches;
+
+    private boolean dansCorbeille;
+
     /**
      * construit un développeur.
      *
@@ -35,6 +38,7 @@ public class Activite {
         }
         this.intitule = intitule;
         this.description = description;
+        dansCorbeille = false;
 
         assert invariant();
     }
