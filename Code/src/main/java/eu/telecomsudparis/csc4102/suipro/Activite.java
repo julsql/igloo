@@ -84,18 +84,21 @@ public class Activite {
     *                             de décision des tests de validation).
     */
     public void ajouterTache(String intitule, String description)throws OperationImpossible{
+
+
         if (this.getTaches().get(intitule) != null) {
 			throw new OperationImpossible("tâche déjà dans le système");
 		}
 
-    this.getTaches().put(intitule, new Tache(intitule, description));
+        this.getTaches().put(intitule, new Tache(intitule, description));
     }
 
     public void mettreTacheCorbeille(String intituleTache) throws OperationImpossible
     {
-    
-    this.getTaches().get(intituleTache).mettreALaCorbeille();
-
+        if (this.getTaches().get(intituleTache) == null) {
+            throw new OperationImpossible("tâche n'existe pas");
+        }
+        this.getTaches().get(intituleTache).mettreALaCorbeille();
     }
     @Override
     public int hashCode() {
