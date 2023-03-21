@@ -88,11 +88,11 @@ public class SuiPro {
 			throw new OperationImpossible("intitulé de la tâche ne peut pas être null ou vide");
 		}
 		Activite activite = activites.get(intituleActivite);
-
-		if (activite.getTaches().get(intituleTache) != null) {
-			throw new OperationImpossible("tâche déjà dans le système");
+		if (activite == null){
+			throw new OperationImpossible("l'activité ne peut pas être null");
 		}
-		activite.getTaches().put(intituleTache, new Tache(intituleTache, description));
+		activite.ajouterTache(intituleTache,description);
+
 		assert invariant();
 	}
 
@@ -117,7 +117,7 @@ public class SuiPro {
 		if (activite.getTaches().get(intituleTache) == null) {
 			throw new OperationImpossible("tâche n'existe pas");
 		}
-		activite.getTaches().get(intituleTache).mettreALaCorbeille();
+		activite.mettreTacheCorbeille(intituleTache);
 		assert invariant();
 	}
 
