@@ -166,7 +166,7 @@ le cours de la séance 6.
 
 * [ ] JAVA-06-Pb-traduction-association : classe PeriodeDeTravail
 
-* [ ] JAVA-04-Cohérence-avec-diagrammes-de-séquence :
+* [X] JAVA-04-Cohérence-avec-diagrammes-de-séquence :
   SuiPro::ajouterUneTache et
   SuiPro::mettreCorbeilleUneTache... activite.getTaches().get(intituleTache)
   c'est différent du diag. de séquence

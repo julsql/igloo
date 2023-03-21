@@ -99,7 +99,8 @@ public class SuiPro {
 	/**
 	 * met à la corbeille une tâche
 	 *
-	 * @param alias  l'alias.
+	 * @param intituleActivite l'intitulé de l'activité.
+	 * @param intituleTache l'intitulé de la tache.
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
 	 */
@@ -124,6 +125,8 @@ public class SuiPro {
 	 * met à la corbeille un développeur.
 	 *
 	 * @param alias  l'alias.
+	 * @param nom  le nom.
+	 * @param prenom  le prenom.
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
 	 */
