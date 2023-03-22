@@ -37,6 +37,7 @@ public class PeriodeDeTravail {
 		this.dansCorbeille = false;
 		this.tache = tache;
 		this.developpeur = developpeur;
+		assert invariant();
 	}
 
 	/**
@@ -48,8 +49,13 @@ public class PeriodeDeTravail {
 		return intervalle != null;
 	}
 
+	public boolean getCorbeille() {
+		return dansCorbeille;
+	}
+
 	public void mettreALaCorbeille(){
 		this.dansCorbeille = true;
+		assert invariant();
 	}
 	/**
 	 * obtient l'intervalle d'instants.

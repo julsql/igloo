@@ -70,6 +70,10 @@ public class Developpeur {
 		return alias;
 	}
 
+	public boolean getCorbeille() {
+		return dansCorbeille;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(alias);
@@ -99,6 +103,7 @@ public class Developpeur {
         for (var periode : periodesDeTravailASupprimer.entrySet()) {
             periode.getValue().mettreALaCorbeille();
         }
+		assert invariant();
     }
 
 

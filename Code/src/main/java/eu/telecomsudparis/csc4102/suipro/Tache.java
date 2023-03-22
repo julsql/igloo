@@ -67,6 +67,10 @@ public class Tache {
 		return description;
 	}
 
+	public boolean getCorbeille() {
+		return dansCorbeille;
+	}
+
     public Map<String,PeriodeDeTravail> getPeriodesDeTravail(){
         return periodesDeTravail;
     }
@@ -77,6 +81,7 @@ public class Tache {
         for (var periode : periodesDeTravailASupprimer.entrySet()) {
             periode.getValue().mettreALaCorbeille();
         }
+		assert invariant();
     }
 
     
