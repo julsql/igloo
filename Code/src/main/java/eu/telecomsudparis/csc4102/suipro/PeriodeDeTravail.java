@@ -55,4 +55,9 @@ public class PeriodeDeTravail {
 	public IntervalleInstants getIntervalle() {
 		return intervalle;
 	}
+
+	@Override
+	public String toString() {
+		return "PeriodeDeTravail [intervalle=" + intervalle + ", dans la corbeille=" + dansCorbeille + "]";
+	}
 }
