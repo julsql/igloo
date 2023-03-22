@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-contenu pour F3
-=======
-contenu F3
->>>>>>> d0754410c236d01cd4191bb9699063be7fb8f8f7
