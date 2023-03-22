@@ -148,8 +148,7 @@ le cours de la séance 6.
   + RAFDIAGCLAS-05-Traduction-attribut-dérivé-manquante
   * Non pertinent
 
-* [ ] INV-03-Invariant-à-compléter : manque termes sur les attributs qui correspondent aux associations + les attributs dérivés (montrer
-  la redondance d'information)
+* [X] INV-03-Invariant-à-compléter : manque termes sur les attributs qui correspondent aux associations + les attributs dérivés (montrer la redondance d'information)
 
 * fiche de la classe tâche : mettre les attributs autres que ceux
   traduisant des associations
@@ -160,13 +159,13 @@ le cours de la séance 6.
 
 * [X] JAVA-13-Avertissement-compilation-code : facile à résoudre, mais y penser
 
-* [ ] invariant de Developpeur à compléter avec les nouveaux attributs
+* [X] invariant de Developpeur à compléter avec les nouveaux attributs
 
-* [ ] invariant de Activite à compléter
+* [x] invariant de Activite à compléter
 
-* [ ] idem autres invariants
+* [X] idem autres invariants
 
-* [ ] JAVA-06-Pb-traduction-association : classe PeriodeDeTravail
+* [X] JAVA-06-Pb-traduction-association : classe PeriodeDeTravail
 
 * [X] JAVA-04-Cohérence-avec-diagrammes-de-séquence :
   SuiPro::ajouterUneTache et
