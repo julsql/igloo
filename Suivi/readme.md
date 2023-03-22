@@ -126,25 +126,27 @@ le cours de la séance 6.
 
 * [x] DIAGCLAS-17-Nom-classe
 
-* [ ] comme vous laissez les associations bidirectionnelles, les
+* [X] comme vous laissez les associations bidirectionnelles, les
   attributs dansCorbeille sont des attributs dérivés, non ?
+  * Non pertinent
 
-* [ ] Les agrégations et les compositions ayant une sémantique
+* [X] Les agrégations et les compositions ayant une sémantique
   « ensemble contient éléments », il n'est pas nécessaire de mettre un
   nom d'association ; le nom d'association est nécessaire lorsque ce
   n'est ni une agrégation ni une composition
     * en trop sur l'agrégation et sur la composition
     * par exemple manque entre Développeur et PériodeDeTravail
 
-* [ ] DIAGCLAS-10-Erreur-multiplicité : de Période... vers Dév...
+* [X] DIAGCLAS-10-Erreur-multiplicité : de Période... vers Dév...
 
 * diag. séquence mettre à la corbeille : ok
 
 * diag. machine à états : ok
 
-* [ ] comme vous laissez les associations bidirectionnelles, les
+* [X] comme vous laissez les associations bidirectionnelles, les
   attributs dansCorbeille sont des attributs dérivés, non ?
   + RAFDIAGCLAS-05-Traduction-attribut-dérivé-manquante
+  * Non pertinent
 
 * [ ] INV-03-Invariant-à-compléter : manque termes sur les attributs qui correspondent aux associations + les attributs dérivés (montrer
   la redondance d'information)
@@ -156,7 +158,7 @@ le cours de la séance 6.
 
 * [X] pb pagination dernière table de décision
 
-* [ ] JAVA-13-Avertissement-compilation-code : facile à résoudre, mais y penser
+* [X] JAVA-13-Avertissement-compilation-code : facile à résoudre, mais y penser
 
 * [ ] invariant de Developpeur à compléter avec les nouveaux attributs
 
