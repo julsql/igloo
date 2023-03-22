@@ -1,7 +1,7 @@
 package eu.telecomsudparis.csc4102.suipro;
 
 import java.util.Objects;
-
+import java.util.Map;
 /**
  * Cette classe réalise le concept de développeur. Un développeur est un élément
  * jetable référençant une collection de période de travail.
@@ -21,6 +21,8 @@ public class Developpeur {
 	 * le prénom du développeur.
 	 */
 	private String prenom;
+	private boolean dansCorbeille;
+	private Map <String,PeriodeDeTravail> periodesDeTravail;
 
 	/**
 	 * construit un développeur.
@@ -43,6 +45,7 @@ public class Developpeur {
 		this.alias = alias;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.dansCorbeille = false;
 		assert invariant();
 	}
 
@@ -84,6 +87,18 @@ public class Developpeur {
 		Developpeur other = (Developpeur) obj;
 		return Objects.equals(alias, other.alias);
 	}
+
+	public Map<String,PeriodeDeTravail> getPeriodesDeTravail(){
+        return periodesDeTravail;
+    }
+    public void mettreALaCorbeille(){
+        this.dansCorbeille = true;
+        Map<String,PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
+        for (var periode : periodesDeTravailASupprimer.entrySet()) {
+            periode.getValue().mettreALaCorbeille();
+        }
+    }
+
 
 	@Override
 	public String toString() {

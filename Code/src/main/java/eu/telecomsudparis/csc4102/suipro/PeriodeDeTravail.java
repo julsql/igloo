@@ -18,6 +18,7 @@ public class PeriodeDeTravail {
 	 */
 	private final IntervalleInstants intervalle;
 
+	private boolean dansCorbeille;
 	/**
 	 * construit une période de travail.
 	 * 
@@ -31,6 +32,7 @@ public class PeriodeDeTravail {
 		Objects.requireNonNull(debut, "debut ne peut pas être null");
 		Objects.requireNonNull(fin, "fin ne peut pas être null");
 		this.intervalle = new IntervalleInstants(debut, fin);
+		this.dansCorbeille = false;
 	}
 
 	/**
@@ -42,6 +44,9 @@ public class PeriodeDeTravail {
 		return intervalle != null;
 	}
 
+	public void mettreALaCorbeille(){
+		this.dansCorbeille = true;
+	}
 	/**
 	 * obtient l'intervalle d'instants.
 	 * 
