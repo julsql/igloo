@@ -1,11 +1,12 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 /**
- * Cette classe réalise le concept de développeur. Un développeur est un élément
+ * Cette classe réalise le concept d'une activité. Une acvitivé est un élément
  * jetable référençant une collection de période de travail.
  *
  * @author Juliette Debono
@@ -20,14 +21,16 @@ public class Activite {
      */
     private String description;
     /**
-     * les périodes de travail de l'activité.
+     * les tâches de l'activité.
      */
     private Map<String, Tache> taches;
-
+    /**
+     * à la corbeille ou non.
+     */
     private boolean dansCorbeille;
 
     /**
-     * construit un développeur.
+     * construit une activité.
      *
      * @param intitule  l'intitulé.
      * @param description la desctiption.
@@ -40,6 +43,7 @@ public class Activite {
         this.intitule = intitule;
         this.description = description;
         dansCorbeille = false;
+        this.taches = new HashMap<>();
 
         assert invariant();
     }
@@ -69,9 +73,9 @@ public class Activite {
         return description;
     }
     /**
-     * obtient les périodes de travail.
+     * obtient les tâches.
      *
-     * @return les périodes de travail.
+     * @return les tâches.
      */
     public Map<String, Tache> getTaches() {
         return taches;
@@ -122,6 +126,6 @@ public class Activite {
 
     @Override
     public String toString() {
-        return "Activité [intitule=" + intitule + ", description=" + description + "]";
+        return "Activité [intitule=" + intitule + ", description=" + description + ", dans la corbeille=" + dansCorbeille + "]";
     }
 }
