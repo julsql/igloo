@@ -44,7 +44,6 @@ public class Activite {
         this.description = description;
         dansCorbeille = false;
         this.taches = new HashMap<>();
-
         assert invariant();
     }
 
@@ -81,6 +80,10 @@ public class Activite {
         return taches;
     }
 
+    public boolean getCorbeille() {
+        return dansCorbeille;
+    }
+
     /**
     * @param intitule  
 	* @param description    
@@ -95,6 +98,7 @@ public class Activite {
 		}
 
         this.getTaches().put(intitule, new Tache(intitule, description, this));
+        assert invariant();
     }
 
     public void mettreTacheCorbeille(String intituleTache) throws OperationImpossible
@@ -103,6 +107,7 @@ public class Activite {
             throw new OperationImpossible("tâche n'existe pas");
         }
         this.getTaches().get(intituleTache).mettreALaCorbeille();
+        assert invariant();
     }
     @Override
     public int hashCode() {
