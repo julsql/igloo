@@ -19,6 +19,8 @@ public class PeriodeDeTravail {
 	private final IntervalleInstants intervalle;
 
 	private boolean dansCorbeille;
+	private Tache tache;
+	private Developpeur developpeur;
 	/**
 	 * construit une période de travail.
 	 * 
@@ -26,13 +28,15 @@ public class PeriodeDeTravail {
 	 * @param fin         l'instant de fin.
 	 * @throws OperationImpossible exception levée lorsque ...
 	 */
-	public PeriodeDeTravail(final Instant debut, final Instant fin)
+	public PeriodeDeTravail(final Instant debut, final Instant fin, Tache tache, Developpeur developpeur)
 			throws OperationImpossible {
 		super();
 		Objects.requireNonNull(debut, "debut ne peut pas être null");
 		Objects.requireNonNull(fin, "fin ne peut pas être null");
 		this.intervalle = new IntervalleInstants(debut, fin);
 		this.dansCorbeille = false;
+		this.tache = tache;
+		this.developpeur = developpeur;
 	}
 
 	/**
@@ -73,7 +77,7 @@ public class PeriodeDeTravail {
             return false;
         }
         PeriodeDeTravail other = (PeriodeDeTravail) obj;
-        return Objects.equals(intervalle,other.intervalle);
+        return Objects.equals(intervalle,other.intervalle) && Objects.equals(tache,other.tache) && Objects.equals(developpeur,other.developpeur);
     }
 	
 }
