@@ -47,9 +47,9 @@ class TestDeveloppeur {
 	void constructeurDeveloppeurTest3Jeu2() throws Exception {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> new Developpeur("alias", "nom", ""));
 	}
-
+	@Test
 	void constructeurDeveloppeurTest4() throws Exception {
-		Developpeur developpeur = new Developpeur("identifiant", "nom", "prénom");
+		Developpeur developpeur = new Developpeur("alias", "nom", "prénom");
 		Assertions.assertNotNull(developpeur);
 		Assertions.assertEquals("alias", developpeur.getAlias());
 	}
