@@ -60,4 +60,20 @@ public class PeriodeDeTravail {
 	public String toString() {
 		return "PeriodeDeTravail [intervalle=" + intervalle + ", dans la corbeille=" + dansCorbeille + "]";
 	}
+	
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        PeriodeDeTravail other = (PeriodeDeTravail) obj;
+        return Objects.equals(intervalle,other.intervalle);
+    }
+	
 }

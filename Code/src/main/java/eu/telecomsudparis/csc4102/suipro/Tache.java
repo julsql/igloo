@@ -35,7 +35,6 @@ public class Tache {
         this.description = description;
 		dansCorbeille = false;
 		this.periodesDeTravail = new HashMap<>();
-
 		assert invariant();
 	}
 

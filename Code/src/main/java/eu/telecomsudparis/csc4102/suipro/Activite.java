@@ -54,7 +54,7 @@ public class Activite {
      * @return {@code true} si l'invariant est respecté.
      */
     public boolean invariant() {
-        return intitule != null && !intitule.isBlank();
+        return intitule != null && !intitule.isBlank() && this.taches != null;
     }
     /**
      * obtient l'intitule.

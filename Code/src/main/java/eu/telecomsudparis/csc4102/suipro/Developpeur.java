@@ -58,7 +58,7 @@ public class Developpeur {
 	 */
 	public boolean invariant() {
 		return alias != null && !alias.isBlank() && nom != null && !nom.isBlank() && prenom != null
-				&& !prenom.isBlank();
+				&& !prenom.isBlank() && periodesDeTravail != null;
 	}
 
 	/**
