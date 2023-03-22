@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 Nathan Feret et Juliette Debono
-=======
-Pierre et Jean
->>>>>>> d0754410c236d01cd4191bb9699063be7fb8f8f7
