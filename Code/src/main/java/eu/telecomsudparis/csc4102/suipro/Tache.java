@@ -18,6 +18,7 @@ public class Tache {
     private Map<String,PeriodeDeTravail> periodesDeTravail;
 
     private boolean dansCorbeille;
+	private Activite activite;
 
 	/**
 	 * construit un développeur.
@@ -25,7 +26,7 @@ public class Tache {
 	 * @param intitule  l'alias.
      * @param description la description
 	 */
-	public Tache(final String intitule, final String description ) {
+	public Tache(final String intitule, final String description, Activite activite) {
 		super();
 		if (intitule == null || intitule.isBlank()) {
 			throw new IllegalArgumentException("intitule ne peut pas être null ou vide");
@@ -35,6 +36,7 @@ public class Tache {
         this.description = description;
 		dansCorbeille = false;
 		this.periodesDeTravail = new HashMap<>();
+		this.activite = activite;
 		assert invariant();
 	}
 
@@ -95,7 +97,7 @@ public class Tache {
 			return false;
 		}
 		Tache other = (Tache) obj;
-		return Objects.equals(intitule, other.intitule);
+		return Objects.equals(intitule, other.intitule) && Objects.equals(activite, other.activite);
 	}
 
 	@Override

@@ -94,7 +94,7 @@ public class Activite {
 			throw new OperationImpossible("tâche déjà dans le système");
 		}
 
-        this.getTaches().put(intitule, new Tache(intitule, description));
+        this.getTaches().put(intitule, new Tache(intitule, description, this));
     }
 
     public void mettreTacheCorbeille(String intituleTache) throws OperationImpossible
