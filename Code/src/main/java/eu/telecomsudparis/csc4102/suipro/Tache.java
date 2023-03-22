@@ -1,5 +1,6 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -33,6 +34,7 @@ public class Tache {
 		this.intitule = intitule;
         this.description = description;
 		dansCorbeille = false;
+		this.periodesDeTravail = new HashMap<>();
 
 		assert invariant();
 	}
@@ -99,6 +101,6 @@ public class Tache {
 
 	@Override
 	public String toString() {
-		return "Tache [intitulé =" + intitule + ", description =" + description + "]";
+		return "Tache [intitulé=" + intitule + ", description=" + description + ", dans la corbeille=" + dansCorbeille + "]";
 	}
 }
