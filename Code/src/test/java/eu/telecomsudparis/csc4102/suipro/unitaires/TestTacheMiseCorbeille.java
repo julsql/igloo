@@ -47,7 +47,8 @@ class TestTacheMiseCorbeille {
 
         tache.mettreALaCorbeille();
 
-        assert tache.getCorbeille();
+        Assertions.assertTrue(tache.getCorbeille());
+        
         assert periodeDeTravail.getCorbeille();
         assert periodeDeTravail2.getCorbeille();
     }

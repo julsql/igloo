@@ -53,6 +53,8 @@ public class SuiPro {
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
 	 */
+
+
 	public void ajouterUnDeveloppeur(final String alias, final String nom, final String prenom)
 			throws OperationImpossible {
 		if (alias == null || alias.isBlank()) {
@@ -113,6 +115,9 @@ public class SuiPro {
 			throw new OperationImpossible("intitulé de la tâche ne peut pas être null ou vide");
 		}
 		Activite activite = activites.get(intituleActivite);
+		if (activite == null ) {
+			throw new OperationImpossible("la tache n'existe pas");
+		}
 		activite.mettreTacheCorbeille(intituleTache);
 		assert invariant();
 	}
@@ -154,8 +159,27 @@ public class SuiPro {
 		return nomDeProjet;
 	}
 
+	public Map<String,Activite> getActivites() {
+		return this.activites;
+	}
 	@Override
 	public String toString() {
 		return "SuiPro [nomDeProjet=" + nomDeProjet + "]";
+	}
+
+
+	public void ajouterUneActivite(String intituleActivite,String description) throws OperationImpossible{
+		if (intituleActivite == null || intituleActivite.isBlank()) {
+			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
+		}
+		if (activites.get(intituleActivite) != null) {
+			throw new OperationImpossible("Activite déjà dans le système");
+		}
+		Activite activite = new Activite(intituleActivite, description);
+		this.activites.put(intituleActivite, activite);
+	}
+
+	public Map<String,Developpeur> getDeveloppeurs(){
+		return this.developpeurs;
 	}
 }
