@@ -17,7 +17,7 @@ class TestAjouterUnDeveloppeur {
 
 	@BeforeEach
 	void setUp() {
-		suiPro = new SuiPro("projetx");
+		suiPro = new SuiPro("projet suipro");
 		alias = "developpeur1";
 		nom = "nom1";
 		prenom = "prenom1";
