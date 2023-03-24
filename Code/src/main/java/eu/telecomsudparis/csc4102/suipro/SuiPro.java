@@ -1,6 +1,5 @@
 package eu.telecomsudparis.csc4102.suipro;
 
-import java.lang.reflect.Array;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
