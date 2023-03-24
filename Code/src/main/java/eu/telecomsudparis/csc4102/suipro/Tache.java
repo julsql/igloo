@@ -34,7 +34,7 @@ public class Tache {
 
 		this.intitule = intitule;
         this.description = description;
-		dansCorbeille = false;
+		this.dansCorbeille = false;
 		this.periodesDeTravail = new HashMap<>();
 		this.activite = activite;
 		assert invariant();
