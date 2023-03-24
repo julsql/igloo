@@ -1,5 +1,6 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -98,6 +99,17 @@ public class Activite {
 		}
 
         this.getTaches().put(intitule, new Tache(intitule, description, this));
+        assert invariant();
+    }
+
+    public void ajouterPeriode(String intituleTache, Instant debut, Instant fin, Developpeur developpeur)throws OperationImpossible{
+
+        Tache tache = this.getTaches().get(intituleTache);
+        if (tache == null){
+            throw new OperationImpossible("la tache ne peut pas être null");
+        }
+
+        tache.ajouterPeriode(debut, fin, developpeur);
         assert invariant();
     }
 

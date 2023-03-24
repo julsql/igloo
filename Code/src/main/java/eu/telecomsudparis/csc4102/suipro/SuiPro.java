@@ -1,5 +1,7 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import java.lang.reflect.Array;
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -97,6 +99,64 @@ public class SuiPro {
 
 		assert invariant();
 	}
+	/**
+	 * ajoute une activité.
+	 *
+	 * @param intituleActivite  l'intitulé de l'activité.
+	 * @param description  la description de la tâche.
+	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+	 *                             de décision des tests de validation).
+	 */
+	public void ajouterUneActivite(String intituleActivite,String description) throws OperationImpossible{
+		if (intituleActivite == null || intituleActivite.isBlank()) {
+			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
+		}
+		if (activites.get(intituleActivite) != null) {
+			throw new OperationImpossible("Activite déjà dans le système");
+		}
+		Activite activite = new Activite(intituleActivite, description);
+		this.activites.put(intituleActivite, activite);
+	}
+
+	/**
+	 * ajoute une période de travail.
+	 *
+	 * @param intituleActivite  l'intitulé de l'activité.
+	 * @param intituleTache  l'intitulé de la tâche.
+	 * @param aliasDev  l'alias du developpeur.
+	 * @param debut  debut de la tâche
+	 * @param fin  fin de la tâche
+	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+	 *                             de décision des tests de validation).
+	 */
+	public void ajouterUnePeriode(String intituleActivite, String intituleTache, String aliasDev, Instant debut, Instant fin) throws OperationImpossible{
+		if (intituleActivite == null || intituleActivite.isBlank()) {
+			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
+		}
+		if (intituleTache == null || intituleTache.isBlank()) {
+			throw new OperationImpossible("intituleTache ne peut pas être null ou vide");
+		}
+		if (aliasDev == null || aliasDev.isBlank()) {
+			throw new OperationImpossible("aliasDev ne peut pas être null ou vide");
+		}
+		if (debut == null) {
+			throw new OperationImpossible("debut ne peut pas être null");
+		}
+		if (fin == null) {
+			throw new OperationImpossible("fin ne peut pas être null");
+		}
+
+		Activite activite = activites.get(intituleActivite);
+		if (activite == null){
+			throw new OperationImpossible("l'activité ne peut pas être null");
+		}
+
+		Developpeur developpeur = developpeurs.get(aliasDev);
+		if (developpeur == null){
+			throw new OperationImpossible("le developpeur ne peut pas être null");
+		}
+		activite.ajouterPeriode(intituleTache, debut, fin, developpeur);
+	}
 
 	/**
 	 * met à la corbeille une tâche
@@ -167,17 +227,6 @@ public class SuiPro {
 		return "SuiPro [nomDeProjet=" + nomDeProjet + "]";
 	}
 
-
-	public void ajouterUneActivite(String intituleActivite,String description) throws OperationImpossible{
-		if (intituleActivite == null || intituleActivite.isBlank()) {
-			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
-		}
-		if (activites.get(intituleActivite) != null) {
-			throw new OperationImpossible("Activite déjà dans le système");
-		}
-		Activite activite = new Activite(intituleActivite, description);
-		this.activites.put(intituleActivite, activite);
-	}
 
 	public Map<String,Developpeur> getDeveloppeurs(){
 		return this.developpeurs;

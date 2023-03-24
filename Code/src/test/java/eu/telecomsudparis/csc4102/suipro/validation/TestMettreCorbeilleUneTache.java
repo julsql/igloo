@@ -11,7 +11,7 @@ import eu.telecomsudparis.csc4102.suipro.Tache;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 
-class TestMettreCobeilleDeveloppeur {
+class TestMettreCorbeilleUneTache {
 	private SuiPro suiPro;
 	private String intituleTache;
 	private String intituleActivite;

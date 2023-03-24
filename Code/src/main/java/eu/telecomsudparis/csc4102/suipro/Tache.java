@@ -1,5 +1,8 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import eu.telecomsudparis.csc4102.util.OperationImpossible;
+
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -74,6 +77,18 @@ public class Tache {
     public Map<String,PeriodeDeTravail> getPeriodesDeTravail(){
         return periodesDeTravail;
     }
+
+	public void ajouterPeriode(Instant debut, Instant fin, Developpeur developpeur) throws OperationImpossible {
+		String instants = debut + fin.toString();
+		if (this.getPeriodesDeTravail().get(instants) != null) {
+			throw new OperationImpossible("Période déjà dans le système des tâches");
+		}
+
+		PeriodeDeTravail periode = new PeriodeDeTravail(debut, fin, this, developpeur);
+
+		periodesDeTravail.put(instants, periode);
+		assert invariant();
+	}
 
     public void mettreALaCorbeille(){
         this.dansCorbeille = true;
