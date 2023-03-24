@@ -1,8 +1,11 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import eu.telecomsudparis.csc4102.util.OperationImpossible;
+
+import java.time.Instant;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.Map;
+import java.util.Objects;
 /**
  * Cette classe réalise le concept de développeur. Un développeur est un élément
  * jetable référençant une collection de période de travail.
@@ -23,7 +26,7 @@ public class Developpeur {
 	 */
 	private String prenom;
 	private boolean dansCorbeille;
-	private Map <String,PeriodeDeTravail> periodesDeTravail;
+	private Map <String, PeriodeDeTravail> periodesDeTravail;
 
 	/**
 	 * construit un développeur.
@@ -73,7 +76,9 @@ public class Developpeur {
 	public boolean getCorbeille() {
 		return dansCorbeille;
 	}
-
+	public Map<String,PeriodeDeTravail> getPeriodesDeTravail(){
+		return periodesDeTravail;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(alias);
@@ -94,9 +99,7 @@ public class Developpeur {
 		return Objects.equals(alias, other.alias);
 	}
 
-	public Map<String,PeriodeDeTravail> getPeriodesDeTravail(){
-        return periodesDeTravail;
-    }
+
     public void mettreALaCorbeille(){
         this.dansCorbeille = true;
         Map<String,PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();

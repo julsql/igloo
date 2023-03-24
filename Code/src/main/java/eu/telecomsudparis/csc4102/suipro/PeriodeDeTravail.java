@@ -7,7 +7,7 @@ import eu.telecomsudparis.csc4102.util.IntervalleInstants;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 /**
- * Cette classe réalise le concept de période de travail. Un période de travail
+ * Cette classe réalise le concept de période de travail. Une période de travail
  * est un élément jetable.
  * 
  * @author Denis Conan
@@ -37,6 +37,9 @@ public class PeriodeDeTravail {
 		this.dansCorbeille = false;
 		this.tache = tache;
 		this.developpeur = developpeur;
+
+		developpeur.getPeriodesDeTravail().put(debut + fin.toString(), this);
+		tache.getPeriodesDeTravail().put(debut + fin.toString(), this);
 		assert invariant();
 	}
 
