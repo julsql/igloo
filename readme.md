@@ -1,6 +1,6 @@
 Binôme:
-- Nom1 Prenom1 (to be adapted)
-- Nom2 Prenom2 (to be adapted)
+- Debono Juliette
+- Feret Nathan
 
 Copyright (C) 2016-2023
 Contact: Denis.Conan[at]telecom-sudparis.eu
