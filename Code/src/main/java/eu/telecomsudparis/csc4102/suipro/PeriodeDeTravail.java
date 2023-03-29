@@ -73,7 +73,12 @@ public class PeriodeDeTravail {
 	public String toString() {
 		return "PeriodeDeTravail [intervalle=" + intervalle + ", dans la corbeille=" + dansCorbeille + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(intervalle);
+	}
+
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {

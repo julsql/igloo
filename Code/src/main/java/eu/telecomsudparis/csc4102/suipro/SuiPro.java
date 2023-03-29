@@ -1,10 +1,12 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
+
 
 /**
  * Cette classe est la façade du logiciel.
@@ -34,6 +36,11 @@ public class SuiPro {
 		this.nomDeProjet = nomDeProjet;
 		developpeurs = new HashMap<>();
 		activites = new HashMap<>();
+	}
+
+	public static void main(String[] args) throws OperationImpossible {
+		SuiPro suiPro = new SuiPro("Projet");
+		suiPro.scenarioSprint1();
 	}
 
 	/**
@@ -185,21 +192,14 @@ public class SuiPro {
 	 * met à la corbeille un développeur.
 	 *
 	 * @param alias  l'alias.
-	 * @param nom  le nom.
-	 * @param prenom  le prenom.
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
 	 */
-	public void mettreCorbeilleUnDeveloppeur(final String alias, final String nom, final String prenom)
+	public void mettreCorbeilleUnDeveloppeur(final String alias)
 			throws OperationImpossible {
+		//TODO : Retirer dans modelisation MettreCorbeilleDeveloppeur le nom et prenom
 		if (alias == null || alias.isBlank()) {
 			throw new OperationImpossible("alias ne peut pas être null ou vide");
-		}
-		if (nom == null || nom.isBlank()) {
-			throw new OperationImpossible("nom ne peut pas être null ou vide");
-		}
-		if (prenom == null || prenom.isBlank()) {
-			throw new OperationImpossible("prenom ne peut pas être null ou vide");
 		}
 
 		if (developpeurs.get(alias) == null) {
@@ -288,6 +288,55 @@ public class SuiPro {
 			afficherTaches(activite.getIntitule(), true);
 
 		}
+	}
+
+	public void scenarioSprint1() throws OperationImpossible {
+		// Ajout des développeurs
+		this.ajouterUnDeveloppeur("pastorel", "Pastorel", "Emmanuel"); // 1
+		this.ajouterUnDeveloppeur("duscastel", "duscastel", "Jean-Baptiste");  // 2
+		this.ajouterUnDeveloppeur("vergniaud", "vergniaud", "Pierre-Victurnien"); // 3
+		this.ajouterUnDeveloppeur("viénot-vaublanc", "Viénot-Vaublanc", "Vincent"); // 4
+
+		// Ajout d'une activité et d'une tâche
+		this.ajouterUneActivite("cd", "Conception détaillée"); // 5
+		this.ajouterUneTache("cd", "dc", "Définition des classes"); // 6
+		this.ajouterUneTache("cd", "mi", "Maquettage des interfaces"); // 7
+
+		// Ajout des périodes
+		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+		this.ajouterUnePeriode("cd", "dc", "duscastel", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+		this.ajouterUnePeriode("cd", "dc", "vergniaud", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+
+		// Erreur
+		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now(), Instant.now().plus(Duration.ofMinutes(30))); // 9
+
+		// Ajout périodes de travail supplémentaires
+		this.ajouterUnePeriode("cd", "mi", "pastorel", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofHours(1))); // 10
+		this.ajouterUnePeriode("cd", "mi", "vergniaud", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofHours(1))); // 10
+		this.ajouterUnePeriode("cd", "dc", "duscastel", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofHours(1))); // 11
+		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofHours(1))); // 11
+
+		// Afficher
+		this.afficherDeveloppeurs(false); // 12
+		this.afficherTaches("cd", false); // 13
+		// this.afficherPeriodes("cd", "dc", false); // 14
+		// this.afficherPeriodes("cd", "mi", false); // 15
+
+		// Mise à la corbeille
+		this.mettreCorbeilleUnDeveloppeur("pastorel"); // 1
+		this.afficherDeveloppeurs(false); // 2
+		this.afficherDeveloppeurs(true); // 3
+		// this.afficherPeriodes("cd", "dc", false); // 4
+		// this.afficherPeriodes("cd", "mi", false); // 5
+		// this.afficherPeriodes("cd", "dc", true); // 6
+
+		//Erreur
+		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now().plus(Duration.ofDays(2)), Instant.now().plus(Duration.ofHours(1))); // 7
+
+		this.mettreCorbeilleUnDeveloppeur("pastorel"); // 8
+		this.afficherDeveloppeurs(false); // 9
+		this.afficherDeveloppeurs(true); // 10
 	}
 	
 }
