@@ -230,4 +230,64 @@ public class SuiPro {
 	public Map<String,Developpeur> getDeveloppeurs(){
 		return this.developpeurs;
 	}
+
+
+
+	/**
+	 * Affiche chaque développeur qui n'est pas dans la corbeille 
+	 * @param dansCorbeille boolean, si True, affiche les développeurs dans la corbeille uniquement
+	 * Si false, affiche les développeurs qui ne sont PAS dans la corbeille. 
+	 * 
+	 */
+	public void afficherDeveloppeurs(boolean dansCorbeille){
+		for (Map.Entry<String, Developpeur> entry : this.developpeurs.entrySet()) {
+			Developpeur dev = entry.getValue();
+
+			if (dev.getCorbeille() == dansCorbeille)
+			{
+			System.out.println(dev);
+			}
+		}
+	}
+
+		/**
+	 * Affiche chaque activité qui n'est pas dans la corbeille 
+	 * @param dansCorbeille boolean, si True, affiche les activités dans la corbeille uniquement
+	 * Si false, affiche les activités qui ne sont PAS dans la corbeille. 
+	 * 
+	 */
+	
+	 public void afficherActivites(boolean dansCorbeille){
+		for (Map.Entry<String, Activite> entry : this.activites.entrySet()) {
+			Activite activite = entry.getValue();
+
+			if (activite.getCorbeille() == dansCorbeille)
+			{
+			System.out.println(activite);
+			}
+		}
+	}
+
+	public void afficherTaches(String intituleActivite, boolean dansCorbeille){
+		Activite activite = this.activites.get(intituleActivite);
+
+		for (Map.Entry<String, Tache> entry : activite.getTaches().entrySet()) {
+			Tache tache = entry.getValue();
+
+			if (tache.getCorbeille() == dansCorbeille)
+			{
+			System.out.println(tache);
+			}
+		}
+	}
+
+	public void afficherTachesCorbeille(){
+		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
+		{
+			Activite activite = entry.getValue();
+			afficherTaches(activite.getIntitule(), true);
+
+		}
+	}
+	
 }
