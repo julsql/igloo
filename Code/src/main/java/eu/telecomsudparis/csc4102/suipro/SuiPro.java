@@ -261,6 +261,26 @@ public class SuiPro {
 	}
 
 	/**
+	 * met à la corbeille une activité.
+	 *
+	 * @param intitule  l'intitulé.
+	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+	 *                             de décision des tests de validation).
+	 */
+	public void mettreCorbeilleUneActivite(final String intitule)
+			throws OperationImpossible {
+		if (intitule == null || intitule.isBlank()) {
+			throw new OperationImpossible("intitule ne peut pas être null ou vide");
+		}
+
+		if (activites.get(intitule) == null) {
+			throw new OperationImpossible("développeur n'existe pas");
+		}
+		activites.get(intitule).mettreALaCorbeille();
+		assert invariant();
+	}
+
+	/**
 	 * obtient le nom du projet.
 	 * 
 	 * @return le nom du projet.

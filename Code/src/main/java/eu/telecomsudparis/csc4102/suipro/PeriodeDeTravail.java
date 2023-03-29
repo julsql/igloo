@@ -16,7 +16,6 @@ public class PeriodeDeTravail {
 	 * l'intervalle d'instants.
 	 */
 	private final IntervalleInstants intervalle;
-
 	private boolean dansCorbeille;
 	private final Tache tache;
 	private final Developpeur developpeur;
@@ -51,7 +50,7 @@ public class PeriodeDeTravail {
 	}
 
 	public void mettreALaCorbeille(){
-		this.dansCorbeille = true;
+		dansCorbeille = true;
 		assert invariant();
 	}
 	/**

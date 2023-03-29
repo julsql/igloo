@@ -130,6 +130,11 @@ public class Activite {
         assert invariant();
     }
 
+    public void mettreALaCorbeille() throws OperationImpossible
+    {
+        dansCorbeille = true;
+        assert invariant();
+    }
 
     public void mettrePeriodeCorbeille(String intituleTache, Instant debut, Instant fin, Developpeur developpeur) throws OperationImpossible {
         if (this.getTaches().get(intituleTache) == null) {
