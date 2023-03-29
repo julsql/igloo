@@ -1,5 +1,9 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import eu.telecomsudparis.csc4102.util.IntervalleInstants;
+import eu.telecomsudparis.csc4102.util.OperationImpossible;
+
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -106,9 +110,39 @@ public class Developpeur {
 		assert invariant();
     }
 
+	public void ajouterUnePeriode(PeriodeDeTravail newPeriode, Instant debut, Instant fin) throws OperationImpossible {
+
+		IntervalleInstants intervalle = new IntervalleInstants(debut, fin);
+		for (var periode : periodesDeTravail.entrySet()) {
+			if (chevauchement(periode.getValue().getIntervalle(), intervalle)) {
+				throw new OperationImpossible("La période chevauche une autre période");
+			}
+		}
+		String id = debut + fin.toString() + this;
+		periodesDeTravail.put(id, newPeriode);
+		assert invariant();
+	}
+
+	public boolean chevauchement(IntervalleInstants intervalle1, IntervalleInstants intervalle2) {
+		// Intervalle1 = [a, b]
+		Instant a = intervalle1.getInstantDebut();
+		Instant b = intervalle1.getInstantFin();
+
+		// Intervalle1 = [c, d]
+		Instant c = intervalle2.getInstantDebut();
+		Instant d = intervalle2.getInstantFin();
+
+		// Vérifier si l'intervalle1 commence avant l'intervalle2 et se termine avant l'intervalle2
+		if (a.isBefore(c) && b.isBefore(c)) {
+			return false;
+		}
+		// Vérifier si l'intervalle2 commence avant l'intervalle1 et se termine avant l'intervalle1
+		return !(c.isBefore(a) && d.isBefore(a));
+	}
+
 
 	@Override
 	public String toString() {
-		return alias ;
+		return "Developpeur [alias=" + alias + ", nom=" + nom + ", prénom=" + prenom + ", dans la corbeille=" + dansCorbeille + "]";
 	}
 }

@@ -80,14 +80,18 @@ public class Activite {
     public Map<String, Tache> getTaches() {
         return taches;
     }
-
+    /**
+     * obtient si c'est dans la corbeille.
+     *
+     * @return l'état de mise en corbeille.
+     */
     public boolean getCorbeille() {
         return dansCorbeille;
     }
 
     /**
-    * @param intitule  
-	* @param description    
+    * @param intitule l'intitulé
+	* @param description la description
     * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
     *                             de décision des tests de validation).
     */
@@ -109,6 +113,10 @@ public class Activite {
             throw new OperationImpossible("la tache ne peut pas être null");
         }
 
+        if (tache.getCorbeille()) {
+            throw new OperationImpossible("la tâche est dans la corbeille");
+        }
+
         tache.ajouterPeriode(debut, fin, developpeur);
         assert invariant();
     }
@@ -121,6 +129,17 @@ public class Activite {
         this.getTaches().get(intituleTache).mettreALaCorbeille();
         assert invariant();
     }
+
+
+    public void mettrePeriodeCorbeille(String intituleTache, Instant debut, Instant fin, Developpeur developpeur) throws OperationImpossible {
+        if (this.getTaches().get(intituleTache) == null) {
+            throw new OperationImpossible("tâche n'existe pas");
+        }
+        this.getTaches().get(intituleTache).mettrePeriodeCorbeille(debut, fin, developpeur);
+        assert invariant();
+    }
+
+
     @Override
     public int hashCode() {
         return Objects.hash(intitule);

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
-
 /**
  * Cette classe est la façade du logiciel.
  * 
@@ -18,10 +17,12 @@ public class SuiPro {
 	 * le nom du projet.
 	 */
 	private final String nomDeProjet;
+
 	/**
 	 * la collection de développeurs. La clef est l'identifiant du développeur.
 	 */
 	private Map<String, Developpeur> developpeurs;
+
 	/**
 	 * la collection de activités. La clef est l'identifiant de l'activité.
 	 */
@@ -61,8 +62,6 @@ public class SuiPro {
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
 	 */
-
-
 	public void ajouterUnDeveloppeur(final String alias, final String nom, final String prenom)
 			throws OperationImpossible {
 		if (alias == null || alias.isBlank()) {
@@ -80,6 +79,7 @@ public class SuiPro {
 		developpeurs.put(alias, new Developpeur(alias, nom, prenom));
 		assert invariant();
 	}
+
 	/**
 	 * ajoute une tâche.
 	 *
@@ -101,10 +101,14 @@ public class SuiPro {
 		if (activite == null){
 			throw new OperationImpossible("l'activité ne peut pas être null");
 		}
+		if (activite.getCorbeille()) {
+			throw new OperationImpossible("l'activité est dans la corbeille");
+		}
 		activite.ajouterTache(intituleTache,description);
 
 		assert invariant();
 	}
+
 	/**
 	 * ajoute une activité.
 	 *
@@ -154,14 +158,21 @@ public class SuiPro {
 
 		Activite activite = activites.get(intituleActivite);
 		if (activite == null){
-			throw new OperationImpossible("l'activité ne peut pas être null");
+			throw new OperationImpossible("l'activité ne put pas être null");
 		}
 
 		Developpeur developpeur = developpeurs.get(aliasDev);
 		if (developpeur == null){
 			throw new OperationImpossible("le developpeur ne peut pas être null");
 		}
+		if (developpeur.getCorbeille()) {
+			throw new OperationImpossible("le développeur est dans la corbeille");
+		}
 		activite.ajouterPeriode(intituleTache, debut, fin, developpeur);
+		String id = debut + fin.toString() + developpeur;
+		PeriodeDeTravail newPeriode = activite.getTaches().get(intituleTache).getPeriodesDeTravail().get(id);
+		developpeur.ajouterUnePeriode(newPeriode, debut, fin);
+
 	}
 
 	/**
@@ -185,6 +196,46 @@ public class SuiPro {
 			throw new OperationImpossible("la tache n'existe pas");
 		}
 		activite.mettreTacheCorbeille(intituleTache);
+		assert invariant();
+	}
+
+	/**
+	 * met à la corbeille une période de travail
+	 *
+	 * @param intituleActivite l'intitulé de l'activité.
+	 * @param intituleTache l'intitulé de la tache.
+	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+	 *                             de décision des tests de validation).
+	 */
+	public void mettreCorbeilleUnePeriode(final String intituleActivite, final String intituleTache, String aliasDev, Instant debut, Instant fin)
+			throws OperationImpossible {
+		if (intituleActivite == null || intituleActivite.isBlank()) {
+			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
+		}
+		if (intituleTache == null || intituleTache.isBlank()) {
+			throw new OperationImpossible("intituleTache ne peut pas être null ou vide");
+		}
+		if (aliasDev == null || aliasDev.isBlank()) {
+			throw new OperationImpossible("aliasDev ne peut pas être null ou vide");
+		}
+		if (debut == null) {
+			throw new OperationImpossible("debut ne peut pas être null");
+		}
+		if (fin == null) {
+			throw new OperationImpossible("fin ne peut pas être null");
+		}
+
+		Activite activite = activites.get(intituleActivite);
+		if (activite == null){
+			throw new OperationImpossible("l'activité ne put pas être null");
+		}
+
+		Developpeur developpeur = developpeurs.get(aliasDev);
+		if (developpeur == null){
+			throw new OperationImpossible("le developpeur ne peut pas être null");
+		}
+
+		activite.mettrePeriodeCorbeille(intituleTache, debut, fin, developpeur);
 		assert invariant();
 	}
 
@@ -218,20 +269,28 @@ public class SuiPro {
 		return nomDeProjet;
 	}
 
+	/**
+	 * obtient les activités.
+	 *
+	 * @return les activités.
+	 */
 	public Map<String,Activite> getActivites() {
 		return this.activites;
 	}
-	@Override
-	public String toString() {
-		return "SuiPro [nomDeProjet=" + nomDeProjet + "]";
-	}
 
-
+	/**
+	 * obtient les développeurs.
+	 *
+	 * @return les développeurs.
+	 */
 	public Map<String,Developpeur> getDeveloppeurs(){
 		return this.developpeurs;
 	}
 
-
+	@Override
+	public String toString() {
+		return "SuiPro [nomDeProjet=" + nomDeProjet + "]";
+	}
 
 	/**
 	 * Affiche chaque développeur qui n'est pas dans la corbeille 
@@ -240,144 +299,119 @@ public class SuiPro {
 	 * 
 	 */
 	public void afficherDeveloppeurs(boolean dansCorbeille){
-		if (!dansCorbeille)
-		{
-		System.out.println("Affichage des développeurs qui ne sont pas dans la corbeille :");
+		if (!dansCorbeille) {
+			System.out.println("Affichage des développeurs qui ne sont pas dans la corbeille :");
 		}
 
-		else 
-		{
+		else {
 			System.out.println("Affichage des développeurs qui sont dans la corbeille :");
-
 		}
-		System.out.print("{");
+		System.out.println("{");
 		
 		for (Map.Entry<String, Developpeur> entry : this.developpeurs.entrySet()) {
 			Developpeur dev = entry.getValue();
 
-			if (dev.getCorbeille() == dansCorbeille)
-			{
-			System.out.print(dev +", ");
+			if (dev.getCorbeille() == dansCorbeille) {
+				System.out.println(dev + ", ");
 			}
 		}
-		System.out.print("}\n\n");
-
+		System.out.println("}\n");
 	}
 
-		/**
+	/**
 	 * Affiche chaque activité qui n'est pas dans la corbeille 
 	 * @param dansCorbeille boolean, si True, affiche les activités dans la corbeille uniquement
 	 * Si false, affiche les activités qui ne sont PAS dans la corbeille. 
 	 * 
 	 */
-	
 	 public void afficherActivites(boolean dansCorbeille){
-		if (!dansCorbeille)
-		{
-		System.out.println("Affichage des activités qui ne sont pas dans la corbeille :");
+		if (!dansCorbeille) {
+			System.out.println("Affichage des activités qui ne sont pas dans la corbeille :");
 		}
 
-		else 
-		{
-		System.out.println("Affichage des activités qui sont dans la corbeille :");
-
+		else {
+			System.out.println("Affichage des activités qui sont dans la corbeille :");
 		}
 		System.out.println("{");
 
 		for (Map.Entry<String, Activite> entry : this.activites.entrySet()) {
 			Activite activite = entry.getValue();
 
-			if (activite.getCorbeille() == dansCorbeille)
-			{
-			System.out.println(activite+", ");
+			if (activite.getCorbeille() == dansCorbeille) {
+				System.out.println(activite + ", ");
 			}
 		}
-		System.out.println("}\n\n");
-
+		System.out.println("}\n");
 	}
 
 	public void afficherTaches(String intituleActivite, boolean dansCorbeille){
 
-		if (!dansCorbeille)
-		{
-		System.out.println("Affichage des Tache associées à " + intituleActivite+ " (qui ne sont pas dans la corbeille) :");
+		if (!dansCorbeille) {
+			System.out.println("Affichage des tâches associées à " + intituleActivite+ " (qui ne sont pas dans la corbeille) :");
 		}
 
-		
 		Activite activite = this.activites.get(intituleActivite);
-		System.out.print("{");
+		System.out.println("{");
 
 		for (Map.Entry<String, Tache> entry : activite.getTaches().entrySet()) {
 			Tache tache = entry.getValue();
 
-			if (tache.getCorbeille() == dansCorbeille)
-			{
-			System.out.print(tache+ ", ");
+			if (tache.getCorbeille() == dansCorbeille) {
+				System.out.println(tache+ ", ");
 			}
 		}
-		System.out.print("}\n\n");
-
+		System.out.println("}\n");
 	}
 
 	public void afficherTachesCorbeille(){
-		System.out.println("Affichage de toutes les taches qui sont dans la corbeille :");
+		System.out.println("Affichage de toutes les tâches qui sont dans la corbeille :");
 		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
 		{
 			Activite activite = entry.getValue();
 			afficherTaches(activite.getIntitule(), true);
-
 		}
 	}
+
 	public void afficherPeriodesDeTravail(String intituleActivite,String intituleTache,boolean dansCorbeille){
-		if (!dansCorbeille)
-		{
-		System.out.println("Affichage des periodes de travail associées à " + intituleTache+ " de " + intituleActivite + " (qui ne sont pas dans la corbeille) :");
-		}
-
-
 		Activite activite = this.activites.get(intituleActivite);
 		Tache tache = activite.getTaches().get(intituleTache);
-		
-		System.out.print("{");
-
+		 if (!dansCorbeille) {
+			System.out.println("Affichage des périodes de travail associées à " + intituleTache+ " de " + intituleActivite + " (qui ne sont pas dans la corbeille) :");
+			System.out.println("{");
+		}
 		for (Map.Entry<String, PeriodeDeTravail> entry : tache.getPeriodesDeTravail().entrySet()) {
 			PeriodeDeTravail periode = entry.getValue();
 
-			if (periode.getCorbeille() == dansCorbeille)
-			{
-			System.out.print(periode+ ", ");
+			if (periode.getCorbeille() == dansCorbeille) {
+				System.out.println(periode+ ", ");
 			}
 		}
-		System.out.print("}\n\n");
-	}
-
-
-	public void afficherPeriodesDeTravailCorbeille(){
-		System.out.println("Affichage de toutes les periodes de travail qui sont dans la corbeille :");
-		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
-		{
-			Activite activite = entry.getValue();
-
-			for (Map.Entry<String, Tache> entry2 : activite.getTaches().entrySet())
-			{
-				Tache tache = entry2.getValue();
-
-				afficherPeriodesDeTravail(activite.getIntitule(),tache.getIntitule(),true);
-			}	
-
+		if (!dansCorbeille) {
+			 System.out.println("}\n");
 		}
 	}
-/*
-	public void ajouterPeriodeDeTravail(String aliasDeveloppeur, String intituleActivite,String intituleTache,Instant debut, Instant fin){
-		Tache tache = this.activites.get(intituleActivite).getTaches().get(intituleTache);
-		Developpeur developpeur = this.developpeurs.get(aliasDeveloppeur);
-		PeriodeDeTravail periodeDeTravail = new PeriodeDeTravail(debut, fin, tache, developpeur);
-		developpeur.ajouterPeriodeDeTravail(periodeDeTravail)
-		tache.ajouterPeriode(periodeDeTravail);}
 
-	 */
+	public void afficherPeriodesDeTravailCorbeille(){
+		System.out.println("Affichage de toutes les périodes de travail qui sont dans la corbeille :");
+		System.out.println("{");
+		for (Map.Entry<String, Activite> entry : this.activites.entrySet()) {
+			Activite activite = entry.getValue();
+
+			for (Map.Entry<String, Tache> entry2 : activite.getTaches().entrySet()) {
+				Tache tache = entry2.getValue();
+				afficherPeriodesDeTravail(activite.getIntitule(),tache.getIntitule(),true);
+			}
+		}
+		System.out.println("}\n");
+	}
 
 	public void scenarioSprint1() throws OperationImpossible {
+		// Instants
+		Instant now = Instant.now();
+		Instant now1h = now.plus(Duration.ofHours(1));
+		Instant tomorrow = now.plus(Duration.ofDays(1));
+		Instant tomorrow1h = tomorrow.plus(Duration.ofHours(1));
+		
 		// Ajout des développeurs
 		this.ajouterUnDeveloppeur("pastorel", "Pastorel", "Emmanuel"); // 1
 		this.ajouterUnDeveloppeur("duscastel", "Duscastel", "Jean-Baptiste");  // 2
@@ -390,20 +424,19 @@ public class SuiPro {
 		this.ajouterUneTache("cd", "mi", "Maquettage des interfaces"); // 7
 
 		// Ajout des périodes
-		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
-		this.ajouterUnePeriode("cd", "dc", "duscastel", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
-		this.ajouterUnePeriode("cd", "dc", "vergniaud", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
-		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+		this.ajouterUnePeriode("cd", "dc", "pastorel", now, now1h); // 8
+		this.ajouterUnePeriode("cd", "dc", "duscastel", now, now1h); // 8
+		this.ajouterUnePeriode("cd", "dc", "vergniaud", now, now1h); // 8
+		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", now, now1h); // 8
 
 		// Erreur
-		// TODO
-		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now(), Instant.now().plus(Duration.ofMinutes(30))); // 9
+		// this.ajouterUnePeriode("cd", "dc", "pastorel", now, now.plus(Duration.ofMinutes(30))); // 9
 
 		// Ajout périodes de travail supplémentaires
-		this.ajouterUnePeriode("cd", "mi", "pastorel", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 10
-		this.ajouterUnePeriode("cd", "mi", "vergniaud", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 10
-		this.ajouterUnePeriode("cd", "dc", "duscastel", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 11
-		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 11
+		this.ajouterUnePeriode("cd", "mi", "pastorel", tomorrow, tomorrow1h); // 10
+		this.ajouterUnePeriode("cd", "mi", "vergniaud", tomorrow, tomorrow1h); // 10
+		this.ajouterUnePeriode("cd", "dc", "duscastel", tomorrow, tomorrow1h); // 11
+		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", tomorrow, tomorrow1h); // 11
 
 		// Afficher
 		this.afficherDeveloppeurs(false); // 12
@@ -419,15 +452,21 @@ public class SuiPro {
 		this.afficherPeriodesDeTravail("cd", "mi", false); // 5
 		this.afficherPeriodesDeTravailCorbeille(); // 6
 
-		//Erreur
-		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now().plus(Duration.ofDays(2)), Instant.now().plus(Duration.ofDays(2)).plus(Duration.ofHours(1))); // 7
-
+		// Erreur
+		// this.ajouterUnePeriode("cd", "dc", "pastorel", now.plus(Duration.ofDays(2)), now.plus(Duration.ofDays(2)).plus(Duration.ofHours(1));); // 7
 		this.mettreCorbeilleUnDeveloppeur("pastorel"); // 8
+
 		this.afficherDeveloppeurs(false); // 9
 		this.afficherDeveloppeurs(true); // 10
 	}
 
 	public void scenarioSprint2() throws OperationImpossible {
+		// Instants
+		Instant now = Instant.now();
+		Instant now1h = now.plus(Duration.ofHours(1));
+		Instant tomorrow = now.plus(Duration.ofDays(1));
+		Instant tomorrow1h = tomorrow.plus(Duration.ofHours(1));
+
 		// Ajout des développeurs
 		this.ajouterUnDeveloppeur("braun", "Braun", "Madeleine"); // 1
 		this.ajouterUnDeveloppeur("bureau-bonnard", "Bureau-Bonnard", "Carole");  // 2
@@ -440,19 +479,19 @@ public class SuiPro {
 		this.ajouterUneTache("cd", "mi", "Maquettage des interfaces"); // 7
 
 		// Ajout des périodes
-		this.ajouterUnePeriode("cd", "dc", "braun", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
-		this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
-		this.ajouterUnePeriode("cd", "dc", "peyroles", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
-		this.ajouterUnePeriode("cd", "dc", "braun-pivet", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+		this.ajouterUnePeriode("cd", "dc", "braun", now, now1h); // 8
+		this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", now, now1h); // 8
+		this.ajouterUnePeriode("cd", "dc", "peyroles", now, now1h); // 8
+		this.ajouterUnePeriode("cd", "dc", "braun-pivet", now, now1h); // 8
 
 		// Erreur
-		this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", Instant.now(), Instant.now().plus(Duration.ofMinutes(30))); // 9
+		// this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", now, now.plus(Duration.ofMinutes(30))); // 9
 
 		// Ajout périodes de travail supplémentaires
-		this.ajouterUnePeriode("cd", "mi", "braun", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 10
-		this.ajouterUnePeriode("cd", "mi", "bureau-bonnard", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 10
-		this.ajouterUnePeriode("cd", "dc", "braun-pivet", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 11
-		this.ajouterUnePeriode("cd", "dc", "peyroles", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 11
+		this.ajouterUnePeriode("cd", "mi", "braun", tomorrow, tomorrow1h); // 10
+		this.ajouterUnePeriode("cd", "mi", "bureau-bonnard", tomorrow, tomorrow1h); // 10
+		this.ajouterUnePeriode("cd", "dc", "braun-pivet", tomorrow, tomorrow1h); // 11
+		this.ajouterUnePeriode("cd", "dc", "peyroles", tomorrow, tomorrow1h); // 11
 
 		// Afficher
 		this.afficherDeveloppeurs(false); // 12
@@ -488,8 +527,8 @@ public class SuiPro {
 		// this.dureeTravailActivite("cd"); // 9
 		// this.dureeTravail(); // 10
 
-		//Erreur
-		this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", Instant.now().plus(Duration.ofDays(2)), Instant.now().plus(Duration.ofDays(2)).plus(Duration.ofHours(1))); // 11
+		// Erreur
+		// this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", now.plus(Duration.ofDays(2)), now.plus(Duration.ofDays(2)).plus(Duration.ofHours(1))); // 11
 
 		this.mettreCorbeilleUnDeveloppeur("bureau-bonnard"); // 12
 		this.afficherDeveloppeurs(false); // 13
@@ -507,7 +546,7 @@ public class SuiPro {
 		// Labellisation
 		// TODO
 		this.ajouterUneTache("cd", "révision", "Révision JAVA"); // 1
-		this.ajouterUnePeriode("cd", "révision", "braun-pivet", Instant.now().plus(Duration.ofDays(3)), Instant.now().plus(Duration.ofDays(3)).plus(Duration.ofHours(1))); // 2
+		this.ajouterUnePeriode("cd", "révision", "braun-pivet", now.plus(Duration.ofDays(3)), now.plus(Duration.ofDays(3)).plus(Duration.ofHours(1))); // 2
 		// this.dureeTravail(); // 3
 		// this.ajoutLabel("remédiation", "Remédiation"); // 4
 		// this.ajoutLabelTache("révision", "remédiation"); // 5
