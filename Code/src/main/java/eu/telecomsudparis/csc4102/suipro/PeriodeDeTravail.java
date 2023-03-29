@@ -18,8 +18,8 @@ public class PeriodeDeTravail {
 	private final IntervalleInstants intervalle;
 
 	private boolean dansCorbeille;
-	private Tache tache;
-	private Developpeur developpeur;
+	private final Tache tache;
+	private final Developpeur developpeur;
 	/**
 	 * construit une période de travail.
 	 * 
@@ -34,8 +34,6 @@ public class PeriodeDeTravail {
 		this.tache = tache;
 		this.developpeur = developpeur;
 
-		developpeur.getPeriodesDeTravail().put(debut + fin.toString(), this);
-		tache.getPeriodesDeTravail().put(debut + fin.toString(), this);
 		assert invariant();
 	}
 
@@ -67,7 +65,7 @@ public class PeriodeDeTravail {
 
 	@Override
 	public String toString() {
-		return "PeriodeDeTravail [intervalle=" + intervalle + ", dans la corbeille=" + dansCorbeille + "]";
+		return "PeriodeDeTravail [intervalle=" + intervalle + ", développeur=" + developpeur + ", tache=" + tache + ", dans la corbeille=" + dansCorbeille + "]";
 	}
 
 	@Override

@@ -28,7 +28,7 @@ class TestTacheMiseCorbeille {
     }
 
     @Test
-    void miseCorbeilleTacheTest1Jeu1() throws Exception {
+    void miseCorbeilleTacheTest1Jeu1() {
         tache.mettreALaCorbeille();
         assert tache.getCorbeille();
     }
@@ -48,14 +48,17 @@ class TestTacheMiseCorbeille {
 
         Assertions.assertTrue(tache.getCorbeille());
 
-        PeriodeDeTravail periodeDeTravail1 = tache.getPeriodesDeTravail().get(i1 + i2.toString());
-        PeriodeDeTravail periodeDeTravail2 = tache.getPeriodesDeTravail().get(i2 + i3.toString());
+        String id1 = i1 + i2.toString() + developpeur;
+        String id2 = i2 + i3.toString() + developpeur;
+
+        PeriodeDeTravail periodeDeTravail1 = tache.getPeriodesDeTravail().get(id1);
+        PeriodeDeTravail periodeDeTravail2 = tache.getPeriodesDeTravail().get(id2);
 
         Assertions.assertTrue(periodeDeTravail1.getCorbeille());
         Assertions.assertTrue(periodeDeTravail2.getCorbeille());
     }
 
-    void miseCorbeilleTacheTest1Jeu3() throws Exception {
+    void miseCorbeilleTacheTest1Jeu3() {
         tache.mettreALaCorbeille();
         tache.mettreALaCorbeille();
         assert tache.getCorbeille();

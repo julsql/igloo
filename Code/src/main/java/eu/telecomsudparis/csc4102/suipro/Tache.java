@@ -16,12 +16,12 @@ public class Tache {
 	 */
 	private final String intitule;
 
-    private String description;
+    private final String description;
 
     private Map<String,PeriodeDeTravail> periodesDeTravail;
 
     private boolean dansCorbeille;
-	private Activite activite;
+	private final Activite activite;
 
 	/**
 	 * construit un développeur.
@@ -79,18 +79,17 @@ public class Tache {
     }
 
 	public void ajouterPeriode(Instant debut, Instant fin, Developpeur developpeur) throws OperationImpossible {
-		String instants = debut + fin.toString();
-		if (this.getPeriodesDeTravail().get(instants) != null) {
+		String id = debut + fin.toString() + developpeur;
+		if (periodesDeTravail.get(id) != null) {
 			throw new OperationImpossible("Période déjà dans le système des tâches");
 		}
 
-		PeriodeDeTravail periode = new PeriodeDeTravail(debut, fin, this, developpeur);
-
-		periodesDeTravail.put(instants, periode);
+		PeriodeDeTravail newPeriode = new PeriodeDeTravail(debut, fin, this, developpeur);
+		periodesDeTravail.put(id, newPeriode);
 		assert invariant();
 	}
 
-    public void mettreALaCorbeille(){
+	public void mettreALaCorbeille(){
         this.dansCorbeille = true;
         Map<String,PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
         for (var periode : periodesDeTravailASupprimer.entrySet()) {
@@ -98,6 +97,18 @@ public class Tache {
         }
 		assert invariant();
     }
+
+	public void mettrePeriodeCorbeille(Instant debut, Instant fin, Developpeur developpeur) throws OperationImpossible {
+		String id = debut + fin.toString() + developpeur;
+
+		if (periodesDeTravail.get(id) == null) {
+			throw new OperationImpossible("Période n'existe pas");
+		}
+		periodesDeTravail.get(id).mettreALaCorbeille();
+		assert invariant();
+	}
+
+
 
     
 	@Override
@@ -122,6 +133,6 @@ public class Tache {
 
 	@Override
 	public String toString() {
-		return intitule;
+		return "Tâche [intitulé=" + intitule + ", desciption=" + description + ", dans la corbeille=" + dansCorbeille + "]";
 	}
 }
