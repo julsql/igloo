@@ -380,8 +380,8 @@ public class SuiPro {
 	public void scenarioSprint1() throws OperationImpossible {
 		// Ajout des développeurs
 		this.ajouterUnDeveloppeur("pastorel", "Pastorel", "Emmanuel"); // 1
-		this.ajouterUnDeveloppeur("duscastel", "duscastel", "Jean-Baptiste");  // 2
-		this.ajouterUnDeveloppeur("vergniaud", "vergniaud", "Pierre-Victurnien"); // 3
+		this.ajouterUnDeveloppeur("duscastel", "Duscastel", "Jean-Baptiste");  // 2
+		this.ajouterUnDeveloppeur("vergniaud", "Vergniaud", "Pierre-Victurnien"); // 3
 		this.ajouterUnDeveloppeur("viénot-vaublanc", "Viénot-Vaublanc", "Vincent"); // 4
 
 		// Ajout d'une activité et d'une tâche
@@ -396,34 +396,122 @@ public class SuiPro {
 		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
 
 		// Erreur
+		// TODO
 		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now(), Instant.now().plus(Duration.ofMinutes(30))); // 9
 
 		// Ajout périodes de travail supplémentaires
-		this.ajouterUnePeriode("cd", "mi", "pastorel", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofHours(1))); // 10
-		this.ajouterUnePeriode("cd", "mi", "vergniaud", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofHours(1))); // 10
-		this.ajouterUnePeriode("cd", "dc", "duscastel", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofHours(1))); // 11
-		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofHours(1))); // 11
+		this.ajouterUnePeriode("cd", "mi", "pastorel", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 10
+		this.ajouterUnePeriode("cd", "mi", "vergniaud", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 10
+		this.ajouterUnePeriode("cd", "dc", "duscastel", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 11
+		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 11
 
 		// Afficher
 		this.afficherDeveloppeurs(false); // 12
 		this.afficherTaches("cd", false); // 13
-		// this.afficherPeriodes("cd", "dc", false); // 14
-		// this.afficherPeriodes("cd", "mi", false); // 15
+		this.afficherPeriodesDeTravail("cd", "dc", false); // 14
+		this.afficherPeriodesDeTravail("cd", "mi", false); // 15
 
 		// Mise à la corbeille
 		this.mettreCorbeilleUnDeveloppeur("pastorel"); // 1
 		this.afficherDeveloppeurs(false); // 2
 		this.afficherDeveloppeurs(true); // 3
-		// this.afficherPeriodes("cd", "dc", false); // 4
-		// this.afficherPeriodes("cd", "mi", false); // 5
-		// this.afficherPeriodes("cd", "dc", true); // 6
+		this.afficherPeriodesDeTravail("cd", "dc", false); // 4
+		this.afficherPeriodesDeTravail("cd", "mi", false); // 5
+		this.afficherPeriodesDeTravailCorbeille(); // 6
 
 		//Erreur
-		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now().plus(Duration.ofDays(2)), Instant.now().plus(Duration.ofHours(1))); // 7
+		this.ajouterUnePeriode("cd", "dc", "pastorel", Instant.now().plus(Duration.ofDays(2)), Instant.now().plus(Duration.ofDays(2)).plus(Duration.ofHours(1))); // 7
 
 		this.mettreCorbeilleUnDeveloppeur("pastorel"); // 8
 		this.afficherDeveloppeurs(false); // 9
 		this.afficherDeveloppeurs(true); // 10
+	}
+
+	public void scenarioSprint2() throws OperationImpossible {
+		// Ajout des développeurs
+		this.ajouterUnDeveloppeur("braun", "Braun", "Madeleine"); // 1
+		this.ajouterUnDeveloppeur("bureau-bonnard", "Bureau-Bonnard", "Carole");  // 2
+		this.ajouterUnDeveloppeur("peyroles", "Peyroles", "Germaine"); // 3
+		this.ajouterUnDeveloppeur("braun-pivet", "Braun-Pivet", "Yaël"); // 4
+
+		// Ajout d'une activité et d'une tâche
+		this.ajouterUneActivite("cd", "Conception détaillée"); // 5
+		this.ajouterUneTache("cd", "dc", "Définition des classes"); // 6
+		this.ajouterUneTache("cd", "mi", "Maquettage des interfaces"); // 7
+
+		// Ajout des périodes
+		this.ajouterUnePeriode("cd", "dc", "braun", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+		this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+		this.ajouterUnePeriode("cd", "dc", "peyroles", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+		this.ajouterUnePeriode("cd", "dc", "braun-pivet", Instant.now(), Instant.now().plus(Duration.ofHours(1))); // 8
+
+		// Erreur
+		this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", Instant.now(), Instant.now().plus(Duration.ofMinutes(30))); // 9
+
+		// Ajout périodes de travail supplémentaires
+		this.ajouterUnePeriode("cd", "mi", "braun", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 10
+		this.ajouterUnePeriode("cd", "mi", "bureau-bonnard", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 10
+		this.ajouterUnePeriode("cd", "dc", "braun-pivet", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 11
+		this.ajouterUnePeriode("cd", "dc", "peyroles", Instant.now().plus(Duration.ofDays(1)), Instant.now().plus(Duration.ofDays(1)).plus(Duration.ofHours(1))); // 11
+
+		// Afficher
+		this.afficherDeveloppeurs(false); // 12
+		this.afficherTaches("cd", false); // 13
+		this.afficherPeriodesDeTravail("cd", "dc", false); // 14
+		this.afficherPeriodesDeTravail("cd", "mi", false); // 15
+
+		// Calcul de durée
+		// TODO
+		// this.dureeTravailDeveloppeur("braun"); // 16
+		// this.dureeTravailDeveloppeur("bureau-bonnard"); // 16
+		// this.dureeTravailDeveloppeur("peyroles"); // 16
+		// this.dureeTravailDeveloppeur("braun-pivet"); // 16
+		// this.dureeTravailTache("cd"); // 17
+		// this.dureeTravailActivite("cd"); // 18
+		// this.dureeTravail(); // 19
+
+		// Mise à la corbeille
+		this.mettreCorbeilleUnDeveloppeur("bureau-bonnard"); // 1
+		this.afficherDeveloppeurs(false); // 2
+		this.afficherDeveloppeurs(true); // 3
+		this.afficherPeriodesDeTravail("cd", "dc", false); // 4
+		this.afficherPeriodesDeTravail("cd", "mi", false); // 5
+		this.afficherPeriodesDeTravailCorbeille(); // 6
+
+		// Calcul de durée
+		// TODO
+		// this.dureeTravailDeveloppeur("braun"); // 7
+		// this.dureeTravailDeveloppeur("bureau-bonnard"); // 7
+		// this.dureeTravailDeveloppeur("peyroles"); // 7
+		// this.dureeTravailDeveloppeur("braun-pivet"); // 7
+		// this.dureeTravailTache("cd"); // 8
+		// this.dureeTravailActivite("cd"); // 9
+		// this.dureeTravail(); // 10
+
+		//Erreur
+		this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", Instant.now().plus(Duration.ofDays(2)), Instant.now().plus(Duration.ofDays(2)).plus(Duration.ofHours(1))); // 11
+
+		this.mettreCorbeilleUnDeveloppeur("bureau-bonnard"); // 12
+		this.afficherDeveloppeurs(false); // 13
+		this.afficherDeveloppeurs(true); // 14
+
+		// Restauration
+		// TODO
+		// this.restaureDeveloppeur("bureau-bonnard"); // 1
+		this.afficherDeveloppeurs(false); // 2
+		this.afficherDeveloppeurs(true); // 3
+		// this.dureeTravail(); // 4
+		// this.dureeTravailActivite(intituleActivite); // 5
+		// this.dureeTravailDeveloppeur("bureau-bonnard"); // 6
+
+		// Labellisation
+		// TODO
+		this.ajouterUneTache("cd", "révision", "Révision JAVA"); // 1
+		this.ajouterUnePeriode("cd", "révision", "braun-pivet", Instant.now().plus(Duration.ofDays(3)), Instant.now().plus(Duration.ofDays(3)).plus(Duration.ofHours(1))); // 2
+		// this.dureeTravail(); // 3
+		// this.ajoutLabel("remédiation", "Remédiation"); // 4
+		// this.ajoutLabelTache("révision", "remédiation"); // 5
+		// this.dureeTravail("remédiation"); // 6
 	}
 	
 }
