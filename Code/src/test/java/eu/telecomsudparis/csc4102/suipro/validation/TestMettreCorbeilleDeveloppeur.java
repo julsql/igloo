@@ -39,27 +39,15 @@ class TestMettreCorbeilleDeveloppeur {
 
 	@Test
 	void mettreCorbeilleUneDeveloppeurTest1Jeu1() throws Exception {
-		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur("",nom,prenom));
+		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(""));
 	}
 	@Test
 	void mettreCorbeilleUneDeveloppeurTest1Jeu2() throws Exception {
-		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(null,nom,prenom));
+		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(null));
 	}
 	@Test
 	void mettreCorbeilleUneTacheTest2Jeu1() throws Exception {
-		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(alias,"",prenom));
-	}
-    @Test
-	void mettreCorbeilleUneTacheTest2Jeu2() throws Exception {
-		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(alias,null,prenom));
-	}
-    @Test
-	void mettreCorbeilleUneTacheTest3Jeu1() throws Exception {
-		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(alias,nom,""));
-	}
-    @Test
-	void mettreCorbeilleUneTacheTest3Jeu2() throws Exception {
-		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(alias,nom,null));
+		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(alias));
 	}
 
     @Test
@@ -67,7 +55,7 @@ class TestMettreCorbeilleDeveloppeur {
     suiPro.ajouterUnDeveloppeur(alias,nom,prenom);
     Developpeur developpeur = suiPro.getDeveloppeurs().get(alias);
     Map <String,PeriodeDeTravail> periodes = developpeur.getPeriodesDeTravail();
-    suiPro.mettreCorbeilleUnDeveloppeur(alias, nom, prenom);
+    suiPro.mettreCorbeilleUnDeveloppeur(alias);
     for (var periode : periodes.entrySet()) {
         Assertions.assertTrue(periode.getValue().getCorbeille());
     }   
