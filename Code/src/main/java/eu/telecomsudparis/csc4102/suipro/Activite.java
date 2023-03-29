@@ -143,6 +143,6 @@ public class Activite {
 
     @Override
     public String toString() {
-        return "Activité [intitule=" + intitule + ", description=" + description + ", dans la corbeille=" + dansCorbeille + "]";
+        return intitule;
     }
 }

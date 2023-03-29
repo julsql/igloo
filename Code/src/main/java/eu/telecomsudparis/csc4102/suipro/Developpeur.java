@@ -109,6 +109,6 @@ public class Developpeur {
 
 	@Override
 	public String toString() {
-		return "Developpeur [alias=" + alias + ", nom=" + nom + ", prenom=" + prenom + ", dans la corbeille=" + dansCorbeille +  "]";
+		return alias ;
 	}
 }

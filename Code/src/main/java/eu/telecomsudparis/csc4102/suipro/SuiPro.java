@@ -240,14 +240,28 @@ public class SuiPro {
 	 * 
 	 */
 	public void afficherDeveloppeurs(boolean dansCorbeille){
+		if (!dansCorbeille)
+		{
+		System.out.println("Affichage des développeurs qui ne sont pas dans la corbeille :");
+		}
+
+		else 
+		{
+			System.out.println("Affichage des développeurs qui sont dans la corbeille :");
+
+		}
+		System.out.print("{");
+		
 		for (Map.Entry<String, Developpeur> entry : this.developpeurs.entrySet()) {
 			Developpeur dev = entry.getValue();
 
 			if (dev.getCorbeille() == dansCorbeille)
 			{
-			System.out.println(dev);
+			System.out.print(dev +", ");
 			}
 		}
+		System.out.print("}\n\n");
+
 	}
 
 		/**
@@ -258,30 +272,55 @@ public class SuiPro {
 	 */
 	
 	 public void afficherActivites(boolean dansCorbeille){
+		if (!dansCorbeille)
+		{
+		System.out.println("Affichage des activités qui ne sont pas dans la corbeille :");
+		}
+
+		else 
+		{
+		System.out.println("Affichage des activités qui sont dans la corbeille :");
+
+		}
+		System.out.println("{");
+
 		for (Map.Entry<String, Activite> entry : this.activites.entrySet()) {
 			Activite activite = entry.getValue();
 
 			if (activite.getCorbeille() == dansCorbeille)
 			{
-			System.out.println(activite);
+			System.out.println(activite+", ");
 			}
 		}
+		System.out.println("}\n\n");
+
 	}
 
 	public void afficherTaches(String intituleActivite, boolean dansCorbeille){
+
+		if (!dansCorbeille)
+		{
+		System.out.println("Affichage des Tache associées à " + intituleActivite+ " (qui ne sont pas dans la corbeille) :");
+		}
+
+		
 		Activite activite = this.activites.get(intituleActivite);
+		System.out.print("{");
 
 		for (Map.Entry<String, Tache> entry : activite.getTaches().entrySet()) {
 			Tache tache = entry.getValue();
 
 			if (tache.getCorbeille() == dansCorbeille)
 			{
-			System.out.println(tache);
+			System.out.print(tache+ ", ");
 			}
 		}
+		System.out.print("}\n\n");
+
 	}
 
 	public void afficherTachesCorbeille(){
+		System.out.println("Affichage de toutes les taches qui sont dans la corbeille :");
 		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
 		{
 			Activite activite = entry.getValue();
@@ -289,6 +328,54 @@ public class SuiPro {
 
 		}
 	}
+	public void afficherPeriodesDeTravail(String intituleActivite,String intituleTache,boolean dansCorbeille){
+		if (!dansCorbeille)
+		{
+		System.out.println("Affichage des periodes de travail associées à " + intituleTache+ " de " + intituleActivite + " (qui ne sont pas dans la corbeille) :");
+		}
+
+
+		Activite activite = this.activites.get(intituleActivite);
+		Tache tache = activite.getTaches().get(intituleTache);
+		
+		System.out.print("{");
+
+		for (Map.Entry<String, PeriodeDeTravail> entry : tache.getPeriodesDeTravail().entrySet()) {
+			PeriodeDeTravail periode = entry.getValue();
+
+			if (periode.getCorbeille() == dansCorbeille)
+			{
+			System.out.print(periode+ ", ");
+			}
+		}
+		System.out.print("}\n\n");
+	}
+
+
+	public void afficherPeriodesDeTravailCorbeille(){
+		System.out.println("Affichage de toutes les periodes de travail qui sont dans la corbeille :");
+		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
+		{
+			Activite activite = entry.getValue();
+
+			for (Map.Entry<String, Tache> entry2 : activite.getTaches().entrySet())
+			{
+				Tache tache = entry2.getValue();
+
+				afficherPeriodesDeTravail(activite.getIntitule(),tache.getIntitule(),true);
+			}	
+
+		}
+	}
+/*
+	public void ajouterPeriodeDeTravail(String aliasDeveloppeur, String intituleActivite,String intituleTache,Instant debut, Instant fin){
+		Tache tache = this.activites.get(intituleActivite).getTaches().get(intituleTache);
+		Developpeur developpeur = this.developpeurs.get(aliasDeveloppeur);
+		PeriodeDeTravail periodeDeTravail = new PeriodeDeTravail(debut, fin, tache, developpeur);
+		developpeur.ajouterPeriodeDeTravail(periodeDeTravail)
+		tache.ajouterPeriode(periodeDeTravail);}
+
+	 */
 
 	public void scenarioSprint1() throws OperationImpossible {
 		// Ajout des développeurs

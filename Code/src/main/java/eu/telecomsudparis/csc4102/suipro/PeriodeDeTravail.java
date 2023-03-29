@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.util.Objects;
 
 import eu.telecomsudparis.csc4102.util.IntervalleInstants;
-import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 /**
  * Cette classe réalise le concept de période de travail. Une période de travail
@@ -26,13 +25,10 @@ public class PeriodeDeTravail {
 	 * 
 	 * @param debut       l'instant de début.
 	 * @param fin         l'instant de fin.
-	 * @throws OperationImpossible exception levée lorsque ...
 	 */
 	public PeriodeDeTravail(final Instant debut, final Instant fin, Tache tache, Developpeur developpeur)
-			throws OperationImpossible {
+{
 		super();
-		Objects.requireNonNull(debut, "debut ne peut pas être null");
-		Objects.requireNonNull(fin, "fin ne peut pas être null");
 		this.intervalle = new IntervalleInstants(debut, fin);
 		this.dansCorbeille = false;
 		this.tache = tache;
