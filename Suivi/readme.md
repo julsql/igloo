@@ -172,3 +172,129 @@ le cours de la séance 6.
   SuiPro::mettreCorbeilleUneTache... activite.getTaches().get(intituleTache)
   c'est différent du diag. de séquence
     * c'est le diag. de séquence qui est le plus propre
+------------------------------------
+lun. 03 avril 2023 16:09:01
+Denis Conan
+
+----
+
+Pour rappel, vous trouverez les explications sur les messages à l'adresse suivante :
+https://gitlabens.imtbs-tsp.eu/enseignants.csc4102/csc4102-exemples/-/blob/main/Suivi/messages_pour_le_suivi.md
+
+# Évaluation du logiciel livré à la fin du Sprint 1
+
+Très bon travail! Les remarques suivantes vont encore vous aider à
+affiner et consolider votre projet pour le Sprint 2. Bonne continuation.
+
+## Modélisation du logiciel
+
+### Spécification et préparation des tests de validation
+
+#### Diagrammes de cas d'utilisation =  a
+
+#### Préconditions et postconditions =  b+
+
+Cas d'utilisation « ajouter une tâche » : 
+
+* PREPOSTCOND-02-Compréhension-étude-de-cas,
+  PREPOSTCOND-05-Précondition-incomplète : termes sur l'activité
+
+Cas d'utilisation « mettre à la corbeille une tâche » : 
+
+* PREPOSTCOND-02-Compréhension-étude-de-cas,
+  PREPOSTCOND-05-Précondition-incomplète : termes sur l'activité
+
+Cas d'utilisation « mettre à la corbeille un développeur » : ok
+
+#### Tables de décision des tests de validation =  a
+
+Cas d'utilisation « ajouter une tâche » : 
+
+* [] TABLEDECTV-07-MAJ-précondition-postcondition
+
+Cas d'utilisation « mettre à la corbeille une tâche » : 
+
+* [] TABLEDECTV-07-MAJ-précondition-postcondition
+
+Cas d'utilisation « mettre à la corbeille un développeur » : ok
+
+### Conception préliminaire
+
+#### Diagramme de classes =  a
+
+* redondance entre nom d'associatin et agrégation : quand agrégation,
+  pas besoin de nom d'association
+
+#### Diagrammes de séquence (2 parmi) =  a
+
+Cas d'utilisation « ajouter une tâche » : ok
+
+Cas d'utilisation « mettre à la corbeille une tâche » : ok
+
+Cas d'utilisation « mettre à la corbeille un développeur » : N/A
+
+### Conception détaillée et préparation des tests unitaires
+
+#### Raffinement du diagramme de classes =  a
+
+#### Diagramme de machine à états et invariant =  a-
+
+* [] INV-03-Invariant-à-compléter : attribut association vers Activité
+
+#### Tables de décision de tests unitaires =  a
+
+## Programmation
+
+### Utilisation des outils de programmation
+
+#### Module Maven et tests avec JUnit = a
+
+### Programmation de la solution
+
+#### Classes du diagramme de classes avec leurs attributs = a-
+
+* [] JAVA-06-Pb-traduction-association : Activité vers la façade car
+  association bidirectionnelle
+
+* [] Tâche::equals et hashCode avec des attributs différents
+
+#### Méthodes des cas d'utilisation de base = a+
+
+Cas d'utilisation « ajouter une tâche » : ok
+
+Cas d'utilisation « mettre à la corbeille une tâche » : ok
+
+Cas d'utilisation « mettre à la corbeille un développeur » : ok
+
+### Cohérence entre le code et le modèle
+
+#### Cohérences du code avec le diagramme de classes = a-
+
+#### Cohérences du code avec les diagrammes de séquence de base = a
+
+### Programmation et exécution des tests de validation et unitaires
+
+#### Tests de validation des cas d'utilisation = b+
+
+Cas d'utilisation « ajouter une tâche » : 
+
+* [] JAVATEST-05-Pb-nommage-méthode-de-test : ajouterUneTacheTest2Jeu1
+  alors qu'il y a deux tests dans la méthode
+
+Cas d'utilisation « mettre à la corbeille une tâche » : 
+
+* [] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
+  suiPro.getActivites()
+
+* [] JAVATEST-05-Test-manquant : avec périodes de travail
+
+Cas d'utilisation « mettre à la corbeille un développeur » : 
+
+* [] JAVATEST-05-Pb-nommage-méthode-de-test : mettreCorbeilleUneTache, etc.
+
+* [] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
+  suiPro.getDeveloppeurs(), etc.
+
+#### Tests unitaires de méthodes d'une classe = a
+
+
