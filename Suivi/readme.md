@@ -298,3 +298,15 @@ Cas d'utilisation « mettre à la corbeille un développeur » :
 #### Tests unitaires de méthodes d'une classe = a
 
 
+ 
+---
+# Suivi du mar. 04 avril 2023 09:32:43
+
+* spotbugs ok
+
+* [] checkstyle à terminer
+
+* [] Activite::toString : y mettre plus de chose
+
+
+
