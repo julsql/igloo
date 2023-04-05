@@ -367,6 +367,11 @@ public class SuiPro {
 		System.out.println("}\n");
 	}
 
+	/**
+	 *  Affiche les taches
+	 * @param intituleActivite intitulé de l'activité
+	 * @param dansCorbeille boolean ; est dans la corbeille
+	 */
 	public void afficherTaches(String intituleActivite, boolean dansCorbeille){
 
 		if (!dansCorbeille) {
@@ -385,7 +390,9 @@ public class SuiPro {
 		}
 		System.out.println("}\n");	
 	}
-
+/**
+ * Affiche les taches dans la corbeille
+ */
 	public void afficherTachesCorbeille(){
 		System.out.println("Affichage de toutes les tâches qui sont dans la corbeille :");
 		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
@@ -414,6 +421,9 @@ public class SuiPro {
 		}
 	}
 
+	/**
+	 * Affiche les toutes les periodes de travail dans la corbeille
+	 */
 	public void afficherPeriodesDeTravailCorbeille(){
 		System.out.println("Affichage de toutes les périodes de travail qui sont dans la corbeille :");
 		System.out.println("{");
@@ -429,17 +439,60 @@ public class SuiPro {
 	}
 
 
-	public List<String> listerActivitesCorbeille(){
+	/** Liste toutes les taches qui sont dans la corbeille
+ 	* @return List<String> liste des intitulés des activités à la corbeille
+	 **/
+
+	public List<String> listerTachesCorbeille(){
 		List<String> listIntitule = new ArrayList<>();
-		Collection<Activite> activitesCorbeille =  this.activites.values();
+		
+		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
+		{
+			Activite activite = entry.getValue();
+			Collection <Tache> taches = activite.getTaches().values();
 
-		activitesCorbeille.stream()
-		.filter(s->s.getCorbeille());
+			taches.stream().filter(s->s.getCorbeille());
+			taches.forEach( (tache) -> listIntitule.add(tache.getIntitule()) );
+			
+		}
 
-		activites.values().forEach( (activite) -> listIntitule.add(activite.toString()) );
 		return listIntitule;
 		
 	}
+	/**
+ * 
+ * @return List<String> liste des alias des developpeurs à la corbeille
+ */
+public List<String> listerDeveloppeursCorbeille(){
+	List<String> listAlias = new ArrayList<>();
+	Collection<Developpeur> developpeursCorbeille =  this.developpeurs.values();
+
+	developpeursCorbeille.stream()
+	.filter(s->s.getCorbeille());
+
+	developpeursCorbeille.forEach( (dev) -> listAlias.add(dev.getAlias()) );
+	return listAlias;
+
+}
+
+/**
+ * 
+ * @return List<String> liste des intitulés des activités à la corbeille
+ */
+// TODO relire cette fonction c'est étrange
+
+public List<String> listerActivitesCorbeille(){
+	List<String> listIntitule = new ArrayList<>();
+	Collection<Activite> activitesCorbeille =  this.activites.values();
+
+	activitesCorbeille.stream()
+	.filter(s->s.getCorbeille());
+
+	activitesCorbeille.forEach( (activite) -> listIntitule.add(activite.toString()) );
+	return listIntitule;
+	
+}
+
 
 	public void scenarioSprint1() throws OperationImpossible {
 		// Instants

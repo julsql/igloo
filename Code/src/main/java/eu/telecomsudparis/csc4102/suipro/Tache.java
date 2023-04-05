@@ -163,6 +163,6 @@ public class Tache {
 
 	@Override
 	public String toString() {
-		return "Tâche [intitulé=" + intitule + ", desciption=" + description + ", dans la corbeille=" + dansCorbeille + "]";
+		return "Tâche [intitulé=" + intitule + ", description=" + description + ", dans la corbeille=" + dansCorbeille + "]";
 	}
 }
