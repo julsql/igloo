@@ -16,17 +16,27 @@ public class PeriodeDeTravail {
 	 * l'intervalle d'instants.
 	 */
 	private final IntervalleInstants intervalle;
+	/**
+	 * est-ce que la tâche est dans la corbeille.
+	 */
 	private boolean dansCorbeille;
+	/**
+	 * la tâche.
+	 */
 	private final Tache tache;
+	/**
+	 * le développeur.
+	 */
 	private final Developpeur developpeur;
 	/**
 	 * construit une période de travail.
 	 * 
 	 * @param debut       l'instant de début.
 	 * @param fin         l'instant de fin.
+	 * @param tache       la tâche
+	 * @param developpeur le développeur
 	 */
-	public PeriodeDeTravail(final Instant debut, final Instant fin, Tache tache, Developpeur developpeur)
-{
+	public PeriodeDeTravail(final Instant debut, final Instant fin, final Tache tache, final Developpeur developpeur) {
 		super();
 		this.intervalle = new IntervalleInstants(debut, fin);
 		this.dansCorbeille = false;
@@ -45,11 +55,20 @@ public class PeriodeDeTravail {
 		return intervalle != null;
 	}
 
+	/**
+	 * obtient la mise à la corbeille.
+	 *
+	 * @return est-ce que la tâche est dans la corbeille.
+	 */
 	public boolean getCorbeille() {
 		return dansCorbeille;
 	}
 
-	public void mettreALaCorbeille(){
+	/**
+	 * met la tâche à la corbeille.
+	 *
+	 */
+	public void mettreALaCorbeille() {
 		dansCorbeille = true;
 		assert invariant();
 	}
@@ -84,7 +103,6 @@ public class PeriodeDeTravail {
             return false;
         }
         PeriodeDeTravail other = (PeriodeDeTravail) obj;
-        return Objects.equals(intervalle,other.intervalle) && Objects.equals(tache,other.tache) && Objects.equals(developpeur,other.developpeur);
+        return Objects.equals(intervalle, other.intervalle);
     }
-	
 }

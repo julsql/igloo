@@ -95,7 +95,7 @@ public class Activite {
     * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
     *                             de décision des tests de validation).
     */
-    public void ajouterTache(String intitule, String description)throws OperationImpossible{
+    public void ajouterTache(final String intitule, final String description)throws OperationImpossible {
 
 
         if (this.getTaches().get(intitule) != null) {
@@ -106,10 +106,20 @@ public class Activite {
         assert invariant();
     }
 
-    public void ajouterPeriode(String intituleTache, Instant debut, Instant fin, Developpeur developpeur)throws OperationImpossible{
+    /**
+     * Ajoute une période de travail.
+     *
+     * @param intituleTache l'intitulé de la tâche.
+     * @param debut l'instant de début.
+     * @param fin l'instant de fin.
+     * @param developpeur le développeur.
+     * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+     *                             de décision des tests de validation).
+     */
+    public void ajouterPeriode(final String intituleTache, final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible {
 
         Tache tache = this.getTaches().get(intituleTache);
-        if (tache == null){
+        if (tache == null) {
             throw new OperationImpossible("la tache ne peut pas être null");
         }
 
@@ -120,23 +130,39 @@ public class Activite {
         tache.ajouterPeriode(debut, fin, developpeur);
         assert invariant();
     }
-
-    public void mettreTacheCorbeille(String intituleTache) throws OperationImpossible
-    {
+    /**
+     * Met à la corbeille une tâche.
+     *
+     * @param intituleTache l'intitulé de la tâche.
+     * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+     *                             de décision des tests de validation).
+     */
+    public void mettreTacheCorbeille(final String intituleTache) throws OperationImpossible {
         if (this.getTaches().get(intituleTache) == null) {
             throw new OperationImpossible("tâche n'existe pas");
         }
         this.getTaches().get(intituleTache).mettreALaCorbeille();
         assert invariant();
     }
-
-    public void mettreALaCorbeille() throws OperationImpossible
-    {
+    /**
+     * Met à la corbeille l'activité.
+     */
+    public void mettreALaCorbeille() {
         dansCorbeille = true;
         assert invariant();
     }
-
-    public void mettrePeriodeCorbeille(String intituleTache, Instant debut, Instant fin, Developpeur developpeur) throws OperationImpossible {
+    /**
+     * Met à la corbeille une période de travail.
+     *
+     * @param intituleTache l'intitulé de la tâche.
+     * @param debut l'instant de début.
+     * @param fin l'instant de fin.
+     * @param developpeur le développeur.
+     *
+     * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+     *                             de décision des tests de validation).
+     */
+    public void mettrePeriodeCorbeille(final String intituleTache, final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible {
         if (this.getTaches().get(intituleTache) == null) {
             throw new OperationImpossible("tâche n'existe pas");
         }
@@ -167,6 +193,6 @@ public class Activite {
 
     @Override
     public String toString() {
-        return intitule;
+        return "Activité [intitulé=" + intitule + ", desciption=" + description + ", dans la corbeille=" + dansCorbeille + "]";
     }
 }
