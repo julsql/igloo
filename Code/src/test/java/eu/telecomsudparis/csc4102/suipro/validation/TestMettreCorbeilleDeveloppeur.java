@@ -38,20 +38,20 @@ class TestMettreCorbeilleDeveloppeur {
 	}
 
 	@Test
-	void mettreCorbeilleUneDeveloppeurTest1Jeu1() throws Exception {
+	void mettreCorbeilleUnDeveloppeurTest1Jeu1() throws Exception {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(""));
 	}
 	@Test
-	void mettreCorbeilleUneDeveloppeurTest1Jeu2() throws Exception {
+	void mettreCorbeilleUnDeveloppeurTest1Jeu2() throws Exception {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(null));
 	}
 	@Test
-	void mettreCorbeilleUneTacheTest2Jeu1() throws Exception {
+	void mettreCorbeilleUnDeveloppeurTest2Jeu1() throws Exception {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(alias));
 	}
 
     @Test
-	void mettreCorbeilleUneTacheTest4Jeu1() throws Exception {
+	void mettreCorbeilleUnDeveloppeurTest3Jeu1() throws Exception {
     suiPro.ajouterUnDeveloppeur(alias,nom,prenom);
     Developpeur developpeur = suiPro.getDeveloppeurs().get(alias);
     Map <String,PeriodeDeTravail> periodes = developpeur.getPeriodesDeTravail();
