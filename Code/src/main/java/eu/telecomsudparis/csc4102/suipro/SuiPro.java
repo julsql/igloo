@@ -2,7 +2,10 @@ package eu.telecomsudparis.csc4102.suipro;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
@@ -377,10 +380,10 @@ public class SuiPro {
 			Tache tache = entry.getValue();
 
 			if (tache.getCorbeille() == dansCorbeille) {
-				System.out.println(tache+ ", ");
+				System.out.println(tache+ ", ");		
 			}
 		}
-		System.out.println("}\n");
+		System.out.println("}\n");	
 	}
 
 	public void afficherTachesCorbeille(){
@@ -423,6 +426,19 @@ public class SuiPro {
 			}
 		}
 		System.out.println("}\n");
+	}
+
+
+	public List<String> listerActivitesCorbeille(){
+		List<String> listIntitule = new ArrayList<>();
+		Collection<Activite> activitesCorbeille =  this.activites.values();
+
+		activitesCorbeille.stream()
+		.filter(s->s.getCorbeille());
+
+		activites.values().forEach( (activite) -> listIntitule.add(activite.toString()) );
+		return listIntitule;
+		
 	}
 
 	public void scenarioSprint1() throws OperationImpossible {
