@@ -1,6 +1,8 @@
 // CHECKSTYLE:OFF
 package eu.telecomsudparis.csc4102.suipro.validation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
@@ -52,16 +54,11 @@ class TestMettreCorbeilleUneTache {
 		suiPro.ajouterUneTache(intituleActivite, intituleTache, intituleActivite);
 		suiPro.mettreCorbeilleUneTache(intituleActivite, intituleTache);
 
-		// suiPro.getActivite(intituleActivite).getTache(intituleTache)
-		Tache tache = suiPro.getActivites().get(intituleActivite).getTaches().get(intituleTache);
-
-		Assertions.assertTrue(tache.getCorbeille());
-		Map <String,PeriodeDeTravail> periodeDeTravail = tache.getPeriodesDeTravail();
+		List<String> tachesCorbeille = suiPro.listerTachesCorbeille();
+		List<String> CetteTache = new ArrayList<String>();
+		CetteTache.add(intituleTache);
 		
-		for (Map.Entry<String, PeriodeDeTravail> entry : periodeDeTravail.entrySet()) {
-			PeriodeDeTravail periode = entry.getValue();
-			Assertions.assertTrue(periode.getCorbeille());
-		}
+		Assertions.assertEquals(tachesCorbeille, CetteTache);
 	}
 
 }
