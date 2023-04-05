@@ -12,15 +12,24 @@ import java.util.Objects;
  */
 public class Tache {
 	/**
-	 * l'intitulé de la tache.
+	 * l'intitulé de la tâche.
 	 */
 	private final String intitule;
-
+	/**
+	 * la description de la tâche.
+	 */
     private final String description;
-
-    private Map<String,PeriodeDeTravail> periodesDeTravail;
-
+	/**
+	 * les périodes de travail de la tâche.
+	 */
+    private Map<String, PeriodeDeTravail> periodesDeTravail;
+	/**
+	 * est-ce que la tâche est dans la corbeille.
+	 */
     private boolean dansCorbeille;
+	/**
+	 * l'activité de la tâche.
+	 */
 	private final Activite activite;
 
 	/**
@@ -28,8 +37,9 @@ public class Tache {
 	 * 
 	 * @param intitule  l'alias.
      * @param description la description
+	 * @param activite l'activité'
 	 */
-	public Tache(final String intitule, final String description, Activite activite) {
+	public Tache(final String intitule, final String description, final Activite activite) {
 		super();
 		if (intitule == null || intitule.isBlank()) {
 			throw new IllegalArgumentException("intitule ne peut pas être null ou vide");
@@ -69,16 +79,30 @@ public class Tache {
     public String getDescription() {
 		return description;
 	}
-
+	/**
+	 * obtient la mise à la corbeille.
+	 *
+	 * @return est-ce que la tâche est dans la corbeille.
+	 */
 	public boolean getCorbeille() {
 		return dansCorbeille;
 	}
-
-    public Map<String,PeriodeDeTravail> getPeriodesDeTravail(){
+	/**
+	 * obtient les périodes de travail.
+	 *
+	 * @return les périodes de travail.
+	 */
+    public Map<String, PeriodeDeTravail> getPeriodesDeTravail() {
         return periodesDeTravail;
     }
-
-	public void ajouterPeriode(Instant debut, Instant fin, Developpeur developpeur) throws OperationImpossible {
+	/**
+	 * ajoute une période de travail.
+	 *
+	 * @param debut  l'instant du début.
+	 * @param fin l'instant de la fin.
+	 * @param developpeur le développeur.
+	 */
+	public void ajouterPeriode(final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible {
 		String id = debut + fin.toString() + developpeur;
 		if (periodesDeTravail.get(id) != null) {
 			throw new OperationImpossible("Période déjà dans le système des tâches");
@@ -88,17 +112,26 @@ public class Tache {
 		periodesDeTravail.put(id, newPeriode);
 		assert invariant();
 	}
-
-	public void mettreALaCorbeille(){
+	/**
+	 * met la tâche à la corbeille.
+	 *
+	 */
+	public void mettreALaCorbeille() {
         this.dansCorbeille = true;
-        Map<String,PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
+        Map<String, PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
         for (var periode : periodesDeTravailASupprimer.entrySet()) {
             periode.getValue().mettreALaCorbeille();
         }
 		assert invariant();
     }
-
-	public void mettrePeriodeCorbeille(Instant debut, Instant fin, Developpeur developpeur) throws OperationImpossible {
+	/**
+	 * met à la corbeille les périodes de travail.
+	 *
+	 * @param debut  l'instant du début.
+	 * @param fin l'instant de la fin.
+	 * @param developpeur le développeur.
+	 */
+	public void mettrePeriodeCorbeille(final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible {
 		String id = debut + fin.toString() + developpeur;
 
 		if (periodesDeTravail.get(id) == null) {
@@ -108,9 +141,6 @@ public class Tache {
 		assert invariant();
 	}
 
-
-
-    
 	@Override
 	public int hashCode() {
 		return Objects.hash(intitule);
@@ -128,7 +158,7 @@ public class Tache {
 			return false;
 		}
 		Tache other = (Tache) obj;
-		return Objects.equals(intitule, other.intitule) && Objects.equals(activite, other.activite);
+		return Objects.equals(intitule, other.intitule);
 	}
 
 	@Override

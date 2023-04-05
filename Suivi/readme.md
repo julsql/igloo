@@ -194,12 +194,12 @@ affiner et consolider votre projet pour le Sprint 2. Bonne continuation.
 
 #### Préconditions et postconditions =  b+
 
-Cas d'utilisation « ajouter une tâche » : 
+Cas d'utilisation « ajouter une tâche » :
 
 * PREPOSTCOND-02-Compréhension-étude-de-cas,
   PREPOSTCOND-05-Précondition-incomplète : termes sur l'activité
 
-Cas d'utilisation « mettre à la corbeille une tâche » : 
+Cas d'utilisation « mettre à la corbeille une tâche » :
 
 * PREPOSTCOND-02-Compréhension-étude-de-cas,
   PREPOSTCOND-05-Précondition-incomplète : termes sur l'activité
@@ -208,13 +208,13 @@ Cas d'utilisation « mettre à la corbeille un développeur » : ok
 
 #### Tables de décision des tests de validation =  a
 
-Cas d'utilisation « ajouter une tâche » : 
+Cas d'utilisation « ajouter une tâche » :
 
-* [] TABLEDECTV-07-MAJ-précondition-postcondition
+* [X] TABLEDECTV-07-MAJ-précondition-postcondition
 
-Cas d'utilisation « mettre à la corbeille une tâche » : 
+Cas d'utilisation « mettre à la corbeille une tâche » :
 
-* [] TABLEDECTV-07-MAJ-précondition-postcondition
+* [X] TABLEDECTV-07-MAJ-précondition-postcondition
 
 Cas d'utilisation « mettre à la corbeille un développeur » : ok
 
@@ -239,7 +239,7 @@ Cas d'utilisation « mettre à la corbeille un développeur » : N/A
 
 #### Diagramme de machine à états et invariant =  a-
 
-* [] INV-03-Invariant-à-compléter : attribut association vers Activité
+* [X] INV-03-Invariant-à-compléter : attribut association vers Activité
 
 #### Tables de décision de tests unitaires =  a
 
@@ -253,10 +253,9 @@ Cas d'utilisation « mettre à la corbeille un développeur » : N/A
 
 #### Classes du diagramme de classes avec leurs attributs = a-
 
-* [] JAVA-06-Pb-traduction-association : Activité vers la façade car
-  association bidirectionnelle
+* [X] JAVA-06-Pb-traduction-association : Activité vers la façade car association bidirectionnelle
 
-* [] Tâche::equals et hashCode avec des attributs différents
+* [X] Tâche::equals et hashCode avec des attributs différents
 
 #### Méthodes des cas d'utilisation de base = a+
 
@@ -278,26 +277,24 @@ Cas d'utilisation « mettre à la corbeille un développeur » : ok
 
 Cas d'utilisation « ajouter une tâche » : 
 
-* [] JAVATEST-05-Pb-nommage-méthode-de-test : ajouterUneTacheTest2Jeu1
+* [X] JAVATEST-05-Pb-nommage-méthode-de-test : ajouterUneTacheTest2Jeu1
   alors qu'il y a deux tests dans la méthode
 
 Cas d'utilisation « mettre à la corbeille une tâche » : 
 
-* [] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
+* [ ] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
   suiPro.getActivites()
 
-* [] JAVATEST-05-Test-manquant : avec périodes de travail
+* [X] JAVATEST-05-Test-manquant : avec périodes de travail
 
 Cas d'utilisation « mettre à la corbeille un développeur » : 
 
-* [] JAVATEST-05-Pb-nommage-méthode-de-test : mettreCorbeilleUneTache, etc.
+* [X] JAVATEST-05-Pb-nommage-méthode-de-test : mettreCorbeilleUneTache, etc.
 
-* [] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
+* [ ] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
   suiPro.getDeveloppeurs(), etc.
 
 #### Tests unitaires de méthodes d'une classe = a
-
-
  
 ---
 # Suivi du mar. 04 avril 2023 09:32:43
@@ -306,7 +303,4 @@ Cas d'utilisation « mettre à la corbeille un développeur » :
 
 * [] checkstyle à terminer
 
-* [] Activite::toString : y mettre plus de chose
-
-
-
+* [X] Activite::toString : y mettre plus de chose
