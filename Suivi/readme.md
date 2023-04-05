@@ -1,19 +1,19 @@
-Ce fichier contient et contiendra des remarques de suivi sur votre
-projet tant sur la modélisation que sur la programmation. Un nouveau
-suivi est indiqué par une nouvelle section datée.
+# Suivi
+
+Ce fichier contient et contiendra des remarques de suivi sur votre projet tant sur la modélisation que sur la programmation. Un nouveau suivi est indiqué par une nouvelle section datée.
 
 Certaines remarques demandent des actions de votre part, vous les
 repérerez par une case à cocher.
 
-- []  Action (à réaliser) 
+- []  Action (à réaliser)
 
 Merci de nous indiquer que vous avez pris en compte la remarque en
 cochant la case. N'hésitez pas à écrire dans ce fichier et à nous
 exposer votre point de vue.
 
 - [x] Action (réalisée)
-    - RÉPONSE et éventuelles remarques de votre part, 
- 
+  - RÉPONSE et éventuelles remarques de votre part,
+
 **Les messages standardisés avec leur explication sont dans le dépôt des exemples et plus particulièrement [ici](https://gitlabens.imtbs-tsp.eu/enseignants.csc4102/csc4102-exemples/-/blob/main/Suivi/messages_pour_le_suivi.md)**
 
 ---
@@ -84,8 +84,7 @@ C'est ajouté
 * [X] DIAGSEQ-06-Pb-syntaxe-message-affectation-attribut : idem sur
   p.corbeille...
 
-* [X] mauvais type de fragment pour le plus imbriqué + besoin de faire
-  un appel sur chaque période de travail 
+* [X] mauvais type de fragment pour le plus imbriqué + besoin de faire un appel sur chaque période de travail 
 ---
 # Suivi du mar. 14 mars 2023 10:06:32
 Denis Conan
@@ -275,32 +274,32 @@ Cas d'utilisation « mettre à la corbeille un développeur » : ok
 
 #### Tests de validation des cas d'utilisation = b+
 
-Cas d'utilisation « ajouter une tâche » : 
+Cas d'utilisation « ajouter une tâche » :
 
 * [X] JAVATEST-05-Pb-nommage-méthode-de-test : ajouterUneTacheTest2Jeu1
   alors qu'il y a deux tests dans la méthode
 
-Cas d'utilisation « mettre à la corbeille une tâche » : 
+Cas d'utilisation « mettre à la corbeille une tâche » :
 
-* [ ] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
+* [X] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
   suiPro.getActivites()
 
 * [X] JAVATEST-05-Test-manquant : avec périodes de travail
 
-Cas d'utilisation « mettre à la corbeille un développeur » : 
+Cas d'utilisation « mettre à la corbeille un développeur » :
 
 * [X] JAVATEST-05-Pb-nommage-méthode-de-test : mettreCorbeilleUneTache, etc.
 
-* [ ] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
+* [X] JAVATEST-08-Test-validation-sans-accès-à-l-intérieur : pb sur
   suiPro.getDeveloppeurs(), etc.
 
 #### Tests unitaires de méthodes d'une classe = a
- 
+
 ---
 # Suivi du mar. 04 avril 2023 09:32:43
 
 * spotbugs ok
 
-* [] checkstyle à terminer
+* [X] checkstyle à terminer
 
 * [X] Activite::toString : y mettre plus de chose

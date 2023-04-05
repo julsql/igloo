@@ -26,8 +26,14 @@ public class Developpeur {
 	 * le prénom du développeur.
 	 */
 	private String prenom;
+	/**
+	 * à la corbeille ou non.
+	 */
 	private boolean dansCorbeille;
-	private Map <String, PeriodeDeTravail> periodesDeTravail;
+	/**
+	 * les périodes de travail.
+	 */
+	private Map<String, PeriodeDeTravail> periodesDeTravail;
 
 	/**
 	 * construit un développeur.
@@ -74,10 +80,20 @@ public class Developpeur {
 		return alias;
 	}
 
+	/**
+	 * obtient si c'est dans la corbeille.
+	 *
+	 * @return l'état de mise en corbeille.
+	 */
 	public boolean getCorbeille() {
 		return dansCorbeille;
 	}
-	public Map<String,PeriodeDeTravail> getPeriodesDeTravail(){
+	/**
+	 * obtient les périodes de travail.
+	 *
+	 * @return les périodes de travail.
+	 */
+	public Map<String, PeriodeDeTravail> getPeriodesDeTravail() {
 		return periodesDeTravail;
 	}
 	@Override
@@ -100,17 +116,26 @@ public class Developpeur {
 		return Objects.equals(alias, other.alias);
 	}
 
-
-    public void mettreALaCorbeille(){
+	/**
+	 * met le développeur à la corbeille.
+	 */
+    public void mettreALaCorbeille() {
         this.dansCorbeille = true;
-        Map<String,PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
+        Map<String, PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
         for (var periode : periodesDeTravailASupprimer.entrySet()) {
             periode.getValue().mettreALaCorbeille();
         }
 		assert invariant();
     }
 
-	public void ajouterUnePeriode(PeriodeDeTravail newPeriode, Instant debut, Instant fin) throws OperationImpossible {
+	/**
+	 * ajoute une période de travail.
+	 *
+	 * @param newPeriode  l'alias.
+	 * @param debut    le nom.
+	 * @param fin le prénom.
+	 */
+	public void ajouterUnePeriode(final PeriodeDeTravail newPeriode, final Instant debut, final Instant fin) throws OperationImpossible {
 
 		IntervalleInstants intervalle = new IntervalleInstants(debut, fin);
 		for (var periode : periodesDeTravail.entrySet()) {
@@ -123,7 +148,15 @@ public class Developpeur {
 		assert invariant();
 	}
 
-	public boolean chevauchement(IntervalleInstants intervalle1, IntervalleInstants intervalle2) {
+	/**
+	 * regarde s'il y a chevauchement entre deux intervalles.
+	 *
+	 * @param intervalle1  l'alias.
+	 * @param intervalle2  le nom.
+	 *
+	 * @return s'il y a chevauchement.
+	 */
+	public boolean chevauchement(final IntervalleInstants intervalle1, final IntervalleInstants intervalle2) {
 		// Intervalle1 = [a, b]
 		Instant a = intervalle1.getInstantDebut();
 		Instant b = intervalle1.getInstantFin();
