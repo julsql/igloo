@@ -10,6 +10,8 @@ import java.util.Map;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
+// TODO : Ajout des calculs de durées, de vider la corbeille, des labels et de la restauration
+
 /**
  * Cette classe est la façade du logiciel.
  * 
@@ -42,9 +44,15 @@ public class SuiPro {
 		activites = new HashMap<>();
 	}
 
-	public static void main(String[] args) throws OperationImpossible {
+	/**
+	 * main.
+	 *
+	 * @param args les arguments en entrée.
+	 */
+	public static void main(final String[] args) throws OperationImpossible {
 		SuiPro suiPro = new SuiPro("Projet");
-		suiPro.scenarioSprint1();
+		// suiPro.scenarioSprint1();
+		suiPro.scenarioSprint2();
 	}
 
 	/**
@@ -101,13 +109,13 @@ public class SuiPro {
 			throw new OperationImpossible("intitulé de la tâche ne peut pas être null ou vide");
 		}
 		Activite activite = activites.get(intituleActivite);
-		if (activite == null){
+		if (activite == null) {
 			throw new OperationImpossible("l'activité ne peut pas être null");
 		}
 		if (activite.getCorbeille()) {
 			throw new OperationImpossible("l'activité est dans la corbeille");
 		}
-		activite.ajouterTache(intituleTache,description);
+		activite.ajouterTache(intituleTache, description);
 
 		assert invariant();
 	}
@@ -120,7 +128,7 @@ public class SuiPro {
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
 	 */
-	public void ajouterUneActivite(String intituleActivite,String description) throws OperationImpossible{
+	public void ajouterUneActivite(final  String intituleActivite, final String description) throws OperationImpossible {
 		if (intituleActivite == null || intituleActivite.isBlank()) {
 			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
 		}
@@ -142,7 +150,7 @@ public class SuiPro {
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
 	 */
-	public void ajouterUnePeriode(String intituleActivite, String intituleTache, String aliasDev, Instant debut, Instant fin) throws OperationImpossible{
+	public void ajouterUnePeriode(final String intituleActivite, final String intituleTache, final String aliasDev, final Instant debut, final Instant fin) throws OperationImpossible {
 		if (intituleActivite == null || intituleActivite.isBlank()) {
 			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
 		}
@@ -160,12 +168,12 @@ public class SuiPro {
 		}
 
 		Activite activite = activites.get(intituleActivite);
-		if (activite == null){
+		if (activite == null) {
 			throw new OperationImpossible("l'activité ne put pas être null");
 		}
 
 		Developpeur developpeur = developpeurs.get(aliasDev);
-		if (developpeur == null){
+		if (developpeur == null) {
 			throw new OperationImpossible("le developpeur ne peut pas être null");
 		}
 		if (developpeur.getCorbeille()) {
@@ -179,7 +187,7 @@ public class SuiPro {
 	}
 
 	/**
-	 * met à la corbeille une tâche
+	 * met à la corbeille une tâche.
 	 *
 	 * @param intituleActivite l'intitulé de l'activité.
 	 * @param intituleTache l'intitulé de la tache.
@@ -195,7 +203,7 @@ public class SuiPro {
 			throw new OperationImpossible("intitulé de la tâche ne peut pas être null ou vide");
 		}
 		Activite activite = activites.get(intituleActivite);
-		if (activite == null ) {
+		if (activite == null) {
 			throw new OperationImpossible("la tache n'existe pas");
 		}
 		activite.mettreTacheCorbeille(intituleTache);
@@ -203,14 +211,17 @@ public class SuiPro {
 	}
 
 	/**
-	 * met à la corbeille une période de travail
+	 * met à la corbeille une période de travail.
 	 *
 	 * @param intituleActivite l'intitulé de l'activité.
 	 * @param intituleTache l'intitulé de la tache.
+	 * @param aliasDev l'alias du développeur.
+	 * @param debut l'instant de début de la période de travail.
+	 * @param fin l'instant de fin de la période de travail.
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
 	 */
-	public void mettreCorbeilleUnePeriode(final String intituleActivite, final String intituleTache, String aliasDev, Instant debut, Instant fin)
+	public void mettreCorbeilleUnePeriode(final String intituleActivite, final String intituleTache, final String aliasDev, final Instant debut, final Instant fin)
 			throws OperationImpossible {
 		if (intituleActivite == null || intituleActivite.isBlank()) {
 			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
@@ -229,12 +240,12 @@ public class SuiPro {
 		}
 
 		Activite activite = activites.get(intituleActivite);
-		if (activite == null){
+		if (activite == null) {
 			throw new OperationImpossible("l'activité ne put pas être null");
 		}
 
 		Developpeur developpeur = developpeurs.get(aliasDev);
-		if (developpeur == null){
+		if (developpeur == null) {
 			throw new OperationImpossible("le developpeur ne peut pas être null");
 		}
 
@@ -251,7 +262,6 @@ public class SuiPro {
 	 */
 	public void mettreCorbeilleUnDeveloppeur(final String alias)
 			throws OperationImpossible {
-		//TODO : Retirer dans modelisation MettreCorbeilleDeveloppeur le nom et prenom
 		if (alias == null || alias.isBlank()) {
 			throw new OperationImpossible("alias ne peut pas être null ou vide");
 		}
@@ -297,7 +307,7 @@ public class SuiPro {
 	 *
 	 * @return les activités.
 	 */
-	public Map<String,Activite> getActivites() {
+	public Map<String, Activite> getActivites() {
 		return this.activites;
 	}
 
@@ -306,7 +316,7 @@ public class SuiPro {
 	 *
 	 * @return les développeurs.
 	 */
-	public Map<String,Developpeur> getDeveloppeurs(){
+	public Map<String, Developpeur> getDeveloppeurs() {
 		return this.developpeurs;
 	}
 
@@ -316,17 +326,15 @@ public class SuiPro {
 	}
 
 	/**
-	 * Affiche chaque développeur qui n'est pas dans la corbeille 
+	 * Affiche chaque développeur qui n'est pas dans la corbeille .
 	 * @param dansCorbeille boolean, si True, affiche les développeurs dans la corbeille uniquement
 	 * Si false, affiche les développeurs qui ne sont PAS dans la corbeille. 
 	 * 
 	 */
-	public void afficherDeveloppeurs(boolean dansCorbeille){
+	public void afficherDeveloppeurs(final boolean dansCorbeille) {
 		if (!dansCorbeille) {
 			System.out.println("Affichage des développeurs qui ne sont pas dans la corbeille :");
-		}
-
-		else {
+		} else {
 			System.out.println("Affichage des développeurs qui sont dans la corbeille :");
 		}
 		System.out.println("{");
@@ -342,17 +350,15 @@ public class SuiPro {
 	}
 
 	/**
-	 * Affiche chaque activité qui n'est pas dans la corbeille 
+	 * Affiche chaque activité qui n'est pas dans la corbeille.
 	 * @param dansCorbeille boolean, si True, affiche les activités dans la corbeille uniquement
 	 * Si false, affiche les activités qui ne sont PAS dans la corbeille. 
 	 * 
 	 */
-	 public void afficherActivites(boolean dansCorbeille){
+	 public void afficherActivites(final boolean dansCorbeille) {
 		if (!dansCorbeille) {
 			System.out.println("Affichage des activités qui ne sont pas dans la corbeille :");
-		}
-
-		else {
+		} else {
 			System.out.println("Affichage des activités qui sont dans la corbeille :");
 		}
 		System.out.println("{");
@@ -368,14 +374,15 @@ public class SuiPro {
 	}
 
 	/**
-	 *  Affiche les taches
+	 * Affiche les taches.
+	 *
 	 * @param intituleActivite intitulé de l'activité
 	 * @param dansCorbeille boolean ; est dans la corbeille
 	 */
-	public void afficherTaches(String intituleActivite, boolean dansCorbeille){
+	public void afficherTaches(final String intituleActivite, final boolean dansCorbeille) {
 
 		if (!dansCorbeille) {
-			System.out.println("Affichage des tâches associées à " + intituleActivite+ " (qui ne sont pas dans la corbeille) :");
+			System.out.println("Affichage des tâches associées à " + intituleActivite + " (qui ne sont pas dans la corbeille) :");
 		}
 
 		Activite activite = this.activites.get(intituleActivite);
@@ -385,35 +392,40 @@ public class SuiPro {
 			Tache tache = entry.getValue();
 
 			if (tache.getCorbeille() == dansCorbeille) {
-				System.out.println(tache+ ", ");		
+				System.out.println(tache + ", ");
 			}
 		}
 		System.out.println("}\n");	
 	}
-/**
- * Affiche les taches dans la corbeille
- */
-	public void afficherTachesCorbeille(){
+	/**
+	 * Affiche les taches dans la corbeille.
+	 */
+	public void afficherTachesCorbeille() {
 		System.out.println("Affichage de toutes les tâches qui sont dans la corbeille :");
-		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
-		{
+		for (Map.Entry<String, Activite> entry : this.activites.entrySet()) {
 			Activite activite = entry.getValue();
 			afficherTaches(activite.getIntitule(), true);
 		}
 	}
-
-	public void afficherPeriodesDeTravail(String intituleActivite,String intituleTache,boolean dansCorbeille){
+	/**
+	 * Affiche les taches dans la corbeille.
+	 *
+	 * @param intituleActivite intitulé de l'activité
+	 * @param intituleTache intitulé de la tâche
+	 * @param dansCorbeille est dans la corbeille
+	 */
+	public void afficherPeriodesDeTravail(final String intituleActivite, final String intituleTache, final boolean dansCorbeille) {
 		Activite activite = this.activites.get(intituleActivite);
 		Tache tache = activite.getTaches().get(intituleTache);
 		 if (!dansCorbeille) {
-			System.out.println("Affichage des périodes de travail associées à " + intituleTache+ " de " + intituleActivite + " (qui ne sont pas dans la corbeille) :");
+			System.out.println("Affichage des périodes de travail associées à " + intituleTache + " de " + intituleActivite + " (qui ne sont pas dans la corbeille) :");
 			System.out.println("{");
 		}
 		for (Map.Entry<String, PeriodeDeTravail> entry : tache.getPeriodesDeTravail().entrySet()) {
 			PeriodeDeTravail periode = entry.getValue();
 
 			if (periode.getCorbeille() == dansCorbeille) {
-				System.out.println(periode+ ", ");
+				System.out.println(periode + ", ");
 			}
 		}
 		if (!dansCorbeille) {
@@ -422,9 +434,9 @@ public class SuiPro {
 	}
 
 	/**
-	 * Affiche les toutes les periodes de travail dans la corbeille
+	 * Affiche les toutes les periodes de travail dans la corbeille.
 	 */
-	public void afficherPeriodesDeTravailCorbeille(){
+	public void afficherPeriodesDeTravailCorbeille() {
 		System.out.println("Affichage de toutes les périodes de travail qui sont dans la corbeille :");
 		System.out.println("{");
 		for (Map.Entry<String, Activite> entry : this.activites.entrySet()) {
@@ -432,27 +444,24 @@ public class SuiPro {
 
 			for (Map.Entry<String, Tache> entry2 : activite.getTaches().entrySet()) {
 				Tache tache = entry2.getValue();
-				afficherPeriodesDeTravail(activite.getIntitule(),tache.getIntitule(),true);
+				afficherPeriodesDeTravail(activite.getIntitule(), tache.getIntitule(), true);
 			}
 		}
 		System.out.println("}\n");
 	}
-
-
-	/** Liste toutes les taches qui sont dans la corbeille
- 	* @return List<String> liste des intitulés des activités à la corbeille
+	/**
+	 * Liste toutes les taches qui sont dans la corbeille.
+	 * @return List<String> liste des intitulés des activités à la corbeille
 	 **/
-
-	public List<String> listerTachesCorbeille(){
+	public List<String> listerTachesCorbeille() {
 		List<String> listIntitule = new ArrayList<>();
 		
-		for (Map.Entry<String, Activite> entry : this.activites.entrySet())
-		{
+		for (Map.Entry<String, Activite> entry : this.activites.entrySet()) {
 			Activite activite = entry.getValue();
-			Collection <Tache> taches = activite.getTaches().values();
+			Collection<Tache> taches = activite.getTaches().values();
 
-			taches.stream().filter(s->s.getCorbeille());
-			taches.forEach( (tache) -> listIntitule.add(tache.getIntitule()) );
+			taches.stream().filter(s -> s.getCorbeille());
+			taches.forEach((tache) -> listIntitule.add(tache.getIntitule()));
 			
 		}
 
@@ -460,40 +469,39 @@ public class SuiPro {
 		
 	}
 	/**
- * 
- * @return List<String> liste des alias des developpeurs à la corbeille
- */
-public List<String> listerDeveloppeursCorbeille(){
-	List<String> listAlias = new ArrayList<>();
-	Collection<Developpeur> developpeursCorbeille =  this.developpeurs.values();
+	 *
+	 * @return List<String> liste des alias des developpeurs à la corbeille
+	 */
+	public List<String> listerDeveloppeursCorbeille() {
+		List<String> listAlias = new ArrayList<>();
+		Collection<Developpeur> developpeursCorbeille =  this.developpeurs.values();
 
-	developpeursCorbeille.stream()
-	.filter(s->s.getCorbeille());
+		developpeursCorbeille.stream().filter(s -> s.getCorbeille());
 
-	developpeursCorbeille.forEach( (dev) -> listAlias.add(dev.getAlias()) );
-	return listAlias;
+		developpeursCorbeille.forEach((dev) -> listAlias.add(dev.getAlias()));
+		return listAlias;
 
 }
 
-/**
- * 
- * @return List<String> liste des intitulés des activités à la corbeille
- */
-// TODO relire cette fonction c'est étrange
+	/**
+	 *
+	 * @return List<String> liste des intitulés des activités à la corbeille
+	 */
+	public List<String> listerActivitesCorbeille() {
+		// TODO relire cette fonction c'est étrange
+		List<String> listIntitule = new ArrayList<>();
+		Collection<Activite> activitesCorbeille =  this.activites.values();
 
-public List<String> listerActivitesCorbeille(){
-	List<String> listIntitule = new ArrayList<>();
-	Collection<Activite> activitesCorbeille =  this.activites.values();
+		activitesCorbeille.stream().filter(s -> s.getCorbeille());
 
-	activitesCorbeille.stream()
-	.filter(s->s.getCorbeille());
+		activitesCorbeille.forEach((activite) -> listIntitule.add(activite.toString()));
+		return listIntitule;
 
-	activitesCorbeille.forEach( (activite) -> listIntitule.add(activite.toString()) );
-	return listIntitule;
-	
 }
 
-
+	/**
+	 * Scénario du sprint1.
+	 */
 	public void scenarioSprint1() throws OperationImpossible {
 		// Instants
 		Instant now = Instant.now();
@@ -549,12 +557,16 @@ public List<String> listerActivitesCorbeille(){
 		this.afficherDeveloppeurs(true); // 10
 	}
 
+	/**
+	 * Scénario du sprint1.
+	 */
 	public void scenarioSprint2() throws OperationImpossible {
 		// Instants
 		Instant now = Instant.now();
 		Instant now1h = now.plus(Duration.ofHours(1));
 		Instant tomorrow = now.plus(Duration.ofDays(1));
 		Instant tomorrow1h = tomorrow.plus(Duration.ofHours(1));
+		Instant totomorrow = tomorrow.plus(Duration.ofDays(1));
 
 		// Ajout des développeurs
 		this.ajouterUnDeveloppeur("braun", "Braun", "Madeleine"); // 1
@@ -635,7 +647,7 @@ public List<String> listerActivitesCorbeille(){
 		// Labellisation
 		// TODO
 		this.ajouterUneTache("cd", "révision", "Révision JAVA"); // 1
-		this.ajouterUnePeriode("cd", "révision", "braun-pivet", now.plus(Duration.ofDays(3)), now.plus(Duration.ofDays(3)).plus(Duration.ofHours(1))); // 2
+		this.ajouterUnePeriode("cd", "révision", "braun-pivet", totomorrow, totomorrow.plus(Duration.ofHours(1))); // 2
 		// this.dureeTravail(); // 3
 		// this.ajoutLabel("remédiation", "Remédiation"); // 4
 		// this.ajoutLabelTache("révision", "remédiation"); // 5
