@@ -2,6 +2,7 @@ package eu.telecomsudparis.csc4102.suipro;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -140,7 +141,17 @@ public class Tache {
 		periodesDeTravail.get(id).mettreALaCorbeille();
 		assert invariant();
 	}
-
+	/**
+	 * 
+	 * @return la somme des durées de chaque période de travail associé à cette tache
+	 */
+	public Duration dureeTache(){
+		Duration duree = Duration.ZERO; // init empty duration
+		for (PeriodeDeTravail periode : periodesDeTravail.values()) {//foreach periode de travail associated, 
+			duree = duree.plus(periode.getIntervalle().calculerDuree()); // add its duration
+		}
+		return duree;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(intitule);

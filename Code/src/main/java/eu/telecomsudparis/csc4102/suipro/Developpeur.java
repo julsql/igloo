@@ -3,6 +3,7 @@ package eu.telecomsudparis.csc4102.suipro;
 import eu.telecomsudparis.csc4102.util.IntervalleInstants;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -146,6 +147,15 @@ public class Developpeur {
 		String id = debut + fin.toString() + this;
 		periodesDeTravail.put(id, newPeriode);
 		assert invariant();
+	}
+
+	public Duration dureeTravail(){
+		Duration duree = Duration.ZERO; // init empty duration
+		for (PeriodeDeTravail periode : this.periodesDeTravail.values()) {
+			duree = duree.plus(periode.getIntervalle().calculerDuree()); // foreach periode de travail, add its duration
+		}
+
+		return duree;
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package eu.telecomsudparis.csc4102.suipro;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -170,6 +171,35 @@ public class Activite {
         assert invariant();
     }
 
+    /**
+     * 
+     * @return la durée de l'activité
+     */
+    public Duration dureeActivite(){
+
+		Duration duree = Duration.ZERO; // init empty duration
+		for (Tache tache : taches.values()) {//foreach tache 
+			duree = duree.plus(tache.dureeTache()); // add its duration
+		}
+		return duree;
+	}
+    /**
+     * 
+     * @return Map<String,Duration> : <intitulé de la tache : durée de la tache>
+     */
+    public Map<String,Duration> dureeActiviteDetails(){
+        Map<String,Duration> durees = new HashMap<>();
+		for (Tache tache : taches.values()) {//foreach tache 
+			durees.put(tache.getIntitule(), tache.dureeTache()); 
+		}
+		return durees;
+	}
+
+
+    /**
+     * 
+     * @return
+     */
 
     @Override
     public int hashCode() {
