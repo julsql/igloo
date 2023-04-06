@@ -148,7 +148,9 @@ public class Tache {
 	public Duration dureeTache(){
 		Duration duree = Duration.ZERO; // init empty duration
 		for (PeriodeDeTravail periode : periodesDeTravail.values()) {//foreach periode de travail associated, 
-			duree = duree.plus(periode.getIntervalle().calculerDuree()); // add its duration
+			if (!periode.getCorbeille()){ // ignore les periodes en corbeille
+			duree = duree.plus(periode.getIntervalle().calculerDuree());
+		} // add its duration
 		}
 		return duree;
 	}
