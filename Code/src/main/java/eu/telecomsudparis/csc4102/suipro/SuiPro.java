@@ -502,8 +502,9 @@ public class SuiPro {
 public Duration dureeProjet(){
 
 	Duration duree = Duration.ZERO; // init empty duration
-	for (Activite activite : activites.values()) {//foreach tache 
-		duree = duree.plus(activite.dureeActivite()); // add its duration
+	for (Activite activite : activites.values()) {//foreach activite
+		duree = duree.plus(activite.dureeActivite());
+		 // add its duration
 	}
 	return duree;
 }

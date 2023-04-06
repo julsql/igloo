@@ -174,11 +174,13 @@ public class Activite {
     /**
      * 
      * @return la durée de l'activité
+     * on peut prendre en compte les taches a la corbeille, car leur périodes de travail le sont forcément aussi
+     * ie pas besoin de filtrer
      */
     public Duration dureeActivite(){
 
 		Duration duree = Duration.ZERO; // init empty duration
-		for (Tache tache : taches.values()) {//foreach tache 
+		for (Tache tache : taches.values()) {//foreach tache
 			duree = duree.plus(tache.dureeTache()); // add its duration
 		}
 		return duree;
