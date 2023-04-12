@@ -303,3 +303,22 @@ Cas d'utilisation « mettre à la corbeille un développeur » :
 * [X] checkstyle à terminer
 
 * [X] Activite::toString : y mettre plus de chose
+ 
+---
+# Suivi du mer. 12 avril 2023 18:27:21
+Denis Conan
+ 
+* page Partage : « L’implémentation du patron de conception »
+
+* [] SuiPro::ajouterConsommateur : vous oubliez de réaliser un mininum
+  de vérification de la précondition, non ? => votre code risque de
+  sortir en erreur NullPointerException
+
+* [] au passage, les scénarios (du Sprint 1, etc.) sont à mettre dans
+  des classes de test
+
+* PeriodeDeTravail::mettreALaCorbeille a priori ok
+
+* [] compléter la classe de test TestMettreCorbeilleUneTache pour
+  avoir des périodes de travail... et tester l'insertion du patron de
+  conception
