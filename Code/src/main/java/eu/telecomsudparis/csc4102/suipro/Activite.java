@@ -177,10 +177,10 @@ public class Activite {
      * on peut prendre en compte les taches a la corbeille, car leur périodes de travail le sont forcément aussi
      * ie pas besoin de filtrer
      */
-    public Duration dureeActivite(){
+    public Duration dureeActivite() {
 
 		Duration duree = Duration.ZERO; // init empty duration
-		for (Tache tache : taches.values()) {//foreach tache
+		for (Tache tache : taches.values()) { //foreach tache
 			duree = duree.plus(tache.dureeTache()); // add its duration
 		}
 		return duree;
@@ -189,9 +189,9 @@ public class Activite {
      * 
      * @return Map<String,Duration> : <intitulé de la tache : durée de la tache>
      */
-    public Map<String,Duration> dureeActiviteDetails(){
-        Map<String,Duration> durees = new HashMap<>();
-		for (Tache tache : taches.values()) {//foreach tache 
+    public Map<String, Duration> dureeActiviteDetails() {
+        Map<String, Duration> durees = new HashMap<>();
+		for (Tache tache : taches.values()) { //foreach tache
 			durees.put(tache.getIntitule(), tache.dureeTache()); 
 		}
 		return durees;
