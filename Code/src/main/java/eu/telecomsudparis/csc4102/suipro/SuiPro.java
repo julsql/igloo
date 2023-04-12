@@ -497,21 +497,54 @@ public class SuiPro {
 		activitesCorbeille.forEach((activite) -> listIntitule.add(activite.toString()));
 		return listIntitule;
 
-}
+	}
 
 	/**
 	 *
 	 * @return Duration durée du projet
 	 */
-	public Duration dureeProjet() {
+	public Duration dureeTravail() {
 
-	Duration duree = Duration.ZERO; // init empty duration
-	for (Activite activite : activites.values()) { //foreach activite
-		duree = duree.plus(activite.dureeActivite());
-		 // add its duration
+		Duration duree = Duration.ZERO; // init empty duration
+		for (Activite activite : activites.values()) { //foreach activite
+			duree = duree.plus(activite.dureeActivite());
+			 // add its duration
+		}
+		return duree;
 	}
-	return duree;
-}
+
+	/**
+	 * @param alias alias du développeur
+	 *
+	 * @return Duration durée du développeur
+	 */
+	public Duration dureeTravailDeveloppeur(final String alias) {
+		Developpeur developpeur = developpeurs.get(alias);
+		return developpeur.dureeTravail();
+	}
+
+	/**
+	 * @param intituleActivite intitulé de l'activité
+	 * @param intituleTache intitulé de la tâche
+	 *
+	 * @return Duration durée d'une tâche
+	 */
+	public Duration dureeTravailTache(final String intituleActivite, final String intituleTache) {
+		Activite activite = activites.get(intituleActivite);
+		Tache tache = activite.getTaches().get(intituleTache);
+		return tache.dureeTache();
+	}
+
+	/**
+	 * @param intituleActivite intitulé de l'activité
+	 *
+	 * @return Duration durée d'une acvtivité
+	 */
+	public Duration dureeTravailActivite(final String intituleActivite) {
+		Activite activite = activites.get(intituleActivite);
+		return activite.dureeActivite();
+	}
+
 	/**
 	 * Scénario du sprint1.
 	 */
@@ -615,13 +648,15 @@ public class SuiPro {
 
 		// Calcul de durée
 		// TODO
-		// this.dureeTravailDeveloppeur("braun"); // 16
-		// this.dureeTravailDeveloppeur("bureau-bonnard"); // 16
-		// this.dureeTravailDeveloppeur("peyroles"); // 16
-		// this.dureeTravailDeveloppeur("braun-pivet"); // 16
-		// this.dureeTravailTache("cd"); // 17
-		// this.dureeTravailActivite("cd"); // 18
-		// this.dureeTravail(); // 19
+		System.out.println("Braun travaille " + this.dureeTravailDeveloppeur("braun")); // 16
+		System.out.println("Bureau-Bonnard travaille " + this.dureeTravailDeveloppeur("bureau-bonnard")); // 16
+		System.out.println("Peyroles travaille " + this.dureeTravailDeveloppeur("peyroles")); // 16
+		System.out.println("Braun-Pivet travaille " + this.dureeTravailDeveloppeur("braun-pivet")); // 16
+		System.out.println("La tâche Définition des classes prend " + this.dureeTravailTache("cd", "dc")); // 17
+		System.out.println("La tâche Maquettage des interfaces prend " + this.dureeTravailTache("cd", "mi")); // 17
+		System.out.println("L'activité Conception Détaillée dure " + this.dureeTravailActivite("cd")); // 18
+		System.out.println("Le projet dure " + this.dureeTravail()); // 19
+		System.out.println();
 
 		// Mise à la corbeille
 		this.mettreCorbeilleUnDeveloppeur("bureau-bonnard"); // 1
@@ -633,13 +668,15 @@ public class SuiPro {
 
 		// Calcul de durée
 		// TODO
-		// this.dureeTravailDeveloppeur("braun"); // 7
-		// this.dureeTravailDeveloppeur("bureau-bonnard"); // 7
-		// this.dureeTravailDeveloppeur("peyroles"); // 7
-		// this.dureeTravailDeveloppeur("braun-pivet"); // 7
-		// this.dureeTravailTache("cd"); // 8
-		// this.dureeTravailActivite("cd"); // 9
-		// this.dureeTravail(); // 10
+		System.out.println("Braun travaille " + this.dureeTravailDeveloppeur("braun")); // 7
+		System.out.println("Bureau-Bonnard travaille " + this.dureeTravailDeveloppeur("bureau-bonnard")); // 7
+		System.out.println("Peyroles travaille " + this.dureeTravailDeveloppeur("peyroles")); // 7
+		System.out.println("Braun-Pivet travaille " + this.dureeTravailDeveloppeur("braun-pivet")); // 7
+		System.out.println("La tâche Définition des classes prend " + this.dureeTravailTache("cd", "dc")); // 8
+		System.out.println("La tâche Maquettage des interfaces prend " + this.dureeTravailTache("cd", "mi")); // 8
+		System.out.println("L'activité Conception Détaillée dure " + this.dureeTravailActivite("cd")); // 9
+		System.out.println("Le projet dure " + this.dureeTravail()); // 10
+		System.out.println();
 
 		// Erreur
 		// this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", now.plus(Duration.ofDays(2)), now.plus(Duration.ofDays(2)).plus(Duration.ofHours(1))); // 11
