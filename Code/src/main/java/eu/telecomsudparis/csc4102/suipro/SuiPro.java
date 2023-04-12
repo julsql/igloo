@@ -558,7 +558,20 @@ public class SuiPro {
 		Activite activite = activites.get(intituleActivite);
 		return activite.dureeActivite();
 	}
-
+	/**
+	 * restaure le developpeur ayant l'alias alias
+	 * @param alias
+	 */
+	public void restaurerDeveloppeur(String alias) {
+		developpeurs.get(alias).restauration();
+	}
+		/**
+	 * restaure la tache  ayant l'intitule associé
+	 * @param intitule
+	 */
+	public void restaurerActivite(String intitule) {
+		activites.get(intitule).restauration();
+	}
 
 	/**
 	 * Vider la corbeille.
@@ -737,6 +750,7 @@ public class SuiPro {
 		// this.ajoutLabel("remédiation", "Remédiation"); // 4
 		// this.ajoutLabelTache("révision", "remédiation"); // 5
 		// this.dureeTravail("remédiation"); // 6
+
 
 	}
 	
