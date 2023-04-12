@@ -2,11 +2,8 @@ package eu.telecomsudparis.csc4102.suipro;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.SubmissionPublisher;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
@@ -49,7 +46,7 @@ public class SuiPro {
 	 *
 	 * @param args les arguments en entrée.
 	 */
-	public static void main(final String[] args) throws OperationImpossible {
+	public static void main(final String[] args) throws OperationImpossible, InterruptedException {
 		SuiPro suiPro = new SuiPro("Projet");
 		// suiPro.scenarioSprint1();
 		suiPro.scenarioSprint2();
@@ -195,7 +192,8 @@ public class SuiPro {
 	 *                             de décision des tests de validation).
 	 */
 	public void mettreCorbeilleUneTache(final String intituleActivite, final String intituleTache)
-			throws OperationImpossible {
+			throws OperationImpossible, InterruptedException {
+		//TODO Patron
 		if (intituleActivite == null || intituleActivite.isBlank()) {
 			throw new OperationImpossible("intitulé de l'activité ne peut pas être null ou vide");
 		}
@@ -206,7 +204,9 @@ public class SuiPro {
 		if (activite == null) {
 			throw new OperationImpossible("la tache n'existe pas");
 		}
+
 		activite.mettreTacheCorbeille(intituleTache);
+
 		assert invariant();
 	}
 
@@ -222,7 +222,7 @@ public class SuiPro {
 	 *                             de décision des tests de validation).
 	 */
 	public void mettreCorbeilleUnePeriode(final String intituleActivite, final String intituleTache, final String aliasDev, final Instant debut, final Instant fin)
-			throws OperationImpossible {
+			throws OperationImpossible, InterruptedException {
 		if (intituleActivite == null || intituleActivite.isBlank()) {
 			throw new OperationImpossible("intituleActivite ne peut pas être null ou vide");
 		}
@@ -261,7 +261,7 @@ public class SuiPro {
 	 *                             de décision des tests de validation).
 	 */
 	public void mettreCorbeilleUnDeveloppeur(final String alias)
-			throws OperationImpossible {
+			throws OperationImpossible, InterruptedException {
 		if (alias == null || alias.isBlank()) {
 			throw new OperationImpossible("alias ne peut pas être null ou vide");
 		}
@@ -281,7 +281,7 @@ public class SuiPro {
 	 *                             de décision des tests de validation).
 	 */
 	public void mettreCorbeilleUneActivite(final String intitule)
-			throws OperationImpossible {
+			throws OperationImpossible, InterruptedException {
 		if (intitule == null || intitule.isBlank()) {
 			throw new OperationImpossible("intitule ne peut pas être null ou vide");
 		}
@@ -559,17 +559,17 @@ public class SuiPro {
 		return activite.dureeActivite();
 	}
 	/**
-	 * restaure le developpeur ayant l'alias alias
+	 * restaure le developpeur ayant l'alias alias.
 	 * @param alias
 	 */
-	public void restaurerDeveloppeur(String alias) {
+	public void restaurerDeveloppeur(final String alias) {
 		developpeurs.get(alias).restauration();
 	}
 		/**
-	 * restaure la tache  ayant l'intitule associé
+	 * restaure la tache  ayant l'intitule associé.
 	 * @param intitule
 	 */
-	public void restaurerActivite(String intitule) {
+	public void restaurerActivite(final String intitule) {
 		activites.get(intitule).restauration();
 	}
 
@@ -594,9 +594,22 @@ public class SuiPro {
 	}
 
 	/**
+	 * @param alias alias de développeur
+	 * @param consommateur consommateur
+	 *
+	 *
+	 */
+	public void ajouterConsommateur(final String alias, final ConsommateurMiseALaCorbeille consommateur) {
+		SubmissionPublisher<Publication> producteur = new SubmissionPublisher<>();
+		producteur.subscribe(consommateur);
+		developpeurs.get(alias).setProducteur(producteur);
+	}
+
+
+	/**
 	 * Scénario du sprint1.
 	 */
-	public void scenarioSprint1() throws OperationImpossible {
+	public void scenarioSprint1() throws OperationImpossible, InterruptedException {
 		// Instants
 		Instant now = Instant.now();
 		Instant now1h = now.plus(Duration.ofHours(1));
@@ -654,7 +667,7 @@ public class SuiPro {
 	/**
 	 * Scénario du sprint1.
 	 */
-	public void scenarioSprint2() throws OperationImpossible {
+	public void scenarioSprint2() throws OperationImpossible, InterruptedException {
 		// Instants
 		Instant now = Instant.now();
 		Instant now1h = now.plus(Duration.ofHours(1));
@@ -664,9 +677,17 @@ public class SuiPro {
 
 		// Ajout des développeurs
 		this.ajouterUnDeveloppeur("braun", "Braun", "Madeleine"); // 1
+		this.ajouterConsommateur("braun", new ConsommateurMiseALaCorbeille("braun"));
+
 		this.ajouterUnDeveloppeur("bureau-bonnard", "Bureau-Bonnard", "Carole");  // 2
+		this.ajouterConsommateur("bureau-bonnard", new ConsommateurMiseALaCorbeille("bureau-bonnard"));
+
 		this.ajouterUnDeveloppeur("peyroles", "Peyroles", "Germaine"); // 3
+		this.ajouterConsommateur("peyroles", new ConsommateurMiseALaCorbeille("peyroles"));
+
 		this.ajouterUnDeveloppeur("braun-pivet", "Braun-Pivet", "Yaël"); // 4
+		this.ajouterConsommateur("braun-pivet", new ConsommateurMiseALaCorbeille("braun-pivet"));
+
 
 		// Ajout d'une activité et d'une tâche
 		this.ajouterUneActivite("cd", "Conception détaillée"); // 5
@@ -695,7 +716,6 @@ public class SuiPro {
 		this.afficherPeriodesDeTravail("cd", "mi", false); // 15
 
 		// Calcul de durée
-		// TODO
 		System.out.println("Braun travaille " + this.dureeTravailDeveloppeur("braun")); // 16
 		System.out.println("Bureau-Bonnard travaille " + this.dureeTravailDeveloppeur("bureau-bonnard")); // 16
 		System.out.println("Peyroles travaille " + this.dureeTravailDeveloppeur("peyroles")); // 16
@@ -715,7 +735,6 @@ public class SuiPro {
 		this.afficherPeriodesDeTravailCorbeille(); // 6
 
 		// Calcul de durée
-		// TODO
 		System.out.println("Braun travaille " + this.dureeTravailDeveloppeur("braun")); // 7
 		System.out.println("Bureau-Bonnard travaille " + this.dureeTravailDeveloppeur("bureau-bonnard")); // 7
 		System.out.println("Peyroles travaille " + this.dureeTravailDeveloppeur("peyroles")); // 7
@@ -751,7 +770,8 @@ public class SuiPro {
 		// this.ajoutLabelTache("révision", "remédiation"); // 5
 		// this.dureeTravail("remédiation"); // 6
 
-
+		System.out.println("MISE A LA CORBEILLE");
+		this.mettreCorbeilleUneTache("cd", "dc"); // 1
 	}
 	
 }

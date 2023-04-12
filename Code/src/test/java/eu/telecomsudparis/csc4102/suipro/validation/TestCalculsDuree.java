@@ -51,7 +51,7 @@ public class TestCalculsDuree {
         Assertions.assertEquals(suiPro.dureeTravail(),Duration.ZERO);
     }
     @Test
-    void TestScenarioDureeProjet() throws OperationImpossible {
+    void TestScenarioDureeProjet() throws OperationImpossible, InterruptedException {
         suiPro.ajouterUneActivite(intituleActivite, descriptionActivite);
         suiPro.ajouterUneTache(intituleActivite, intituleTache, descriptionActivite);
         LocalDate date1 = LocalDate.of(2015, 1, 11);

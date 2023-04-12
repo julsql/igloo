@@ -94,7 +94,7 @@ public class Tache {
 	 * restaure la tache et toutes les periodes de travail associées pour lesquelle le developpeur n'est PAS dans la corbeille.
 	 */
 	public void restauration() {
-		this.dansCorbeille=false;
+		this.dansCorbeille = false;
 		for (var periode : periodesDeTravail.entrySet()) {
 			periode.getValue().restauration();
 		}
@@ -129,7 +129,7 @@ public class Tache {
 	 * met la tâche à la corbeille.
 	 *
 	 */
-	public void mettreALaCorbeille() {
+	public void mettreALaCorbeille() throws InterruptedException {
         this.dansCorbeille = true;
         Map<String, PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
         for (var periode : periodesDeTravailASupprimer.entrySet()) {
@@ -144,7 +144,7 @@ public class Tache {
 	 * @param fin l'instant de la fin.
 	 * @param developpeur le développeur.
 	 */
-	public void mettrePeriodeCorbeille(final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible {
+	public void mettrePeriodeCorbeille(final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible, InterruptedException {
 		String id = debut + fin.toString() + developpeur;
 
 		if (periodesDeTravail.get(id) == null) {

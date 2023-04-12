@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.SubmissionPublisher;
+
 /**
  * Cette classe réalise le concept de développeur. Un développeur est un élément
  * jetable référençant une collection de période de travail.
@@ -35,6 +37,10 @@ public class Developpeur {
 	 * les périodes de travail.
 	 */
 	private Map<String, PeriodeDeTravail> periodesDeTravail;
+	/**
+	 * les producteurs.
+	 */
+	private SubmissionPublisher<Publication> producteur;
 
 	/**
 	 * construit un développeur.
@@ -82,6 +88,24 @@ public class Developpeur {
 	}
 
 	/**
+	 * obtient le producteur.
+	 *
+	 * @return le producteur.
+	 */
+	public SubmissionPublisher<Publication> getProducteur() {
+		return producteur;
+	}
+
+	/**
+	 * obtient le producteur.
+	 *
+	 * @param producteur le producteur.
+	 */
+	public void setProducteur(final SubmissionPublisher producteur) {
+		this.producteur = producteur;
+	}
+
+	/**
 	 * obtient si c'est dans la corbeille.
 	 *
 	 * @return l'état de mise en corbeille.
@@ -120,7 +144,7 @@ public class Developpeur {
 	/**
 	 * met le développeur à la corbeille.
 	 */
-    public void mettreALaCorbeille() {
+    public void mettreALaCorbeille() throws InterruptedException {
         this.dansCorbeille = true;
         Map<String, PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
         for (var periode : periodesDeTravailASupprimer.entrySet()) {
@@ -165,7 +189,7 @@ public class Developpeur {
 	}
 
 	/**
-	 * restaure un developpeur
+	 * restaure un developpeur.
 	 * on autorise de restaurer un developpeur qui n'est pas dans la corbeille
 	 * cette methode n'aura alors pas d'effet sur le developpeur
 	 */
