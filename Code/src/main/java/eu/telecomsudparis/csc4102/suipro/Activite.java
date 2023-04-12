@@ -138,7 +138,7 @@ public class Activite {
      * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
      *                             de décision des tests de validation).
      */
-    public void mettreTacheCorbeille(final String intituleTache) throws OperationImpossible {
+    public void mettreTacheCorbeille(final String intituleTache) throws OperationImpossible, InterruptedException {
         if (this.getTaches().get(intituleTache) == null) {
             throw new OperationImpossible("tâche n'existe pas");
         }
@@ -148,7 +148,7 @@ public class Activite {
     /**
      * Met à la corbeille l'activité.
      */
-    public void mettreALaCorbeille() throws OperationImpossible {
+    public void mettreALaCorbeille() throws OperationImpossible, InterruptedException {
         dansCorbeille = true;
         for (Tache tache : taches.values()) {
             mettreTacheCorbeille(tache.getIntitule());
@@ -166,7 +166,7 @@ public class Activite {
      * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
      *                             de décision des tests de validation).
      */
-    public void mettrePeriodeCorbeille(final String intituleTache, final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible {
+    public void mettrePeriodeCorbeille(final String intituleTache, final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible, InterruptedException {
         if (this.getTaches().get(intituleTache) == null) {
             throw new OperationImpossible("tâche n'existe pas");
         }
@@ -200,10 +200,10 @@ public class Activite {
 		return durees;
 	}
     /**
-	 * restaure l'activite  et toutes les taches associées
+	 * restaure l'activite  et toutes les taches associées.
      */
     public void restauration() {
-        this.dansCorbeille=false;
+        this.dansCorbeille = false;
         for (var tache : taches.entrySet()) {
             tache.getValue().restauration();
         }

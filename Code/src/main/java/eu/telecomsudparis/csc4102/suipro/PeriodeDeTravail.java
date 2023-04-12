@@ -2,6 +2,7 @@ package eu.telecomsudparis.csc4102.suipro;
 
 import java.time.Instant;
 import java.util.Objects;
+import java.util.concurrent.SubmissionPublisher;
 
 import eu.telecomsudparis.csc4102.util.IntervalleInstants;
 
@@ -28,9 +29,10 @@ public class PeriodeDeTravail {
 	 * le développeur.
 	 */
 	private final Developpeur developpeur;
+
 	/**
 	 * construit une période de travail.
-	 * 
+	 *
 	 * @param debut       l'instant de début.
 	 * @param fin         l'instant de fin.
 	 * @param tache       la tâche
@@ -48,7 +50,7 @@ public class PeriodeDeTravail {
 
 	/**
 	 * vérifie l'invariant de la classe.
-	 * 
+	 *
 	 * @return {@code true} si l'invariant est respecté.
 	 */
 	public boolean invariant() {
@@ -77,25 +79,40 @@ public class PeriodeDeTravail {
 	 * met la periode de travail à la corbeille.
 	 *
 	 */
-	public void mettreALaCorbeille() {
+	public void mettreALaCorbeille() throws InterruptedException {
 		dansCorbeille = true;
+		final int time = 100;
+
+		if (!developpeur.getCorbeille()) {
+
+			String alias = developpeur.getAlias();
+
+			SubmissionPublisher<Publication> producteur = developpeur.getProducteur();
+
+			Thread.sleep(time);
+
+			producteur.submit(new Publication(tache.getIntitule(), alias));
+
+			Thread.sleep(time);
+		}
+
 		assert invariant();
 	}
 
 	/**
-	 * restaure la periode de travail si le developpeur associé n'est PAS dans la corbeille
+	 * restaure la periode de travail si le developpeur associé n'est PAS dans la corbeille.
 	 * on autorise une restauration d'une periode de travail qui n'était pas dans la corbeille
 	 * dans ce cas la la periode n'est pas modifiée
 	 */
 	public void restauration() {
 		if (!developpeur.getCorbeille()) {
-			this.dansCorbeille=false;
+			this.dansCorbeille = false;
 		}
 	}
 
 	/**
 	 * obtient l'intervalle d'instants.
-	 * 
+	 *
 	 * @return l'intervalle d'instants.
 	 */
 	public IntervalleInstants getIntervalle() {

@@ -2,14 +2,16 @@ package eu.telecomsudparis.csc4102.suipro;
 
 public class Label {
 
+     /**
+     * le nom du label.
+     */
     private final String nom;
 
     /**
-     * construit un label
+     * construit un label.
      * @param nom le nom du label
      */
-
-    public Label(String nom) {
+    public Label(final String nom) {
         this.nom = nom;
     }
 
