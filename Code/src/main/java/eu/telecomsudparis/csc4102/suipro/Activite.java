@@ -148,8 +148,11 @@ public class Activite {
     /**
      * Met à la corbeille l'activité.
      */
-    public void mettreALaCorbeille() {
+    public void mettreALaCorbeille() throws OperationImpossible {
         dansCorbeille = true;
+        for (Tache tache : taches.values()) {
+            mettreTacheCorbeille(tache.getIntitule());
+        }
         assert invariant();
     }
     /**
@@ -203,6 +206,18 @@ public class Activite {
         this.dansCorbeille=false;
         for (var tache : taches.entrySet()) {
             tache.getValue().restauration();
+        }
+    }
+
+    /**
+     * Supprime les tâches d'une activité.
+     *
+     */
+    public void supprimerPeriodes() {
+        for (Tache tache : taches.values()) { // foreach periode de travail associated,
+            if (tache.getCorbeille()) { // ne considère que les période de travaille dans la corbeille
+                taches.remove(tache.getIntitule());
+            }
         }
     }
 

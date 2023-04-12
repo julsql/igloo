@@ -159,13 +159,27 @@ public class Tache {
 	 */
 	public Duration dureeTache() {
 		Duration duree = Duration.ZERO; // init empty duration
-		for (PeriodeDeTravail periode : periodesDeTravail.values()) { //foreach periode de travail associated,
-			if (!periode.getCorbeille()) { // ignore les periodes en corbeille
-			duree = duree.plus(periode.getIntervalle().calculerDuree());
-		} // add its duration
+			for (PeriodeDeTravail periode : periodesDeTravail.values()) { //foreach periode de travail associated,
+				if (!periode.getCorbeille()) { // ignore les periodes en corbeille
+				duree = duree.plus(periode.getIntervalle().calculerDuree());
+			} // add its duration
 		}
 		return duree;
 	}
+
+	/**
+	 * Supprime les périodes de travail d'une tâche.
+	 *
+	 */
+	public void supprimerPeriodes() {
+		for (PeriodeDeTravail periode : periodesDeTravail.values()) { // foreach periode de travail associated,
+			if (periode.getCorbeille()) { // ne considère que les période de travaille dans la corbeille
+				String id = periode.getIntervalle().getInstantDebut().toString() + periode.getIntervalle().getInstantDebut() + periode.getDeveloppeur();
+				periodesDeTravail.remove(id);
+			}
+		}
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(intitule);

@@ -65,6 +65,15 @@ public class PeriodeDeTravail {
 	}
 
 	/**
+	 * obtient le développeur.
+	 *
+	 * @return le développeur
+	 */
+	public Developpeur getDeveloppeur() {
+		return developpeur;
+	}
+
+	/**
 	 * met la periode de travail à la corbeille.
 	 *
 	 */

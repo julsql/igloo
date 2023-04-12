@@ -10,7 +10,7 @@ import java.util.Map;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
-// TODO : Ajout des calculs de durées, de vider la corbeille, des labels et de la restauration
+// TODO : de vider la corbeille, des labels et de la restauration
 
 /**
  * Cette classe est la façade du logiciel.
@@ -350,6 +350,13 @@ public class SuiPro {
 	}
 
 	/**
+	 * Affiche les développeurs dans la corbeille.
+	 */
+	public void afficherDeveloppeursCorbeille() {
+		afficherDeveloppeurs(true);
+	}
+
+	/**
 	 * Affiche chaque activité qui n'est pas dans la corbeille.
 	 * @param dansCorbeille boolean, si True, affiche les activités dans la corbeille uniquement
 	 * Si false, affiche les activités qui ne sont PAS dans la corbeille. 
@@ -371,6 +378,13 @@ public class SuiPro {
 			}
 		}
 		System.out.println("}\n");
+	}
+
+	/**
+	 * Affiche les activités dans la corbeille.
+	 */
+	public void afficherActivitesCorbeille() {
+		afficherActivites(true);
 	}
 
 	/**
@@ -545,6 +559,27 @@ public class SuiPro {
 		return activite.dureeActivite();
 	}
 
+
+	/**
+	 * Vider la corbeille.
+	 *
+	 */
+	public void viderLaCorbeille() {
+		for (Developpeur developpeur : developpeurs.values()) { // foreach periode de travail associated,
+			if (developpeur.getCorbeille()) { // ne considère que les période de travaille dans la corbeille
+				developpeurs.remove(developpeur.getAlias());
+			}
+		}
+
+		for (Activite activite : activites.values()) { // foreach periode de travail associated,
+			if (activite.getCorbeille()) { // ne considère que les période de travaille dans la corbeille
+				activites.remove(activite.getIntitule());
+			}
+		}
+
+		System.out.println("Corbeille vidée");
+	}
+
 	/**
 	 * Scénario du sprint1.
 	 */
@@ -690,18 +725,19 @@ public class SuiPro {
 		// this.restaureDeveloppeur("bureau-bonnard"); // 1
 		this.afficherDeveloppeurs(false); // 2
 		this.afficherDeveloppeurs(true); // 3
-		// this.dureeTravail(); // 4
-		// this.dureeTravailActivite(intituleActivite); // 5
-		// this.dureeTravailDeveloppeur("bureau-bonnard"); // 6
+		System.out.println("Le projet dure " + this.dureeTravail()); // 3
+		System.out.println("L'activité Conception Détaillée dure " + this.dureeTravailActivite("cd")); // 5
+		System.out.println("Bureau-Bonnard travaille " + this.dureeTravailDeveloppeur("bureau-bonnard")); // 6
 
 		// Labellisation
 		// TODO
 		this.ajouterUneTache("cd", "révision", "Révision JAVA"); // 1
 		this.ajouterUnePeriode("cd", "révision", "braun-pivet", totomorrow, totomorrow.plus(Duration.ofHours(1))); // 2
-		// this.dureeTravail(); // 3
+		System.out.println("Le projet dure " + this.dureeTravail()); // 3
 		// this.ajoutLabel("remédiation", "Remédiation"); // 4
 		// this.ajoutLabelTache("révision", "remédiation"); // 5
 		// this.dureeTravail("remédiation"); // 6
+
 	}
 	
 }
