@@ -65,13 +65,25 @@ public class PeriodeDeTravail {
 	}
 
 	/**
-	 * met la tâche à la corbeille.
+	 * met la periode de travail à la corbeille.
 	 *
 	 */
 	public void mettreALaCorbeille() {
 		dansCorbeille = true;
 		assert invariant();
 	}
+
+	/**
+	 * restaure la periode de travail si le developpeur associé n'est PAS dans la corbeille
+	 * on autorise une restauration d'une periode de travail qui n'était pas dans la corbeille
+	 * dans ce cas la la periode n'est pas modifiée
+	 */
+	public void restauration() {
+		if (!developpeur.getCorbeille()) {
+			this.dansCorbeille=false;
+		}
+	}
+
 	/**
 	 * obtient l'intervalle d'instants.
 	 * 
