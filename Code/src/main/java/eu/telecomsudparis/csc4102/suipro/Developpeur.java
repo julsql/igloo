@@ -149,7 +149,12 @@ public class Developpeur {
 		assert invariant();
 	}
 
-	public Duration dureeTravail(){
+	/**
+	 * calcul la durée de travail d'un développeur.
+	 *
+	 * @return Duration dirée de travail du développeur.
+	 */
+	public Duration dureeTravail() {
 		Duration duree = Duration.ZERO; // init empty duration
 		for (PeriodeDeTravail periode : this.periodesDeTravail.values()) {
 			duree = duree.plus(periode.getIntervalle().calculerDuree()); // foreach periode de travail, add its duration

@@ -145,10 +145,10 @@ public class Tache {
 	 * 
 	 * @return la somme des durées de chaque période de travail associé à cette tache
 	 */
-	public Duration dureeTache(){
+	public Duration dureeTache() {
 		Duration duree = Duration.ZERO; // init empty duration
-		for (PeriodeDeTravail periode : periodesDeTravail.values()) {//foreach periode de travail associated, 
-			if (!periode.getCorbeille()){ // ignore les periodes en corbeille
+		for (PeriodeDeTravail periode : periodesDeTravail.values()) { //foreach periode de travail associated,
+			if (!periode.getCorbeille()) { // ignore les periodes en corbeille
 			duree = duree.plus(periode.getIntervalle().calculerDuree());
 		} // add its duration
 		}

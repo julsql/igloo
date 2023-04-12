@@ -499,10 +499,14 @@ public class SuiPro {
 
 }
 
-public Duration dureeProjet(){
+	/**
+	 *
+	 * @return Duration durée du projet
+	 */
+	public Duration dureeProjet() {
 
 	Duration duree = Duration.ZERO; // init empty duration
-	for (Activite activite : activites.values()) {//foreach activite
+	for (Activite activite : activites.values()) { //foreach activite
 		duree = duree.plus(activite.dureeActivite());
 		 // add its duration
 	}
