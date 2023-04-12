@@ -88,6 +88,17 @@ public class Tache {
 	public boolean getCorbeille() {
 		return dansCorbeille;
 	}
+
+
+	/**
+	 * restaure la tache et toutes les periodes de travail associées pour lesquelle le developpeur n'est PAS dans la corbeille.
+	 */
+	public void restauration() {
+		this.dansCorbeille=false;
+		
+
+	}
+
 	/**
 	 * obtient les périodes de travail.
 	 *

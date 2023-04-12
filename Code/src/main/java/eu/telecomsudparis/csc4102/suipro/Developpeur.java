@@ -164,6 +164,15 @@ public class Developpeur {
 	}
 
 	/**
+	 * restaure un developpeur
+	 * on autorise de restaurer un developpeur qui n'est pas dans la corbeille
+	 * cette methode n'aura alors pas d'effet sur le developpeur
+	 */
+	public void restauration() {
+		this.dansCorbeille = false;
+	}
+
+	/**
 	 * regarde s'il y a chevauchement entre deux intervalles.
 	 *
 	 * @param intervalle1  l'alias.
