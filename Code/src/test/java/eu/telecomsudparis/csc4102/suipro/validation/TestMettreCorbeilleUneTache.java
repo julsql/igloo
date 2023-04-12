@@ -3,16 +3,13 @@ package eu.telecomsudparis.csc4102.suipro.validation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import eu.telecomsudparis.csc4102.suipro.PeriodeDeTravail;
 import eu.telecomsudparis.csc4102.suipro.SuiPro;
-import eu.telecomsudparis.csc4102.suipro.Tache;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 
