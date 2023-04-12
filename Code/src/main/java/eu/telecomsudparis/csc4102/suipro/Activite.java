@@ -192,10 +192,19 @@ public class Activite {
     public Map<String, Duration> dureeActiviteDetails() {
         Map<String, Duration> durees = new HashMap<>();
 		for (Tache tache : taches.values()) { //foreach tache
-			durees.put(tache.getIntitule(), tache.dureeTache()); 
+			durees.put(tache.getIntitule(), tache.dureeTache());
 		}
 		return durees;
 	}
+    /**
+	 * restaure l'activite  et toutes les taches associées
+     */
+    public void restauration() {
+        this.dansCorbeille=false;
+        for (var tache : taches.entrySet()) {
+            tache.getValue().restauration();
+        }
+    }
 
 
     /**

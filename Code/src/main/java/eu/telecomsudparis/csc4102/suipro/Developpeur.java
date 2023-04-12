@@ -161,7 +161,6 @@ public class Developpeur {
 				duree = duree.plus(periode.getIntervalle().calculerDuree()); // foreach periode de travail, add its duration
 			}
 		}
-
 		return duree;
 	}
 

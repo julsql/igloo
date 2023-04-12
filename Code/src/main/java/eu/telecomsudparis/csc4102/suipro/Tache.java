@@ -95,8 +95,9 @@ public class Tache {
 	 */
 	public void restauration() {
 		this.dansCorbeille=false;
-		
-
+		for (var periode : periodesDeTravail.entrySet()) {
+			periode.getValue().restauration();
+		}
 	}
 
 	/**
