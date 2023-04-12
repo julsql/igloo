@@ -157,7 +157,9 @@ public class Developpeur {
 	public Duration dureeTravail() {
 		Duration duree = Duration.ZERO; // init empty duration
 		for (PeriodeDeTravail periode : this.periodesDeTravail.values()) {
-			duree = duree.plus(periode.getIntervalle().calculerDuree()); // foreach periode de travail, add its duration
+			if (!periode.getCorbeille()) { // ignore les periodes en corbeille
+				duree = duree.plus(periode.getIntervalle().calculerDuree()); // foreach periode de travail, add its duration
+			}
 		}
 
 		return duree;
