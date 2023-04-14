@@ -7,8 +7,6 @@ import java.util.concurrent.SubmissionPublisher;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
-// TODO : de vider la corbeille, des labels et de la restauration
-
 /**
  * Cette classe est la façade du logiciel.
  * 
@@ -190,6 +188,7 @@ public class SuiPro {
 	 * @param intituleTache l'intitulé de la tache.
 	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
 	 *                             de décision des tests de validation).
+	 * @throws InterruptedException exception levée par le time.sleep
 	 */
 	public void mettreCorbeilleUneTache(final String intituleActivite, final String intituleTache)
 			throws OperationImpossible, InterruptedException {
@@ -591,15 +590,26 @@ public class SuiPro {
 		}
 
 		System.out.println("Corbeille vidée");
+		assert invariant();
 	}
 
 	/**
 	 * @param alias alias de développeur
 	 * @param consommateur consommateur
 	 *
-	 *
+	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+	 *                             de décision des tests de validation).
 	 */
-	public void ajouterConsommateur(final String alias, final ConsommateurMiseALaCorbeille consommateur) {
+	public void ajouterConsommateur(final String alias, final ConsommateurMiseALaCorbeille consommateur) throws OperationImpossible {
+		if (alias == null || alias.isBlank()) {
+			throw new OperationImpossible("intitule ne peut pas être null ou vide");
+		}
+		if (consommateur == null) {
+			throw new OperationImpossible("consommateur null");
+		}
+		if (developpeurs.get(alias) == null) {
+			throw new OperationImpossible("développeur n'existe pas");
+		}
 		SubmissionPublisher<Publication> producteur = new SubmissionPublisher<>();
 		producteur.subscribe(consommateur);
 		developpeurs.get(alias).setProducteur(producteur);
@@ -753,7 +763,6 @@ public class SuiPro {
 		this.afficherDeveloppeurs(true); // 14
 
 		// Restauration
-		// TODO
 		// this.restaureDeveloppeur("bureau-bonnard"); // 1
 		this.afficherDeveloppeurs(false); // 2
 		this.afficherDeveloppeurs(true); // 3

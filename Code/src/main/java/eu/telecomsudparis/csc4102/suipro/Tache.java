@@ -143,6 +143,9 @@ public class Tache {
 	 * @param debut  l'instant du début.
 	 * @param fin l'instant de la fin.
 	 * @param developpeur le développeur.
+	 * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
+	 *                             de décision des tests de validation).
+	 * @throws InterruptedException exception levée par le time.sleep
 	 */
 	public void mettrePeriodeCorbeille(final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible, InterruptedException {
 		String id = debut + fin.toString() + developpeur;
