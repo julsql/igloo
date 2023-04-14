@@ -508,10 +508,18 @@ public class SuiPro {
 	 * @return List<String> liste des alias des periodes à la corbeille
 	 */
 	public List<PeriodeDeTravail> listerPeriodesCorbeille() {
-		List<PeriodeDeTravail> listPeriodes = new ArrayList<>();
+		List<PeriodeDeTravail> listPeriodesCorbeille = new ArrayList<>();
 		// TODO finir la fonction
-
-		return listPeriodes;
+		for (Activite activite : activites.values()) {
+			for (Tache tache : activite.getTaches().values()){
+				Collection<PeriodeDeTravail> listeperiode = tache.getPeriodesDeTravail().values();
+				listeperiode.stream()
+							.filter(periode -> periode.getCorbeille())
+							.forEach(periode -> listPeriodesCorbeille.add(periode));
+			}
+			
+		}
+		return listPeriodesCorbeille;
 
 	}
 

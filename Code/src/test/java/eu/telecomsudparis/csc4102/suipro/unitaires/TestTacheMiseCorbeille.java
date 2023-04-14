@@ -2,8 +2,10 @@
 package eu.telecomsudparis.csc4102.suipro.unitaires;
 
 import eu.telecomsudparis.csc4102.suipro.Activite;
+import eu.telecomsudparis.csc4102.suipro.ConsommateurMiseALaCorbeille;
 import eu.telecomsudparis.csc4102.suipro.Developpeur;
 import eu.telecomsudparis.csc4102.suipro.PeriodeDeTravail;
+import eu.telecomsudparis.csc4102.suipro.SuiPro;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -35,8 +37,12 @@ class TestTacheMiseCorbeille {
 
     @Test
     void miseCorbeilleTacheTest1Jeu2() throws Exception {
-        Developpeur developpeur = new Developpeur("alias", "nom", "prénom");
+        SuiPro suiPro = new SuiPro("Nom projet");
+        suiPro.ajouterUnDeveloppeur("alias", "jean", "pascal");
+        Developpeur developpeur = suiPro.getDeveloppeurs().get("alias");
+        suiPro.ajouterConsommateur("alias",new ConsommateurMiseALaCorbeille("alias"));
 
+        
         Instant i1 = Instant.now();
         Instant i2 = Instant.now().plus(Duration.ofDays(1));
         Instant i3 = Instant.now().plus(Duration.ofDays(2));
