@@ -66,15 +66,15 @@ class TestSprint {
         suiPro.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", tomorrow, tomorrow1h); // 11
 
         // Afficher
-        suiPro.afficherDeveloppeurs(false); // 12
+        suiPro.afficherDeveloppeurs(); // 12
         suiPro.afficherTaches("cd", false); // 13
         suiPro.afficherPeriodesDeTravail("cd", "dc", false); // 14
         suiPro.afficherPeriodesDeTravail("cd", "mi", false); // 15
 
         // Mise à la corbeille
         suiPro.mettreCorbeilleUnDeveloppeur("pastorel"); // 1
-        suiPro.afficherDeveloppeurs(false); // 2
-        suiPro.afficherDeveloppeurs(true); // 3
+        suiPro.afficherDeveloppeurs(); // 2
+        suiPro.afficherDeveloppeursCorbeille(); // 3
         suiPro.afficherPeriodesDeTravail("cd", "dc", false); // 4
         suiPro.afficherPeriodesDeTravail("cd", "mi", false); // 5
         suiPro.afficherPeriodesDeTravailCorbeille(); // 6
@@ -83,8 +83,8 @@ class TestSprint {
         Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUnePeriode("cd", "dc", "pastorel", totomorrow, totomorrow1h)); // 7
         suiPro.mettreCorbeilleUnDeveloppeur("pastorel"); // 8
 
-        suiPro.afficherDeveloppeurs(false); // 9
-        suiPro.afficherDeveloppeurs(true); // 10
+        suiPro.afficherDeveloppeurs(); // 9
+        suiPro.afficherDeveloppeursCorbeille(); // 10
     }
     @Test
     void sprint2Test1Jeu1() throws Exception {
@@ -123,7 +123,7 @@ class TestSprint {
         suiPro.ajouterUnePeriode("cd", "dc", "peyroles", tomorrow, tomorrow1h); // 11
 
         // Afficher
-        suiPro.afficherDeveloppeurs(false); // 12
+        suiPro.afficherDeveloppeurs(); // 12
         suiPro.afficherTaches("cd", false); // 13
         suiPro.afficherPeriodesDeTravail("cd", "dc", false); // 14
         suiPro.afficherPeriodesDeTravail("cd", "mi", false); // 15
@@ -141,8 +141,8 @@ class TestSprint {
 
         // Mise à la corbeille
         suiPro.mettreCorbeilleUnDeveloppeur("bureau-bonnard"); // 1
-        suiPro.afficherDeveloppeurs(false); // 2
-        suiPro.afficherDeveloppeurs(true); // 3
+        suiPro.afficherDeveloppeurs(); // 2
+        suiPro.afficherDeveloppeursCorbeille(); // 3
         suiPro.afficherPeriodesDeTravail("cd", "dc", false); // 4
         suiPro.afficherPeriodesDeTravail("cd", "mi", false); // 5
         suiPro.afficherPeriodesDeTravailCorbeille(); // 6
@@ -162,13 +162,13 @@ class TestSprint {
         Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUnePeriode("cd", "dc", "bureau-bonnard", totomorrow, totomorrow1h)); // 11
 
         suiPro.mettreCorbeilleUnDeveloppeur("bureau-bonnard"); // 12
-        suiPro.afficherDeveloppeurs(false); // 13
-        suiPro.afficherDeveloppeurs(true); // 14
+        suiPro.afficherDeveloppeurs(); // 13
+        suiPro.afficherDeveloppeursCorbeille(); // 14
 
         // Restauration
         suiPro.restaurerDeveloppeur("bureau-bonnard"); // 1
-        suiPro.afficherDeveloppeurs(false); // 2
-        suiPro.afficherDeveloppeurs(true); // 3
+        suiPro.afficherDeveloppeurs(); // 2
+        suiPro.afficherDeveloppeursCorbeille(); // 3
         System.out.println("Le projet dure " + suiPro.dureeTravail()); // 3
         System.out.println("L'activité Conception Détaillée dure " + suiPro.dureeTravailActivite("cd")); // 5
         System.out.println("Bureau-Bonnard travaille " + suiPro.dureeTravailDeveloppeur("bureau-bonnard")); // 6

@@ -41,8 +41,8 @@ class TestActiviteCorbeille {
         suiPro.mettreCorbeilleUneActivite("Activite 1");
         suiPro.mettreCorbeilleUneActivite("Activite 2");
         List<String> activitesCorbeille = suiPro.listerActivitesCorbeille();
-        Assertions.assertEquals(activitesCorbeille,Arrays.asList("Activite 1", "Activite 2"));
-        
+        Assertions.assertEquals(activitesCorbeille,Arrays.asList("Activite 2", "Activite 1"));
+
 	}
 	
 }
