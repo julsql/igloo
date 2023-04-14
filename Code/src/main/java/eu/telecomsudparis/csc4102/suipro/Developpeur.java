@@ -144,7 +144,7 @@ public class Developpeur {
 	/**
 	 * met le développeur à la corbeille.
 	 */
-    public void mettreALaCorbeille() throws InterruptedException {
+    public void mettreALaCorbeille() throws InterruptedException,OperationImpossible {
         this.dansCorbeille = true;
         Map<String, PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
         for (var periode : periodesDeTravailASupprimer.entrySet()) {

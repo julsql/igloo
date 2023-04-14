@@ -129,7 +129,7 @@ public class Tache {
 	 * met la tâche à la corbeille.
 	 *
 	 */
-	public void mettreALaCorbeille() throws InterruptedException {
+	public void mettreALaCorbeille() throws InterruptedException,OperationImpossible {
         this.dansCorbeille = true;
         Map<String, PeriodeDeTravail> periodesDeTravailASupprimer = getPeriodesDeTravail();
         for (var periode : periodesDeTravailASupprimer.entrySet()) {
@@ -205,6 +205,6 @@ public class Tache {
 
 	@Override
 	public String toString() {
-		return "Tâche [intitulé=" + intitule + ", description=" + description + ", dans la corbeille=" + dansCorbeille + "]";
+		return "Tâche [intitulé=" + intitule + ", activité= "+activite+", description=" + description + ", dans la corbeille=" + dansCorbeille + "]";
 	}
 }
