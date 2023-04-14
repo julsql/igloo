@@ -38,15 +38,15 @@ class TestMettreCorbeilleDeveloppeur {
 	}
 
 	@Test
-	void mettreCorbeilleUnDeveloppeurTest1Jeu1() throws Exception {
+	void mettreCorbeilleUnDeveloppeurTest1Jeu1() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(""));
 	}
 	@Test
-	void mettreCorbeilleUnDeveloppeurTest1Jeu2() throws Exception {
+	void mettreCorbeilleUnDeveloppeurTest1Jeu2() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(null));
 	}
 	@Test
-	void mettreCorbeilleUnDeveloppeurTest2Jeu1() throws Exception {
+	void mettreCorbeilleUnDeveloppeurTest2Jeu1() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.mettreCorbeilleUnDeveloppeur(alias));
 	}
 

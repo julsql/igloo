@@ -57,7 +57,7 @@ class TestTacheMiseCorbeille {
         Assertions.assertTrue(periodeDeTravail1.getCorbeille());
         Assertions.assertTrue(periodeDeTravail2.getCorbeille());
     }
-
+    @Test
     void miseCorbeilleTacheTest1Jeu3() throws InterruptedException {
         tache.mettreALaCorbeille();
         tache.mettreALaCorbeille();
