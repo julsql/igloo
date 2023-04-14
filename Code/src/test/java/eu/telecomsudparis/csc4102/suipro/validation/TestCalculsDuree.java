@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 import java.time.Instant;
 
+import eu.telecomsudparis.csc4102.suipro.ConsommateurMiseALaCorbeille;
 import eu.telecomsudparis.csc4102.suipro.SuiPro;
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
@@ -34,6 +35,7 @@ public class TestCalculsDuree {
         descriptionActivite = "blabla";
         alias = "TurboDev";
         suiPro.ajouterUnDeveloppeur(alias, "jean", "PIERRE");
+        suiPro.ajouterConsommateur(alias, new ConsommateurMiseALaCorbeille(alias));
 
 	}
 

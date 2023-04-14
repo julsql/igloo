@@ -1,5 +1,6 @@
 // CHECKSTYLE:OFF
 package eu.telecomsudparis.csc4102.suipro.validation;
+import eu.telecomsudparis.csc4102.suipro.ConsommateurMiseALaCorbeille;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -61,6 +62,7 @@ class TestMettreCorbeilleUneTache {
 		Instant now = Instant.now();
 		Instant now1h = now.plus(Duration.ofHours(1));
 		suiPro.ajouterUnDeveloppeur(alias, "nom", "prenom");
+        suiPro.ajouterConsommateur(alias, new ConsommateurMiseALaCorbeille(alias));
 		Developpeur developpeur = suiPro.getDeveloppeurs().get(alias);
 		suiPro.ajouterUnePeriode(intituleActivite, intituleTache, alias, now, now1h);
 		PeriodeDeTravail periode = suiPro.getDeveloppeurs().get(alias).getPeriodesDeTravail().get(now + now1h.toString() + developpeur);
