@@ -165,6 +165,7 @@ public class Activite {
      *
      * @throws OperationImpossible exception levée en cas d'impossibilité (cf. table
      *                             de décision des tests de validation).
+     * @throws InterruptedException exception levée par le time.sleep
      */
     public void mettrePeriodeCorbeille(final String intituleTache, final Instant debut, final Instant fin, final Developpeur developpeur) throws OperationImpossible, InterruptedException {
         if (this.getTaches().get(intituleTache) == null) {
