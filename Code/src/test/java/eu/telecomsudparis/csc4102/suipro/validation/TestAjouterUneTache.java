@@ -36,12 +36,12 @@ class TestAjouterUneTache {
 	}
 
 	@Test
-	void ajouterUneTacheTest1Jeu1() throws Exception {
+	void ajouterUneTacheTest1Jeu1() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUneTache(intituleActivite,"",descriptionTache));
 	}
 
 	@Test
-	void ajouterUneTacheTest1Jeu2() throws Exception {
+	void ajouterUneTacheTest1Jeu2() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUneTache(intituleActivite,null,descriptionTache));
 	}
 	@Test

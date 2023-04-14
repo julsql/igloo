@@ -32,33 +32,33 @@ class TestAjouterUnDeveloppeur {
 	}
 
 	@Test
-	void ajouterUnDeveloppeurTest1Jeu1() throws Exception {
+	void ajouterUnDeveloppeurTest1Jeu1() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUnDeveloppeur(null, nom, prenom));
 	}
 
 	@Test
-	void ajouterUnDeveloppeurTest1Jeu2() throws Exception {
+	void ajouterUnDeveloppeurTest1Jeu2() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUnDeveloppeur("", nom, prenom));
 	}
 
 	@Test
-	void ajouterUnDeveloppeurTest2Jeu1() throws Exception {
+	void ajouterUnDeveloppeurTest2Jeu1() {
 		Assertions.assertThrows(OperationImpossible.class,
 				() -> suiPro.ajouterUnDeveloppeur(alias, null, prenom));
 	}
 
 	@Test
-	void ajouterUnDeveloppeurTest2Jeu2() throws Exception {
+	void ajouterUnDeveloppeurTest2Jeu2() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUnDeveloppeur(alias, "", prenom));
 	}
 
 	@Test
-	void ajouterUnDeveloppeurTest3Jeu1() throws Exception {
+	void ajouterUnDeveloppeurTest3Jeu1() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUnDeveloppeur(alias, nom, null));
 	}
 
 	@Test
-	void ajouterUnDeveloppeurTest3Jeu2() throws Exception {
+	void ajouterUnDeveloppeurTest3Jeu2() {
 		Assertions.assertThrows(OperationImpossible.class, () -> suiPro.ajouterUnDeveloppeur(alias, nom, ""));
 	}
 

@@ -174,7 +174,6 @@ class TestSprint {
         System.out.println("Bureau-Bonnard travaille " + suiPro.dureeTravailDeveloppeur("bureau-bonnard")); // 6
 
         // Labellisation
-        // TODO
         suiPro.ajouterUneTache("cd", "révision", "Révision JAVA"); // 1
         suiPro.ajouterUnePeriode("cd", "révision", "braun-pivet", totomorrow, totomorrow.plus(Duration.ofHours(1))); // 2
         System.out.println("Le projet dure " + suiPro.dureeTravail()); // 3

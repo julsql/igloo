@@ -21,16 +21,16 @@ class TestTacheConstruction {
 	}
 
 	@Test
-	void constructeurTacheTest1Jeu1() throws Exception {
+	void constructeurTacheTest1Jeu1() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> new Tache("","",activite));
 	}
     @Test
-	void constructeurTacheTest1Jeu2() throws Exception {
+	void constructeurTacheTest1Jeu2() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> new Tache(null, "",activite));
 	} 
 	
 	   @Test
-	void constructeurTacheTest2Jeu1() throws Exception {
+	void constructeurTacheTest2Jeu1() {
 		Tache tache = new Tache("intitulétache", "description", activite);
 		Assertions.assertNotNull((tache));
 		Assertions.assertEquals("intitulétache", tache.getIntitule());
