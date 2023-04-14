@@ -478,7 +478,6 @@ public class SuiPro {
 			taches.forEach((tache) -> listIntitule.add(tache.getIntitule()));
 			
 		}
-
 		return listIntitule;
 		
 	}
@@ -501,14 +500,15 @@ public class SuiPro {
 	 *
 	 * @return List<String> liste des intitulés des activités à la corbeille
 	 */
-	public List<String> listerActivitesCorbeille() {
+	public List<String> listerActivitesCorbeille() throws OperationImpossible{
 		// TODO relire cette fonction c'est étrange
 		List<String> listIntitule = new ArrayList<>();
 		Collection<Activite> activitesCorbeille =  this.activites.values();
 
-		activitesCorbeille.stream().filter(s -> s.getCorbeille());
+		activitesCorbeille.stream()
+        .filter(activite -> activite.getCorbeille())
+		.forEach((activite) -> listIntitule.add(activite.getIntitule()));
 
-		activitesCorbeille.forEach((activite) -> listIntitule.add(activite.toString()));
 		return listIntitule;
 
 	}
