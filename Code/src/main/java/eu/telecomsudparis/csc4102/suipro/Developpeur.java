@@ -101,7 +101,7 @@ public class Developpeur {
 	 *
 	 * @param producteur le producteur.
 	 */
-	public void setProducteur(final SubmissionPublisher producteur) {
+	public void setProducteur(final SubmissionPublisher<Publication> producteur) {
 		this.producteur = producteur;
 	}
 
