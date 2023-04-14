@@ -323,30 +323,31 @@ public class SuiPro {
 	 * Si false, affiche les développeurs qui ne sont PAS dans la corbeille. 
 	 * 
 	 */
-	public void afficherDeveloppeurs(final boolean dansCorbeille) {
-		if (!dansCorbeille) {
-			System.out.println("Affichage des développeurs qui ne sont pas dans la corbeille :");
-		} else {
-			System.out.println("Affichage des développeurs qui sont dans la corbeille :");
-		}
-		System.out.println("{");
+	public void afficherDeveloppeurs() {
+		
 		
 		for (Map.Entry<String, Developpeur> entry : this.developpeurs.entrySet()) {
 			Developpeur dev = entry.getValue();
 
-			if (dev.getCorbeille() == dansCorbeille) {
+			if (dev.getCorbeille()) {
 				System.out.println(dev + ", ");
 			}
 		}
-		System.out.println("}\n");
+		System.out.println("\n");
 	}
 
 	/**
 	 * Affiche les développeurs dans la corbeille.
 	 */
 	public void afficherDeveloppeursCorbeille() {
-		afficherDeveloppeurs(true);
-	}
+		for (Map.Entry<String, Developpeur> entry : this.developpeurs.entrySet()) {
+			Developpeur dev = entry.getValue();
+			if (!dev.getCorbeille()) {
+				System.out.println(dev + ", ");
+			}
+		}
+			System.out.println("\n");
+		}
 
 	/**
 	 * Affiche chaque activité qui n'est pas dans la corbeille.
@@ -481,9 +482,8 @@ public class SuiPro {
 		List<String> listAlias = new ArrayList<>();
 		Collection<Developpeur> developpeursCorbeille =  this.developpeurs.values();
 
-		developpeursCorbeille.stream().filter(s -> s.getCorbeille());
-
-		developpeursCorbeille.forEach((dev) -> listAlias.add(dev.getAlias()));
+		developpeursCorbeille.stream()							 .filter(s -> s.getCorbeille())
+							 .forEach((dev) -> listAlias.add(dev.getAlias()));
 		return listAlias;
 
 	}
@@ -493,14 +493,12 @@ public class SuiPro {
 	 * @return List<String> liste des intitulés des activités à la corbeille
 	 */
 	public List<String> listerActivitesCorbeille() throws OperationImpossible {
-		// TODO relire cette fonction c'est étrange
 		List<String> listIntitule = new ArrayList<>();
 		Collection<Activite> activitesCorbeille =  this.activites.values();
 
 		activitesCorbeille.stream()
         .filter(activite -> activite.getCorbeille())
 		.forEach((activite) -> listIntitule.add(activite.getIntitule()));
-
 		return listIntitule;
 
 	}
