@@ -2,10 +2,16 @@ package eu.telecomsudparis.csc4102.suipro;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.SubmissionPublisher;
 
 import eu.telecomsudparis.csc4102.util.OperationImpossible;
+
+// TODO Tests patron, finir les fonctions de listings
 
 /**
  * Cette classe est la façade du logiciel.
@@ -37,17 +43,6 @@ public class SuiPro {
 		this.nomDeProjet = nomDeProjet;
 		developpeurs = new HashMap<>();
 		activites = new HashMap<>();
-	}
-
-	/**
-	 * main.
-	 *
-	 * @param args les arguments en entrée.
-	 */
-	public static void main(final String[] args) throws OperationImpossible, InterruptedException {
-		SuiPro suiPro = new SuiPro("Projet");
-		// suiPro.scenarioSprint1();
-		suiPro.scenarioSprint2();
 	}
 
 	/**
@@ -178,7 +173,6 @@ public class SuiPro {
 		String id = debut + fin.toString() + developpeur;
 		PeriodeDeTravail newPeriode = activite.getTaches().get(intituleTache).getPeriodesDeTravail().get(id);
 		developpeur.ajouterUnePeriode(newPeriode, debut, fin);
-
 	}
 
 	/**
@@ -192,7 +186,6 @@ public class SuiPro {
 	 */
 	public void mettreCorbeilleUneTache(final String intituleActivite, final String intituleTache)
 			throws OperationImpossible, InterruptedException {
-		//TODO Patron
 		if (intituleActivite == null || intituleActivite.isBlank()) {
 			throw new OperationImpossible("intitulé de l'activité ne peut pas être null ou vide");
 		}
@@ -493,13 +486,13 @@ public class SuiPro {
 		developpeursCorbeille.forEach((dev) -> listAlias.add(dev.getAlias()));
 		return listAlias;
 
-}
+	}
 
 	/**
 	 *
 	 * @return List<String> liste des intitulés des activités à la corbeille
 	 */
-	public List<String> listerActivitesCorbeille() throws OperationImpossible{
+	public List<String> listerActivitesCorbeille() throws OperationImpossible {
 		// TODO relire cette fonction c'est étrange
 		List<String> listIntitule = new ArrayList<>();
 		Collection<Activite> activitesCorbeille =  this.activites.values();
@@ -509,6 +502,18 @@ public class SuiPro {
 		.forEach((activite) -> listIntitule.add(activite.getIntitule()));
 
 		return listIntitule;
+
+	}
+
+	/**
+	 *
+	 * @return List<String> liste des alias des periodes à la corbeille
+	 */
+	public List<PeriodeDeTravail> listerPeriodesCorbeille() {
+		List<PeriodeDeTravail> listPeriodes = new ArrayList<>();
+		// TODO finir la fonction
+
+		return listPeriodes;
 
 	}
 
@@ -614,173 +619,4 @@ public class SuiPro {
 		producteur.subscribe(consommateur);
 		developpeurs.get(alias).setProducteur(producteur);
 	}
-
-
-	/**
-	 * Scénario du sprint1.
-	 */
-	public void scenarioSprint1() throws OperationImpossible, InterruptedException {
-		// Instants
-		Instant now = Instant.now();
-		Instant now1h = now.plus(Duration.ofHours(1));
-		Instant tomorrow = now.plus(Duration.ofDays(1));
-		Instant tomorrow1h = tomorrow.plus(Duration.ofHours(1));
-		
-		// Ajout des développeurs
-		this.ajouterUnDeveloppeur("pastorel", "Pastorel", "Emmanuel"); // 1
-		this.ajouterUnDeveloppeur("duscastel", "Duscastel", "Jean-Baptiste");  // 2
-		this.ajouterUnDeveloppeur("vergniaud", "Vergniaud", "Pierre-Victurnien"); // 3
-		this.ajouterUnDeveloppeur("viénot-vaublanc", "Viénot-Vaublanc", "Vincent"); // 4
-
-		// Ajout d'une activité et d'une tâche
-		this.ajouterUneActivite("cd", "Conception détaillée"); // 5
-		this.ajouterUneTache("cd", "dc", "Définition des classes"); // 6
-		this.ajouterUneTache("cd", "mi", "Maquettage des interfaces"); // 7
-
-		// Ajout des périodes
-		this.ajouterUnePeriode("cd", "dc", "pastorel", now, now1h); // 8
-		this.ajouterUnePeriode("cd", "dc", "duscastel", now, now1h); // 8
-		this.ajouterUnePeriode("cd", "dc", "vergniaud", now, now1h); // 8
-		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", now, now1h); // 8
-
-		// Erreur
-		// this.ajouterUnePeriode("cd", "dc", "pastorel", now, now.plus(Duration.ofMinutes(30))); // 9
-
-		// Ajout périodes de travail supplémentaires
-		this.ajouterUnePeriode("cd", "mi", "pastorel", tomorrow, tomorrow1h); // 10
-		this.ajouterUnePeriode("cd", "mi", "vergniaud", tomorrow, tomorrow1h); // 10
-		this.ajouterUnePeriode("cd", "dc", "duscastel", tomorrow, tomorrow1h); // 11
-		this.ajouterUnePeriode("cd", "dc", "viénot-vaublanc", tomorrow, tomorrow1h); // 11
-
-		// Afficher
-		this.afficherDeveloppeurs(false); // 12
-		this.afficherTaches("cd", false); // 13
-		this.afficherPeriodesDeTravail("cd", "dc", false); // 14
-		this.afficherPeriodesDeTravail("cd", "mi", false); // 15
-
-		// Mise à la corbeille
-		this.mettreCorbeilleUnDeveloppeur("pastorel"); // 1
-		this.afficherDeveloppeurs(false); // 2
-		this.afficherDeveloppeurs(true); // 3
-		this.afficherPeriodesDeTravail("cd", "dc", false); // 4
-		this.afficherPeriodesDeTravail("cd", "mi", false); // 5
-		this.afficherPeriodesDeTravailCorbeille(); // 6
-
-		// Erreur
-		// this.ajouterUnePeriode("cd", "dc", "pastorel", now.plus(Duration.ofDays(2)), now.plus(Duration.ofDays(2)).plus(Duration.ofHours(1));); // 7
-		this.mettreCorbeilleUnDeveloppeur("pastorel"); // 8
-
-		this.afficherDeveloppeurs(false); // 9
-		this.afficherDeveloppeurs(true); // 10
-	}
-
-	/**
-	 * Scénario du sprint1.
-	 */
-	public void scenarioSprint2() throws OperationImpossible, InterruptedException {
-		// Instants
-		Instant now = Instant.now();
-		Instant now1h = now.plus(Duration.ofHours(1));
-		Instant tomorrow = now.plus(Duration.ofDays(1));
-		Instant tomorrow1h = tomorrow.plus(Duration.ofHours(1));
-		Instant totomorrow = tomorrow.plus(Duration.ofDays(1));
-
-		// Ajout des développeurs
-		this.ajouterUnDeveloppeur("braun", "Braun", "Madeleine"); // 1
-		this.ajouterConsommateur("braun", new ConsommateurMiseALaCorbeille("braun"));
-
-		this.ajouterUnDeveloppeur("bureau-bonnard", "Bureau-Bonnard", "Carole");  // 2
-		this.ajouterConsommateur("bureau-bonnard", new ConsommateurMiseALaCorbeille("bureau-bonnard"));
-
-		this.ajouterUnDeveloppeur("peyroles", "Peyroles", "Germaine"); // 3
-		this.ajouterConsommateur("peyroles", new ConsommateurMiseALaCorbeille("peyroles"));
-
-		this.ajouterUnDeveloppeur("braun-pivet", "Braun-Pivet", "Yaël"); // 4
-		this.ajouterConsommateur("braun-pivet", new ConsommateurMiseALaCorbeille("braun-pivet"));
-
-
-		// Ajout d'une activité et d'une tâche
-		this.ajouterUneActivite("cd", "Conception détaillée"); // 5
-		this.ajouterUneTache("cd", "dc", "Définition des classes"); // 6
-		this.ajouterUneTache("cd", "mi", "Maquettage des interfaces"); // 7
-
-		// Ajout des périodes
-		this.ajouterUnePeriode("cd", "dc", "braun", now, now1h); // 8
-		this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", now, now1h); // 8
-		this.ajouterUnePeriode("cd", "dc", "peyroles", now, now1h); // 8
-		this.ajouterUnePeriode("cd", "dc", "braun-pivet", now, now1h); // 8
-
-		// Erreur
-		// this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", now, now.plus(Duration.ofMinutes(30))); // 9
-
-		// Ajout périodes de travail supplémentaires
-		this.ajouterUnePeriode("cd", "mi", "braun", tomorrow, tomorrow1h); // 10
-		this.ajouterUnePeriode("cd", "mi", "bureau-bonnard", tomorrow, tomorrow1h); // 10
-		this.ajouterUnePeriode("cd", "dc", "braun-pivet", tomorrow, tomorrow1h); // 11
-		this.ajouterUnePeriode("cd", "dc", "peyroles", tomorrow, tomorrow1h); // 11
-
-		// Afficher
-		this.afficherDeveloppeurs(false); // 12
-		this.afficherTaches("cd", false); // 13
-		this.afficherPeriodesDeTravail("cd", "dc", false); // 14
-		this.afficherPeriodesDeTravail("cd", "mi", false); // 15
-
-		// Calcul de durée
-		System.out.println("Braun travaille " + this.dureeTravailDeveloppeur("braun")); // 16
-		System.out.println("Bureau-Bonnard travaille " + this.dureeTravailDeveloppeur("bureau-bonnard")); // 16
-		System.out.println("Peyroles travaille " + this.dureeTravailDeveloppeur("peyroles")); // 16
-		System.out.println("Braun-Pivet travaille " + this.dureeTravailDeveloppeur("braun-pivet")); // 16
-		System.out.println("La tâche Définition des classes prend " + this.dureeTravailTache("cd", "dc")); // 17
-		System.out.println("La tâche Maquettage des interfaces prend " + this.dureeTravailTache("cd", "mi")); // 17
-		System.out.println("L'activité Conception Détaillée dure " + this.dureeTravailActivite("cd")); // 18
-		System.out.println("Le projet dure " + this.dureeTravail()); // 19
-		System.out.println();
-
-		// Mise à la corbeille
-		this.mettreCorbeilleUnDeveloppeur("bureau-bonnard"); // 1
-		this.afficherDeveloppeurs(false); // 2
-		this.afficherDeveloppeurs(true); // 3
-		this.afficherPeriodesDeTravail("cd", "dc", false); // 4
-		this.afficherPeriodesDeTravail("cd", "mi", false); // 5
-		this.afficherPeriodesDeTravailCorbeille(); // 6
-
-		// Calcul de durée
-		System.out.println("Braun travaille " + this.dureeTravailDeveloppeur("braun")); // 7
-		System.out.println("Bureau-Bonnard travaille " + this.dureeTravailDeveloppeur("bureau-bonnard")); // 7
-		System.out.println("Peyroles travaille " + this.dureeTravailDeveloppeur("peyroles")); // 7
-		System.out.println("Braun-Pivet travaille " + this.dureeTravailDeveloppeur("braun-pivet")); // 7
-		System.out.println("La tâche Définition des classes prend " + this.dureeTravailTache("cd", "dc")); // 8
-		System.out.println("La tâche Maquettage des interfaces prend " + this.dureeTravailTache("cd", "mi")); // 8
-		System.out.println("L'activité Conception Détaillée dure " + this.dureeTravailActivite("cd")); // 9
-		System.out.println("Le projet dure " + this.dureeTravail()); // 10
-		System.out.println();
-
-		// Erreur
-		// this.ajouterUnePeriode("cd", "dc", "bureau-bonnard", now.plus(Duration.ofDays(2)), now.plus(Duration.ofDays(2)).plus(Duration.ofHours(1))); // 11
-
-		this.mettreCorbeilleUnDeveloppeur("bureau-bonnard"); // 12
-		this.afficherDeveloppeurs(false); // 13
-		this.afficherDeveloppeurs(true); // 14
-
-		// Restauration
-		// this.restaureDeveloppeur("bureau-bonnard"); // 1
-		this.afficherDeveloppeurs(false); // 2
-		this.afficherDeveloppeurs(true); // 3
-		System.out.println("Le projet dure " + this.dureeTravail()); // 3
-		System.out.println("L'activité Conception Détaillée dure " + this.dureeTravailActivite("cd")); // 5
-		System.out.println("Bureau-Bonnard travaille " + this.dureeTravailDeveloppeur("bureau-bonnard")); // 6
-
-		// Labellisation
-		// TODO
-		this.ajouterUneTache("cd", "révision", "Révision JAVA"); // 1
-		this.ajouterUnePeriode("cd", "révision", "braun-pivet", totomorrow, totomorrow.plus(Duration.ofHours(1))); // 2
-		System.out.println("Le projet dure " + this.dureeTravail()); // 3
-		// this.ajoutLabel("remédiation", "Remédiation"); // 4
-		// this.ajoutLabelTache("révision", "remédiation"); // 5
-		// this.dureeTravail("remédiation"); // 6
-
-		System.out.println("MISE A LA CORBEILLE");
-		this.mettreCorbeilleUneTache("cd", "dc"); // 1
-	}
-	
 }
