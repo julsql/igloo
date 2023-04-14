@@ -509,7 +509,6 @@ public class SuiPro {
 	 */
 	public List<PeriodeDeTravail> listerPeriodesCorbeille() {
 		List<PeriodeDeTravail> listPeriodesCorbeille = new ArrayList<>();
-		// TODO finir la fonction
 		for (Activite activite : activites.values()) {
 			for (Tache tache : activite.getTaches().values()){
 				Collection<PeriodeDeTravail> listeperiode = tache.getPeriodesDeTravail().values();

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import eu.telecomsudparis.csc4102.suipro.Tache;
+import eu.telecomsudparis.csc4102.util.OperationImpossible;
 
 class TestTacheMiseCorbeille {
 
@@ -30,7 +31,7 @@ class TestTacheMiseCorbeille {
     }
 
     @Test
-    void miseCorbeilleTacheTest1Jeu1() throws InterruptedException {
+    void miseCorbeilleTacheTest1Jeu1() throws InterruptedException,OperationImpossible {
         tache.mettreALaCorbeille();
         assert tache.getCorbeille();
     }
@@ -64,7 +65,7 @@ class TestTacheMiseCorbeille {
         Assertions.assertTrue(periodeDeTravail2.getCorbeille());
     }
     @Test
-    void miseCorbeilleTacheTest1Jeu3() throws InterruptedException {
+    void miseCorbeilleTacheTest1Jeu3() throws InterruptedException,OperationImpossible {
         tache.mettreALaCorbeille();
         tache.mettreALaCorbeille();
         assert tache.getCorbeille();
