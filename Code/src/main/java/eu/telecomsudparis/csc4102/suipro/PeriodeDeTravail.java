@@ -78,6 +78,7 @@ public class PeriodeDeTravail {
 	/**
 	 * met la periode de travail à la corbeille.
 	 *
+	 * @throws InterruptedException exception levée par le time.sleep
 	 */
 	public void mettreALaCorbeille() throws InterruptedException {
 		dansCorbeille = true;
