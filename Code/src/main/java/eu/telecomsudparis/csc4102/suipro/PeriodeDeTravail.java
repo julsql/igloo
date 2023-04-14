@@ -81,7 +81,7 @@ public class PeriodeDeTravail {
 	 *
 	 * @throws InterruptedException exception levée par le time.sleep
 	 */
-	public void mettreALaCorbeille() throws InterruptedException,OperationImpossible {
+	public void mettreALaCorbeille() throws InterruptedException, OperationImpossible {
 		dansCorbeille = true;
 		final int time = 100;
 
@@ -90,8 +90,8 @@ public class PeriodeDeTravail {
 			String alias = developpeur.getAlias();
 
 			SubmissionPublisher<Publication> producteur = developpeur.getProducteur();
-			if (producteur==null) {
-			throw new OperationImpossible("Le développeur "+alias+" n'a pas de producteur !");
+			if (producteur == null) {
+			throw new OperationImpossible("Le développeur " + alias + " n'a pas de producteur !");
 			}
 			
 			Thread.sleep(time);
