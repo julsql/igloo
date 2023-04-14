@@ -319,9 +319,7 @@ public class SuiPro {
 
 	/**
 	 * Affiche chaque développeur qui n'est pas dans la corbeille .
-	 * @param dansCorbeille boolean, si True, affiche les développeurs dans la corbeille uniquement
-	 * Si false, affiche les développeurs qui ne sont PAS dans la corbeille. 
-	 * 
+	 *
 	 */
 	public void afficherDeveloppeurs() {
 		
@@ -510,7 +508,7 @@ public class SuiPro {
 	public List<PeriodeDeTravail> listerPeriodesCorbeille() {
 		List<PeriodeDeTravail> listPeriodesCorbeille = new ArrayList<>();
 		for (Activite activite : activites.values()) {
-			for (Tache tache : activite.getTaches().values()){
+			for (Tache tache : activite.getTaches().values()) {
 				Collection<PeriodeDeTravail> listeperiode = tache.getPeriodesDeTravail().values();
 				listeperiode.stream()
 							.filter(periode -> periode.getCorbeille())
