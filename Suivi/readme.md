@@ -310,9 +310,9 @@ Denis Conan
  
 * page Partage : « L’implémentation du patron de conception »
 
-* [] SuiPro::ajouterConsommateur : vous oubliez de réaliser un mininum de vérification de la précondition, non ? => votre code risque de sortir en erreur NullPointerException
+* [X] SuiPro::ajouterConsommateur : vous oubliez de réaliser un mininum de vérification de la précondition, non ? => votre code risque de sortir en erreur NullPointerException
 
-* [] au passage, les scénarios (du Sprint 1, etc.) sont à mettre dans des classes de test
+* [X] au passage, les scénarios (du Sprint 1, etc.) sont à mettre dans des classes de test
 
 * PeriodeDeTravail::mettreALaCorbeille a priori ok
 
