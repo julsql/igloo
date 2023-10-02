@@ -22,6 +22,7 @@ class TestSprint {
     private Instant totomorrow;
     private Instant totomorrow1h;
 
+
     @BeforeEach
     void setUp() {
         suiPro = new SuiPro("Projet suipro");
