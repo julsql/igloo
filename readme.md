@@ -1,6 +1,6 @@
 Binôme:
-- Debono Juliette
-- Feret Nathan
+- Jul SQL
+- Nathan F.
 
 Copyright (C) 2016-2023
 Contact: Denis.Conan[at]telecom-sudparis.eu
